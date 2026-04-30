@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Businesses | Sell & Retire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-trigger.active{color:#fff}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+.dropdown{position:relative}
+.dropdown>a::after{content:' ▾';font-size:0.7rem}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:180px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark)}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.page-header{background:var(--forest);padding:5rem 2rem 3rem;margin-top:68px}
+.page-header-inner{max-width:1200px;margin:0 auto}
+.page-header h1{font-size:clamp(2rem,4vw,3rem);color:#fff;font-weight:600;margin-bottom:0.75rem}
+.page-header p{color:rgba(255,255,255,0.65);font-size:1rem;max-width:560px}
+.browse-layout{display:grid;grid-template-columns:280px 1fr;gap:2.5rem;max-width:1200px;margin:0 auto;padding:2.5rem 2rem 5rem}
+.sidebar{flex-shrink:0}
+.filter-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;padding:1.5rem;margin-bottom:1.25rem}
+.filter-card h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem}
+.filter-group{display:flex;flex-direction:column;gap:0.5rem}
+.filter-option{display:flex;align-items:center;gap:10px;cursor:pointer;padding:0.35rem 0;font-size:0.875rem;color:var(--text-mid);transition:color 0.2s}
+.filter-option:hover{color:var(--forest)}
+.filter-option input{accent-color:var(--gold);width:15px;height:15px}
+.filter-option .count{margin-left:auto;font-size:0.75rem;color:var(--text-light);background:var(--cream);padding:1px 6px;border-radius:10px}
+.price-range{display:flex;flex-direction:column;gap:0.75rem}
+
+.price-input{flex:1;padding:0.5rem 0.75rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.875rem;font-family:'DM Sans',sans-serif;color:var(--text)}
+.price-input:focus{outline:none;border-color:var(--gold)}
+.apply-btn{width:100%;padding:0.65rem;background:var(--forest);color:#fff;border:none;border-radius:var(--radius);font-size:0.875rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.apply-btn:hover{background:var(--gold)}
+.search-bar{display:flex;gap:1rem;margin-bottom:1.75rem}
+.search-input{flex:1;padding:0.75rem 1rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.9rem;font-family:'DM Sans',sans-serif}
+.search-input:focus{outline:none;border-color:var(--gold)}
+.search-btn{padding:0.75rem 1.5rem;background:var(--forest);color:#fff;border:none;border-radius:var(--radius);font-size:0.9rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s}
+.search-btn:hover{background:var(--gold)}
+.filter-tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.filter-tab{padding:0.45rem 1rem;border:1px solid var(--cream-dark);border-radius:20px;font-size:0.82rem;cursor:pointer;color:var(--text-mid);background:#fff;transition:all 0.2s}
+.filter-tab.active,.filter-tab:hover{background:var(--forest);color:#fff;border-color:var(--forest)}
+.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.results-count{font-size:0.88rem;color:var(--text-light)}
+.results-count strong{color:var(--text)}
+.sort-select{padding:0.45rem 0.75rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;color:var(--text);background:#fff}
+.listings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.listing-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+.listing-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.listing-card.hidden{display:none}
+.lc-thumb{width:100%;height:160px;overflow:hidden;border-radius:0}
+.lc-thumb img{width:100%;height:100%;object-fit:cover}
+.lc-header{background:var(--forest);padding:1.25rem 1.5rem}
+.lc-category{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:4px}
+.lc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#fff;font-weight:600;line-height:1.3}
+.lc-body{padding:1.25rem}
+.lc-price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--forest);font-weight:700;margin-bottom:0.6rem}
+.lc-details{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.75rem}
+.lc-detail{font-size:0.8rem;color:var(--text-mid)}
+.lc-footer{padding:0 1.25rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
+.example-badge{position:absolute;top:0.75rem;right:0.75rem;background:rgba(191,138,46,0.12);border:1px solid rgba(191,138,46,0.3);color:#8a6020;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;font-weight:600}
+.listing-card{position:relative}
+.lc-badge{font-size:0.7rem;font-weight:600;background:var(--cream);color:var(--forest);padding:3px 9px;border-radius:3px;border:1px solid var(--cream-dark)}
+.view-link{font-size:0.82rem;color:var(--gold);font-weight:600}
+.featured-section{background:linear-gradient(135deg,var(--forest) 0%,#2a5240 100%);border-radius:12px;padding:1.75rem;margin-bottom:2rem;border:1px solid rgba(191,138,46,0.25)}
+.featured-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.featured-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff}
+.featured-badge{background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.featured-card{background:rgba(28,56,41,0.85);border:1px solid rgba(191,138,46,0.3);border-radius:10px;overflow:hidden;transition:all 0.2s;cursor:pointer;position:relative}
+.featured-card:hover{border-color:rgba(191,138,46,0.7);transform:translateY(-2px)}
+.fc-thumb{width:100%;height:130px;overflow:hidden;background:#1c3829}
+.fc-thumb img{width:100%;height:100%;object-fit:cover;opacity:0.85}
+.fc-body{padding:1rem 1.1rem 0.75rem}
+.fc-footer{padding:0.75rem 1.1rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center}
+.fc-feat-label{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em}
+.fc-view-btn{background:var(--gold);color:#fff;border:none;border-radius:4px;padding:0.35rem 0.9rem;font-size:11px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif}
+.fc-star{color:var(--gold);font-size:0.7rem;letter-spacing:2px;margin-bottom:5px}
+.fc-cat{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:4px}
+.fc-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:600;line-height:1.3;margin-bottom:6px}
+.fc-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);font-weight:700;margin-bottom:4px}
+.fc-meta{font-size:0.72rem;color:rgba(255,255,255,0.5)}
+.featured-view-all{text-align:right;margin-top:0.75rem}
+.featured-view-all a{font-size:0.8rem;color:var(--gold-pale);font-weight:500;border-bottom:1px solid rgba(191,138,46,0.4)}
+.no-results h3{font-size:1.5rem;color:var(--text-mid);margin-bottom:0.5rem}
+.alert-box{background:var(--cream);border:1px solid var(--cream-dark);border-radius:10px;padding:1.5rem;margin-top:2rem}
+.alert-box h4{font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;margin-bottom:0.5rem}
+.alert-box p{font-size:0.82rem;color:var(--text-light);margin-bottom:1rem;line-height:1.5}
+.alert-form{display:flex;gap:0.75rem}
+.alert-input{flex:1;padding:0.5rem 0.75rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif}
+.alert-submit{padding:0.5rem 1rem;background:var(--forest);color:#fff;border:none;border-radius:var(--radius);font-size:0.85rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:2.5rem 2rem 1.5rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-bottom a:hover{color:var(--gold)}
+@media(max-width:900px){.browse-layout{grid-template-columns:1fr}.sidebar{order:2}}
+@media(max-width:600px){.listings-grid{grid-template-columns:1fr}}
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column;gap:0}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu a:hover{color:#fff}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.mobile-btn-join:hover{background:var(--gold);color:#fff}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <span class="nav-trigger" class="active">Browse Businesses</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">View All Listings</a>
+          <div class="dropdown-divider"></div>
+          <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">Browse Listings</a>
+          <a href="buying.html#buyers-guide">Buyer's Guide</a>
+          <a href="buying.html">Register as a Buyer</a>
+          <a href="join.html">Register for Alerts</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu">
+          <a href="selling.html">List My Business</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Other</span>
+        <div class="dropdown-menu">
+          <a href="faqs.html">FAQs</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="professionals.html">Partner With Us</a>
+        </div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>Browse Businesses for Sale</h1>
+    <p>Every business here is listed by a retiring owner ready to hand over to the right buyer. Filter by location, industry or price.</p>
+  </div>
+</div>
+
+<div class="browse-layout">
+  <!-- SIDEBAR FILTERS -->
+  <aside class="sidebar">
+    <div class="filter-card">
+      <h3>State / Territory</h3>
+      <div class="filter-group" id="location">
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="NSW" onchange="applyFilters()"> New South Wales <span class="count">4</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="VIC" onchange="applyFilters()"> Victoria <span class="count">3</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="QLD" onchange="applyFilters()"> Queensland <span class="count">1</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="WA" onchange="applyFilters()"> Western Australia <span class="count">0</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="SA" onchange="applyFilters()"> South Australia <span class="count">0</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="state" value="TAS" onchange="applyFilters()"> Tasmania <span class="count">0</span></label>
+      </div>
+    </div>
+
+    <div class="filter-card" id="industry">
+      <h3>Industry</h3>
+      <div class="filter-group">
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Hospitality" onchange="applyFilters()"> Hospitality <span class="count">3</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Trade" onchange="applyFilters()"> Trade Services <span class="count">3</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Retail" onchange="applyFilters()"> Retail <span class="count">3</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Professional" onchange="applyFilters()"> Professional Services <span class="count">2</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Health" onchange="applyFilters()"> Health &amp; Beauty <span class="count">2</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Manufacturing" onchange="applyFilters()"> Manufacturing <span class="count">1</span></label>
+        <label class="filter-option"><input type="checkbox" data-filter="industry" value="Other" onchange="applyFilters()"> Other <span class="count">0</span></label>
+      </div>
+    </div>
+
+    <div class="filter-card">
+      <h3>Price Range</h3>
+      <div class="price-range">
+        <input type="number" class="price-input" id="minPrice" placeholder="Min $" min="0" step="1" style="margin-bottom:0.6rem">
+        <input type="number" class="price-input" id="maxPrice" placeholder="Max $" min="0" step="1" style="margin-bottom:0.75rem">
+        <button class="apply-btn" onclick="applyFilters()">Apply Filters</button>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <h4>🔔 Get New Listing Alerts</h4>
+      <p>Register your interest and be first to know when businesses matching your criteria are listed.</p>
+      <a href="join.html" style="display:block;width:100%;text-align:center;padding:0.65rem;background:var(--forest);color:#fff;border:none;border-radius:var(--radius);font-size:0.875rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;box-sizing:border-box">Register for Alerts</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- FEATURED BUSINESSES -->
+    <div class="featured-section" id="featured" style="cursor:pointer" onclick="handleFeaturedClick(event)">
+      <div class="featured-header">
+        <div class="featured-title">★ Featured Businesses</div>
+        <span class="featured-badge">Premium Listings</span>
+      </div>
+      <div class="featured-grid">
+        <div class="featured-card">
+          <div style="position:absolute;top:0.6rem;right:0.6rem;background:rgba(191,138,46,0.2);border:1px solid rgba(191,138,46,0.4);color:var(--gold-pale);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.65rem;font-weight:600;z-index:1">Example</div>
+          <div class="fc-thumb"><img src="https://picsum.photos/seed/feat1/400/260" alt="Featured listing"></div>
+          <div class="fc-body">
+            <div class="fc-star">★★★★★</div>
+            <div class="fc-cat">Hospitality · VIC</div>
+            <div class="fc-title">Artisan Bakery &amp; Café, Melbourne</div>
+            <div class="fc-price">$285,000</div>
+            <div class="fc-meta">📍 Richmond · 22 years · $980K turnover</div>
+          </div>
+          <div class="fc-footer"><span class="fc-feat-label">Premium listing</span><a href="listing-template.html" class="fc-view-btn">View →</a></div>
+        </div>
+        <div class="featured-card">
+          <div style="position:absolute;top:0.6rem;right:0.6rem;background:rgba(191,138,46,0.2);border:1px solid rgba(191,138,46,0.4);color:var(--gold-pale);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.65rem;font-weight:600;z-index:1">Example</div>
+          <div class="fc-thumb"><img src="https://picsum.photos/seed/feat2/400/260" alt="Featured listing"></div>
+          <div class="fc-body">
+            <div class="fc-star">★★★★★</div>
+            <div class="fc-cat">Trade Services · NSW</div>
+            <div class="fc-title">Electrical Contracting, Western Sydney</div>
+            <div class="fc-price">$620,000</div>
+            <div class="fc-meta">📍 Parramatta · 24 years · $2.4M turnover</div>
+          </div>
+          <div class="fc-footer"><span class="fc-feat-label">Premium listing</span><a href="listing-template.html" class="fc-view-btn">View →</a></div>
+        </div>
+        <div class="featured-card">
+          <div style="position:absolute;top:0.6rem;right:0.6rem;background:rgba(191,138,46,0.2);border:1px solid rgba(191,138,46,0.4);color:var(--gold-pale);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.65rem;font-weight:600;z-index:1">Example</div>
+          <div class="fc-thumb"><img src="https://picsum.photos/seed/feat3/400/260" alt="Featured listing"></div>
+          <div class="fc-body">
+            <div class="fc-star">★★★★★</div>
+            <div class="fc-cat">Manufacturing · WA</div>
+            <div class="fc-title">Metal Fabrication Workshop, Perth</div>
+            <div class="fc-price">$750,000</div>
+            <div class="fc-meta">📍 Osborne Park · 32 years · $3.1M turnover</div>
+          </div>
+          <div class="fc-footer"><span class="fc-feat-label">Premium listing</span><a href="listing-template.html" class="fc-view-btn">View →</a></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
+        <a href="featured.html" class="featured-view-all-btn" style="background:var(--gold);color:#fff;padding:0.55rem 1.2rem;border-radius:var(--radius);font-size:0.82rem;font-weight:600;display:inline-block;transition:all 0.2s">View All Featured Listings →</a>
+        <a href="selling.html" style="font-size:0.8rem;color:var(--gold-pale);font-weight:500;border-bottom:1px solid rgba(191,138,46,0.4)">Want your business featured? Learn about Premium listings →</a>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by keyword, location, or industry..." oninput="applyFilters()">
+      <button class="search-btn" onclick="applyFilters()">Search</button>
+    </div>
+
+    <div class="filter-tabs">
+      <div class="filter-tab active" onclick="setTab(this,'all')">All Listings</div>
+      <div class="filter-tab" onclick="setTab(this,'NSW')">NSW</div>
+      <div class="filter-tab" onclick="setTab(this,'VIC')">VIC</div>
+      <div class="filter-tab" onclick="setTab(this,'QLD')">QLD</div>
+      <div class="filter-tab" onclick="setTab(this,'WA')">WA</div>
+      <div class="filter-tab" onclick="setTab(this,'SA')">SA</div>
+    </div>
+
+    <div class="results-header">
+      <div class="results-count">Showing <strong id="count">8</strong> businesses for sale</div>
+      <select class="sort-select" onchange="applyFilters()">
+        <option>Sort: Newest First</option>
+        <option>Sort: Price Low–High</option>
+        <option>Sort: Price High–Low</option>
+        <option>Sort: Years Trading</option>
+      </select>
+    </div>
+
+    <div class="listings-grid" id="listingsGrid">
+      <!-- NSW -->
+      <div class="listing-card" data-state="NSW" data-industry="Hospitality" data-price="340000" data-text="cafe catering sydney nsw hospitality" data-years="19" data-date="20260115">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/cafe1/400/200" alt="Café listing"></div>
+        <div class="lc-header"><div class="lc-category">Hospitality · NSW</div><div class="lc-title">Established Café &amp; Catering, Sydney CBD</div></div>
+        <div class="lc-body"><div class="lc-price">$340,000</div><div class="lc-details"><div class="lc-detail">📍 Sydney CBD, NSW</div><div class="lc-detail">📅 19 years trading</div><div class="lc-detail">💰 $1.2M annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <div class="listing-card" data-state="NSW" data-industry="Trade" data-price="620000" data-text="electrical contracting sydney western nsw trade" data-years="24" data-date="20260110">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/trade1/400/200" alt="Trade listing"></div>
+        <div class="lc-header"><div class="lc-category">Trade Services · NSW</div><div class="lc-title">Electrical Contracting Business, Western Sydney</div></div>
+        <div class="lc-body"><div class="lc-price">$620,000</div><div class="lc-details"><div class="lc-detail">📍 Parramatta, NSW</div><div class="lc-detail">📅 24 years trading</div><div class="lc-detail">💰 $2.4M annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <div class="listing-card" data-state="NSW" data-industry="Retail" data-price="195000" data-text="newsagency retail nsw central coast" data-years="31" data-date="20260108">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/retail1/400/200" alt="Retail listing"></div>
+        <div class="lc-header"><div class="lc-category">Retail · NSW</div><div class="lc-title">Newsagency &amp; Gifts, Central Coast</div></div>
+        <div class="lc-body"><div class="lc-price">$195,000</div><div class="lc-details"><div class="lc-detail">📍 Gosford, NSW</div><div class="lc-detail">📅 31 years trading</div><div class="lc-detail">💰 $620K annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <div class="listing-card" data-state="NSW" data-industry="Professional" data-price="480000" data-text="accounting bookkeeping professional services nsw" data-years="28" data-date="20260105">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/prof1/400/200" alt="Professional services listing"></div>
+        <div class="lc-header"><div class="lc-category">Professional Services · NSW</div><div class="lc-title">Accounting Practice, Newcastle</div></div>
+        <div class="lc-body"><div class="lc-price">$480,000</div><div class="lc-details"><div class="lc-detail">📍 Newcastle, NSW</div><div class="lc-detail">📅 28 years trading</div><div class="lc-detail">💰 $890K annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <!-- VIC -->
+      <div class="listing-card" data-state="VIC" data-industry="Hospitality" data-price="285000" data-text="bakery cafe melbourne vic hospitality" data-years="22" data-date="20260103">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/bake1/400/200" alt="Bakery listing"></div>
+        <div class="lc-header"><div class="lc-category">Hospitality · VIC</div><div class="lc-title">Artisan Bakery &amp; Café, Melbourne</div></div>
+        <div class="lc-body"><div class="lc-price">$285,000</div><div class="lc-details"><div class="lc-detail">📍 Richmond, VIC</div><div class="lc-detail">📅 22 years trading</div><div class="lc-detail">💰 $980K annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <div class="listing-card" data-state="VIC" data-industry="Trade" data-price="390000" data-text="plumbing trade vic melbourne services" data-years="17" data-date="20260101">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/plmb1/400/200" alt="Plumbing listing"></div>
+        <div class="lc-header"><div class="lc-category">Trade Services · VIC</div><div class="lc-title">Plumbing &amp; Gas Fitting Business, Melbourne</div></div>
+        <div class="lc-body"><div class="lc-price">$390,000</div><div class="lc-details"><div class="lc-detail">📍 Footscray, VIC</div><div class="lc-detail">📅 17 years trading</div><div class="lc-detail">💰 $1.4M annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <div class="listing-card" data-state="VIC" data-industry="Health" data-price="260000" data-text="beauty salon health vic geelong spa" data-years="14" data-date="20251228">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/beau1/400/200" alt="Beauty salon listing"></div>
+        <div class="lc-header"><div class="lc-category">Health &amp; Beauty · VIC</div><div class="lc-title">Beauty Salon &amp; Day Spa, Geelong</div></div>
+        <div class="lc-body"><div class="lc-price">$260,000</div><div class="lc-details"><div class="lc-detail">📍 Geelong, VIC</div><div class="lc-detail">📅 14 years trading</div><div class="lc-detail">💰 $520K annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+      <!-- QLD -->
+      <div class="listing-card" data-state="QLD" data-industry="Retail" data-price="175000" data-text="garden centre retail qld brisbane nursery" data-years="14" data-date="20251220">
+        <div class="example-badge">Example</div>
+        <div class="lc-thumb"><img src="https://picsum.photos/seed/gard1/400/200" alt="Garden centre listing"></div>
+        <div class="lc-header"><div class="lc-category">Retail · QLD</div><div class="lc-title">Garden Centre &amp; Nursery, Brisbane</div></div>
+        <div class="lc-body"><div class="lc-price">$175,000</div><div class="lc-details"><div class="lc-detail">📍 Carindale, QLD</div><div class="lc-detail">📅 14 years trading</div><div class="lc-detail">💰 $640K annual turnover</div></div></div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="listing-template.html" class="view-link">View →</a></div>
+      </div>
+
+
+
+      <!-- WA -->
+
+
+      <!-- SA -->
+
+      <!-- TAS -->
+
+      <div class="no-results" id="noResults"><h3>No businesses found</h3><p>Try adjusting your filters or <a href="contact.html" style="color:var(--gold)">register for alerts</a>.</p></div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au — All rights reserved</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div>
+  </div>
+</footer>
+
+<script>
+let activeTab = 'all';
+
+function setTab(el, val) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeTab = val;
+  applyFilters();
+}
+
+function applyFilters() {
+  const keyword = document.getElementById('searchInput').value.toLowerCase();
+  const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+  const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+  const checkedStates = [...document.querySelectorAll('[data-filter="state"]:checked')].map(el => el.value);
+  const checkedIndustries = [...document.querySelectorAll('[data-filter="industry"]:checked')].map(el => el.value);
+  const sortVal = document.querySelector('.sort-select').value;
+  const cards = [...document.querySelectorAll('.listing-card')];
+  const grid = document.getElementById('listingsGrid');
+  let visibleCount = 0;
+  const stateCounts = {};
+  const industryCounts = {};
+
+  cards.forEach(function(card) {
+    const state = card.dataset.state;
+    const industry = card.dataset.industry;
+    const price = parseInt(card.dataset.price) || 0;
+    const text = (card.dataset.text || '').toLowerCase();
+    const tabOk = activeTab === 'all' || state === activeTab;
+    const stateOk = checkedStates.length === 0 || checkedStates.includes(state);
+    const industryOk = checkedIndustries.length === 0 || checkedIndustries.includes(industry);
+    const priceOk = price >= minPrice && price <= maxPrice;
+    const keywordOk = !keyword || text.includes(keyword) || (state || '').toLowerCase().includes(keyword);
+    if (tabOk && stateOk && industryOk && priceOk && keywordOk) {
+      card.classList.remove('hidden');
+      visibleCount++;
+      stateCounts[state] = (stateCounts[state] || 0) + 1;
+      industryCounts[industry] = (industryCounts[industry] || 0) + 1;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Sort visible cards
+  const visibleCards = cards.filter(function(c) { return !c.classList.contains('hidden'); });
+  visibleCards.sort(function(a, b) {
+    const priceA = parseInt(a.dataset.price) || 0;
+    const priceB = parseInt(b.dataset.price) || 0;
+    const yearsA = parseInt(a.dataset.years) || 0;
+    const yearsB = parseInt(b.dataset.years) || 0;
+    const dateA = parseInt(a.dataset.date) || 0;
+    const dateB = parseInt(b.dataset.date) || 0;
+    if (sortVal.indexOf('Newest') > -1) return dateB - dateA;
+    if (sortVal.indexOf('Low') > -1) return priceA - priceB;
+    if (sortVal.indexOf('High') > -1) return priceB - priceA;
+    if (sortVal.indexOf('Years') > -1) return yearsB - yearsA;
+    return 0;
+  });
+  visibleCards.forEach(function(card) { grid.appendChild(card); });
+
+  document.getElementById('count').textContent = visibleCount;
+  const noResults = document.getElementById('noResults');
+  if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+  document.querySelectorAll('[data-filter="state"]').forEach(function(el) {
+    var badge = el.parentElement.querySelector('.count');
+    if (badge) badge.textContent = stateCounts[el.value] || 0;
+  });
+  document.querySelectorAll('[data-filter="industry"]').forEach(function(el) {
+    var badge = el.parentElement.querySelector('.count');
+    if (badge) badge.textContent = industryCounts[el.value] || 0;
+  });
+
+  // Reattach click handlers after DOM reorder
+  attachCardClicks();
+}
+
+function attachCardClicks() {
+  document.querySelectorAll('.listing-card').forEach(function(card) {
+    card.style.cursor = 'pointer';
+    card.onclick = function(e) {
+      if (e.target.tagName === 'A' || e.target.closest('a')) return;
+      var link = card.querySelector('.view-link');
+      if (link) window.location.href = link.href;
+    };
+  });
+}
+
+// Read URL params from homepage search
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var cat = params.get('cat');
+  if (cat) {
+    var checkbox = document.querySelector('[data-filter="industry"][value="' + cat + '"]');
+    if (checkbox) checkbox.checked = true;
+  }
+  var state = params.get('state');
+  if (state) {
+    var stateBox = document.querySelector('[data-filter="state"][value="' + state + '"]');
+    if (stateBox) stateBox.checked = true;
+    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+    var tab = document.querySelector('.filter-tab[onclick*="'' + state + ''"]');
+    if (tab) { tab.classList.add('active'); activeTab = state; }
+  }
+  var min = params.get('min');
+  var max = params.get('max');
+  if (min) document.getElementById('minPrice').value = min;
+  if (max) document.getElementById('maxPrice').value = max;
+})();
+
+applyFilters();
+attachCardClicks();
+
+// Featured section background clickable
+function handleFeaturedClick(e) {
+  if (e.target.closest('.featured-card') || e.target.tagName === 'A' || e.target.closest('a')) return;
+  window.location.href = 'featured.html';
+}
+
+// Featured cards clickable
+document.querySelectorAll('.featured-card').forEach(function(card) {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (e.target.tagName === 'A' || e.target.closest('a')) return;
+    var link = card.querySelector('.fc-view-btn');
+    if (link) window.location.href = link.href;
+  });
+});
+
+// Check URL hash
+if (window.location.hash === '#location') {
+  document.querySelectorAll('.filter-card')[0].scrollIntoView({behavior:'smooth'});
+} else if (window.location.hash === '#industry') {
+  document.getElementById('industry').scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+<script>
+// Dropdown: open on hover AND toggle on click
+document.querySelectorAll('.dropdown').forEach(function(dd) {
+  var menu = dd.querySelector('.dropdown-menu');
+  var trigger = dd.querySelector('.nav-trigger');
+  if (!menu || !trigger) return;
+
+  // Click toggles open/close
+  trigger.addEventListener('click', function(e) {
+    var isOpen = dd.classList.contains('open');
+    // Close all others
+    document.querySelectorAll('.dropdown.open').forEach(function(other) {
+      other.classList.remove('open');
+    });
+    if (!isOpen) dd.classList.add('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+});
+</script>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">
+        Browse Businesses <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-browse">
+        <a href="browse.html">View All Listings</a>
+        <a href="featured.html" class="featured-link">★ Featured Businesses</a>
+                      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">
+        How It Works <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-how">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">
+        Buying <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-buying">
+        <a href="browse.html">Browse Listings</a>
+        <a href="buying.html#buyers-guide">Buyer's Guide</a>
+        <a href="buying.html">Register as a Buyer</a>
+        <a href="join.html">Register for Alerts</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">
+        Selling <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-selling">
+        <a href="selling.html">List My Business</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">
+        Other <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-other">
+        <a href="faqs.html">FAQs</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="professionals.html">Partner With Us</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+</body>
+</html>

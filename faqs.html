@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQs | Sell & Retire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-trigger.active{color:#fff}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+.dropdown{position:relative}
+.dropdown>a::after{content:' ▾';font-size:0.7rem}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:180px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark)}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.page-header{background:var(--forest);padding:5rem 2rem 3.5rem;margin-top:68px;text-align:center}
+.page-header h1{font-size:clamp(2rem,4vw,3rem);color:#fff;font-weight:600;margin-bottom:0.75rem}
+.page-header p{color:rgba(255,255,255,0.65);font-size:1rem;max-width:520px;margin:0 auto}
+.faq-layout{max-width:900px;margin:0 auto;padding:4rem 2rem 5rem}
+.faq-tabs{display:flex;gap:0.5rem;margin-bottom:3rem;flex-wrap:wrap;border-bottom:2px solid var(--cream-dark);padding-bottom:0}
+.faq-tab{padding:0.6rem 1.25rem;font-size:0.875rem;font-weight:500;color:var(--text-light);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
+.faq-tab.active,.faq-tab:hover{color:var(--forest);border-bottom-color:var(--gold)}
+.faq-section{display:none}
+.faq-section.active{display:block}
+.faq-section h2{font-size:1.5rem;font-weight:600;color:var(--forest);margin-bottom:1.5rem}
+.accordion-item{border:1px solid var(--cream-dark);border-radius:8px;margin-bottom:0.75rem;overflow:hidden}
+.accordion-header{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;cursor:pointer;background:#fff;transition:background 0.2s;gap:1rem}
+.accordion-header:hover{background:var(--cream)}
+.accordion-header h3{font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:600;color:var(--text);line-height:1.4}
+.accordion-icon{color:var(--gold);font-size:1.2rem;flex-shrink:0;transition:transform 0.25s;font-weight:300}
+.accordion-item.open .accordion-icon{transform:rotate(45deg)}
+.accordion-item.open .accordion-header{background:var(--cream)}
+.accordion-body{display:none;padding:0 1.5rem 1.25rem;background:var(--cream)}
+.accordion-item.open .accordion-body{display:block}
+.accordion-body p{font-size:0.9rem;color:var(--text-mid);line-height:1.7}
+.accordion-body p+p{margin-top:0.75rem}
+.accordion-body a{color:var(--gold);font-weight:500}
+.accordion-body ul{margin:0.75rem 0 0 0.25rem;display:flex;flex-direction:column;gap:0.35rem}
+.accordion-body li{font-size:0.88rem;color:var(--text-mid);display:flex;gap:8px}
+.accordion-body li::before{content:'→';color:var(--gold);flex-shrink:0}
+.contact-banner{background:var(--forest);border-radius:12px;padding:2.5rem;text-align:center;margin-top:3rem}
+.contact-banner h3{font-size:1.5rem;color:#fff;margin-bottom:0.5rem}
+.contact-banner p{color:rgba(255,255,255,0.65);font-size:0.9rem;margin-bottom:1.5rem}
+.btn-gold{background:var(--gold);color:#fff;padding:0.8rem 1.75rem;border-radius:var(--radius);font-weight:500;font-size:0.9rem;display:inline-block;border:2px solid var(--gold);transition:all 0.2s}
+.btn-gold:hover{background:var(--gold-light);border-color:var(--gold-light)}
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-bottom a:hover{color:var(--gold)}
+@media(max-width:600px){
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.nav-links{display:none}.faq-tabs{gap:0.25rem}}
+
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column;gap:0}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu a:hover{color:#fff}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.mobile-btn-join:hover{background:var(--gold);color:#fff}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">View All Listings</a>
+          <div class="dropdown-divider"></div>
+          <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">Browse Listings</a>
+          <a href="buying.html#buyers-guide">Buyer's Guide</a>
+          <a href="buying.html">Register as a Buyer</a>
+          <a href="join.html">Register for Alerts</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu">
+          <a href="selling.html">List My Business</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Other</span>
+        <div class="dropdown-menu">
+          <a href="faqs.html" class="active">FAQs</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="professionals.html">Partner With Us</a>
+        </div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Frequently Asked Questions</h1>
+  <p>Everything you need to know about selling or buying through Sell &amp; Retire.</p>
+</div>
+
+<div class="faq-layout">
+  <div class="faq-tabs">
+    <button class="faq-tab active" onclick="showTab('sellers',this)">For Sellers</button>
+    <button class="faq-tab" onclick="showTab('buyers',this)">For Buyers</button>
+    <button class="faq-tab" onclick="showTab('platform',this)">About the Platform</button>
+    <button class="faq-tab" onclick="showTab('pricing',this)">Pricing &amp; Fees</button>
+  </div>
+
+  <!-- SELLERS -->
+  <div class="faq-section active" id="sellers">
+    <h2>Questions for Sellers</h2>
+
+    <div class="accordion-item open">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>How much does it cost to list my business?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>It's free to list. The first 50 businesses listed get 12 months free. After the free period, paid plans start from as little as $299+GST. See our <a href="pricing.html">pricing page</a> for full details.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Will my staff or customers find out I'm selling?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Only if you want them to. You can list your business confidentially — we don't display your business name, exact address, or financial details publicly. These are shared only with buyers who you've accepted to enquire further.</p><p>Most sellers prefer to keep their sale private until a buyer is found and a deal is near completion.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>How do I know what my business is worth?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Business valuation varies significantly by industry, profitability, and market conditions. As a very rough guide only, many small businesses sell for 1–3× annual profit — though some industries command higher multiples and this is not a reliable rule of thumb.</p><p>We recommend getting a formal valuation from a qualified accountant or business broker before setting your asking price. We can refer you to specialists. Being realistic about price is one of the most important factors in successfully selling.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>How long does it take to sell?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>It varies. Some businesses sell quickly; others can take 2, 3 or even 6+ months. Key factors that speed up a sale:</p><ul><li>Realistic asking price based on actual financials</li><li>Good quality photos and documentation</li><li>Clear story about the business and the handover</li><li>Willingness to do a transition period with the buyer</li><li>Responsiveness to buyer enquiries</li></ul></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Do I need a business broker?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Not necessarily. Many sellers successfully sell their business directly through our platform without a broker. However, for businesses with complex structures, a broker can add significant value — handling negotiations, managing documentation, and finding buyers beyond our platform.</p><p>We can refer you to brokers who specialise in retirement business sales if you'd like one involved.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What documents do I need to have ready?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>To create a strong listing, you'll ideally have:</p><ul><li>Last 3+ years of profit &amp; loss statements</li><li>Recent BAS lodgements and tax returns</li><li>Current balance sheet</li><li>A list of assets included in the sale</li><li>Lease agreement (if applicable)</li></ul><p>You don't need everything to get started — you can list and add more detail as you go.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What happens after I submit my listing?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>We review every listing before it goes live. Once approved, your listing appears in our search results and buyers can start finding and enquiring about your business.</p><p>When a buyer enquires, you receive their name, contact details and message. You choose whether to respond.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Can I withdraw my listing at any time?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Yes. You can remove your listing at any time — no questions asked. Just contact us and we'll take care of it.</p></div>
+    </div>
+  </div>
+
+  <!-- BUYERS -->
+  <div class="faq-section" id="buyers">
+    <h2>Questions for Buyers</h2>
+
+    <div class="accordion-item open">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Is it free to use the platform as a buyer?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Yes, completely free. You can browse listings and submit enquiries at no cost. We never charge buyers a fee.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>How do I enquire about a business?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Click "Enquire" on any listing and fill in the form. We forward your details to the seller, who will decide whether to respond. If they accept your enquiry, you'll receive their contact details and can arrange to speak directly.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Can I see full financials before I meet the seller?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Detailed financials are shared at the seller's discretion — usually once there's an initial conversation and the seller is comfortable with your interest. Most sellers will ask you to sign a confidentiality agreement before sharing sensitive documents.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What's the typical buying process?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Generally:</p><ul><li>Browse listings and identify opportunities that suit you</li><li>Make an enquiry and have an initial conversation with the seller</li><li>Sign a confidentiality agreement and review financials</li><li>Make an offer and agree on terms</li><li>Conduct due diligence</li><li>Secure finance if needed</li><li>Formal contract, settlement and handover</li></ul><p>We recommend seeking independent legal and financial advice before completing any purchase.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Can I get finance to buy a business?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Yes. Business acquisition finance is available from most major banks and specialist lenders. Typically lenders want to see the business's financials, a business plan, and evidence of your experience in the industry. We can refer you to specialist finance brokers.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What should I look for when doing due diligence?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Key areas to investigate:</p><ul><li>Financial performance over 3+ years (trends matter more than a single year)</li><li>Reason for sale</li><li>Lease terms and transferability</li><li>Staff situation — are key people staying?</li><li>Customer and supplier concentration</li><li>Any outstanding legal or compliance issues</li></ul><p>This is a general guide only. We recommend seeking independent legal and financial advice before completing any purchase.</p></div>
+    </div>
+  </div>
+
+  <!-- PLATFORM -->
+  <div class="faq-section" id="platform">
+    <h2>About the Platform</h2>
+
+    <div class="accordion-item open">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What makes Sell &amp; Retire different from other platforms?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>We're Australia's only marketplace built specifically for retiring business owners. That means:</p><ul><li>Buyers who are specifically looking for retirement business handovers</li><li>A process designed with care for owners stepping away from something they've built</li><li>Referrals to advisors who specialise in these transactions</li><li>A focused, relevant audience — not a generic classifieds site</li></ul></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Is this platform Australian owned and operated?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Yes. Sell &amp; Retire is 100% Australian owned and operated. We understand the Australian small business landscape, the tax environment, and what matters to Australian business owners approaching retirement.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>How do you verify buyers?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Anyone can enquire on a listing — no registration required. We encourage sellers to ask qualifying questions before sharing detailed financials, and to take their time deciding who to engage with.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What support do you offer during the sale?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>We're here to help where we can. For more complex needs — valuations, legal advice, or broker support — we can refer you to specialists who handle retirement business transactions regularly.</p></div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="faq-section" id="pricing">
+    <h2>Pricing &amp; Fees</h2>
+
+    <div class="accordion-item open">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What does it cost to list?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>We have three plans:</p><ul><li><strong>Starter</strong> — Free for 3 months</li><li><strong>Standard</strong> — $299+GST for 6 months</li><li><strong>Premium</strong> — $549+GST until sold</li></ul><p>The first 50 businesses listed get 12 months free. See our <a href="pricing.html">pricing page</a> for full details.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Do you charge a commission on the sale?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>No. Our revenue comes from listing fees, not success fees. There's no conflict of interest — we're not pushing you to take a lower offer just to close a deal.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>Is it really free for buyers?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>Yes, 100% free for buyers. Browse, register, and enquire at no cost.</p></div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)"><h3>What payment methods do you accept?</h3><span class="accordion-icon">+</span></div>
+      <div class="accordion-body"><p>We accept all major credit and debit cards via Stripe. All payments are processed securely. GST invoices are issued automatically.</p></div>
+    </div>
+  </div>
+
+  <div class="contact-banner">
+    <h3>Still have questions?</h3>
+    <p>We're real people and happy to help. Reach out any time.</p>
+    <a href="contact.html" class="btn-gold">Contact Us</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="browse.html">Browse</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div>
+  </div>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.faq-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  const firstItem = document.getElementById(id).querySelector('.accordion-item');
+  if (firstItem && !firstItem.classList.contains('open')) {
+    firstItem.classList.add('open');
+  }
+}
+
+// Open correct tab if arriving via anchor link
+(function() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const target = document.getElementById(hash);
+    const btn = document.querySelector('.faq-tab[onclick*="' + hash + '"]');
+    if (target && btn) showTab(hash, btn);
+  }
+})();
+
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const isOpen = item.classList.contains('open');
+  // Close all in same section
+  item.closest('.faq-section').querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+<script>
+// Dropdown: open on hover AND toggle on click
+document.querySelectorAll('.dropdown').forEach(function(dd) {
+  var menu = dd.querySelector('.dropdown-menu');
+  var trigger = dd.querySelector('.nav-trigger');
+  if (!menu || !trigger) return;
+
+  // Click toggles open/close
+  trigger.addEventListener('click', function(e) {
+    var isOpen = dd.classList.contains('open');
+    // Close all others
+    document.querySelectorAll('.dropdown.open').forEach(function(other) {
+      other.classList.remove('open');
+    });
+    if (!isOpen) dd.classList.add('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+});
+</script>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">
+        Browse Businesses <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-browse">
+        <a href="browse.html">View All Listings</a>
+        <a href="featured.html" class="featured-link">★ Featured Businesses</a>
+                      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">
+        How It Works <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-how">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">
+        Buying <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-buying">
+        <a href="browse.html">Browse Listings</a>
+        <a href="buying.html#buyers-guide">Buyer's Guide</a>
+        <a href="buying.html">Register as a Buyer</a>
+        <a href="join.html">Register for Alerts</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">
+        Selling <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-selling">
+        <a href="selling.html">List My Business</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">
+        Other <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-other">
+        <a href="faqs.html">FAQs</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="professionals.html">Partner With Us</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+</body>
+</html>

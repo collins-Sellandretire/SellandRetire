@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy a Business | Sell & Retire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-trigger.active{color:#fff}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+.dropdown{position:relative}
+.dropdown>a::after{content:' ▾';font-size:0.7rem}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:180px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark)}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.page-header{background:var(--forest);padding:5rem 2rem 3.5rem;margin-top:68px}
+.page-header-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.page-header h1{font-size:clamp(2rem,4vw,3.2rem);color:#fff;font-weight:600;margin-bottom:0.75rem;line-height:1.1}
+.page-header h1 em{color:var(--gold);font-style:italic}
+.page-header p{color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.7;margin-bottom:1.5rem}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap}
+.hero-stat .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold);line-height:1}
+.hero-stat .label{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:3px}
+.alert-card{background:#fff;border:1px solid var(--cream-dark);border-radius:12px;padding:2rem;box-shadow:0 8px 32px rgba(0,0,0,0.18)}
+.alert-card h3{font-size:1.3rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem}
+.alert-card p{color:var(--text-light);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.5}
+.alert-form-fields{display:flex;flex-direction:column;gap:0.75rem}
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--text-mid);margin-bottom:0.3rem;letter-spacing:0.02em}
+input,select{width:100%;padding:0.65rem 0.9rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.875rem;font-family:'DM Sans',sans-serif;background:#fff;color:var(--text);transition:border-color 0.2s}
+input::placeholder{color:var(--text-light)}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+select option{background:#fff;color:var(--text)}
+.submit-btn{width:100%;padding:0.85rem;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:0.25rem}
+.submit-btn:hover{background:var(--gold-light)}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-label{font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;line-height:1.15;letter-spacing:-0.02em;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--text-light);line-height:1.7}
+.btn-primary{background:var(--gold);color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;border:2px solid var(--gold);transition:all 0.2s;display:inline-block}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+
+/* WHY BUY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.why-card{background:var(--cream);border-radius:10px;padding:2rem}
+.why-icon{font-size:2rem;margin-bottom:1rem}
+.why-card h3{font-size:1.15rem;font-weight:600;margin-bottom:0.5rem}
+.why-card p{font-size:0.88rem;color:var(--text-light);line-height:1.6}
+
+/* JOURNEY */
+.journey-section{background:var(--forest);padding:5rem 2rem}
+.journey-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;position:relative}
+.journey-step{text-align:center;position:relative}
+.journey-step::after{content:'→';position:absolute;right:-1.2rem;top:1.2rem;color:rgba(255,255,255,0.2);font-size:1.2rem}
+.journey-step:last-child::after{display:none}
+.j-icon{width:64px;height:64px;border-radius:50%;background:rgba(191,138,46,0.15);border:1px solid rgba(191,138,46,0.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 1rem}
+.journey-step h4{font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;color:#fff;margin-bottom:0.4rem}
+.journey-step p{font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5}
+
+/* DUE DILIGENCE */
+.dd-section{padding:5rem 2rem;background:var(--cream)}
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+.dd-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;padding:1.75rem}
+.dd-card h3{font-size:1.1rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.dd-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem}
+.dd-list li{font-size:0.83rem;color:var(--text-mid);display:flex;gap:8px;align-items:flex-start}
+.dd-list li::before{content:'□';color:var(--gold);flex-shrink:0;font-size:0.9rem}
+
+.cta-section{background:var(--gold);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(1.8rem,3vw,2.4rem);color:#fff;font-weight:600;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,0.85);margin-bottom:2rem}
+.btn-white{background:#fff;color:var(--gold);padding:0.9rem 2rem;border-radius:var(--radius);font-weight:600;font-size:0.95rem;border:2px solid #fff;transition:all 0.2s;display:inline-block;margin:0 0.5rem}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-outline-white{background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;border:2px solid rgba(255,255,255,0.6);transition:all 0.2s;display:inline-block;margin:0 0.5rem}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);border-color:#fff}
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-bottom a:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.page-header-inner{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr 1fr}.journey-steps{grid-template-columns:1fr 1fr}.dd-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.why-grid,.journey-steps{grid-template-columns:1fr}
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.nav-links{display:none}}
+
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column;gap:0}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu a:hover{color:#fff}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.mobile-btn-join:hover{background:var(--gold);color:#fff}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+
+
+.form-success{display:none;background:#f0faf4;border:1px solid #6ee7b7;border-radius:10px;padding:2rem;text-align:center}
+.form-success.visible{display:block}
+.form-success h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#1c3829;margin-bottom:0.5rem}
+.form-success p{font-size:0.9rem;color:#444;line-height:1.6}
+.form-success .tick{font-size:2.5rem;margin-bottom:0.75rem}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">View All Listings</a>
+          <div class="dropdown-divider"></div>
+          <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger" class="active">Buying</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">Browse Listings</a>
+          <a href="buying.html#buyers-guide">Buyer's Guide</a>
+          <a href="buying.html">Register as a Buyer</a>
+          <a href="join.html">Register for Alerts</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu">
+          <a href="selling.html">List My Business</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Other</span>
+        <div class="dropdown-menu">
+          <a href="faqs.html">FAQs</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="professionals.html">Partner With Us</a>
+        </div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <h1>Buy a business with<br><em>proven history.</em></h1>
+      <p>Every business listed on Sell &amp; Retire comes from an owner who built it over years or decades and is ready to hand it on. That means real revenue, real customers, and a real story.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">50</div><div class="label">Founding member spots</div></div>
+        <div class="hero-stat"><div class="num">All</div><div class="label">States covered</div></div>
+        <div class="hero-stat"><div class="num">Free</div><div class="label">To register as a buyer</div></div>
+      </div>
+    </div>
+    <div class="alert-card">
+      <h3>🔔 Register as a Buyer</h3>
+      <p>Register your interest and we'll alert you when new listings match what you're looking for.</p>
+      <form name="buyer-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="buyer-enquiry">
+        <input type="hidden" name="bot-field" style="display:none">
+        <div class="alert-form-fields">
+          <div><label>Your Name</label><input type="text" name="name" placeholder="First and last name" required></div>
+          <div><label>Email</label><input type="email" name="email" placeholder="your@email.com.au" required></div>
+          <div><label>Preferred Industry</label>
+            <select name="industry">
+              <option value="">Any industry</option>
+              <option>Hospitality / Food &amp; Bev</option>
+              <option>Trade Services</option>
+              <option>Retail</option>
+              <option>Professional Services</option>
+              <option>Health &amp; Beauty</option>
+              <option>Manufacturing</option>
+              <option>Other / Open to anything</option>
+            </select>
+          </div>
+          <div><label>Preferred State</label>
+            <select name="state">
+              <option value="">Any state</option>
+              <option>NSW</option><option>VIC</option><option>QLD</option>
+              <option>WA</option><option>SA</option><option>TAS</option>
+            </select>
+          </div>
+          <div><label>Budget Range</label>
+            <select name="budget">
+              <option value="">Not sure yet</option>
+              <option>Under $200K</option>
+              <option>$200K – $500K</option>
+              <option>$500K – $1M</option>
+              <option>Over $1M</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">Register — Free</button>
+        </div>
+      </form>
+<div class="form-success" id="success-buyer-enquiry">
+  <div class="tick">✓</div>
+  <h4>You're registered</h4>
+  <p>You're on the list. We'll be in touch when businesses matching your criteria are listed.</p>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY BUY RETIREMENT BUSINESS -->
+<section style="padding:5rem 2rem" id="why-buy">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <div class="section-label">Why Buy Here</div>
+      <h2 class="section-title">Why buy a retirement business?</h2>
+      <p class="section-sub" style="max-width:560px;margin:0 auto 3rem">Buying from a retiring owner is one of the best ways to acquire a business. Here's why.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">📈</div><h3>Proven Track Record</h3><p>These businesses have been trading for 10, 20 or 30+ years. The model works. The customer base is real. You're not starting from zero.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🤝</div><h3>Motivated Sellers</h3><p>Retiring owners genuinely want to hand over to the right person. That means fair pricing and a willingness to support a transition period.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🏆</div><h3>Real Asset Value</h3><p>Equipment, client lists, goodwill, trained staff, supplier relationships — you're buying everything the owner spent decades building.</p></div>
+      <div class="why-card reveal"><div class="why-icon">📚</div><h3>Knowledge Transfer</h3><p>Many retiring owners are willing to support a handover period — to make sure the business gets the best possible start under new ownership.</p></div>
+      <div class="why-card reveal"><div class="why-icon">❤️</div><h3>Legacy &amp; Goodwill</h3><p>A business with a good reputation in the community is worth more than any number on a balance sheet. You inherit that too.</p></div>
+      <div class="why-card reveal"><div class="why-icon">💰</div><h3>Immediate Cash Flow</h3><p>You take over a business that's already generating revenue. No waiting for the model to work — it already does.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUYER JOURNEY -->
+<section class="journey-section">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <div class="section-label" style="color:var(--gold)">Your Journey</div>
+      <h2 class="section-title" style="color:#fff">How buying works</h2>
+    </div>
+    <div class="journey-steps">
+      <div class="journey-step reveal"><div class="j-icon">📝</div><h4>Register Free</h4><p>Tell us what you're looking for and get alerts when matches come up</p></div>
+      <div class="journey-step reveal"><div class="j-icon">🔍</div><h4>Browse &amp; Discover</h4><p>Search listings by location, industry and price. Get alerts for new matches.</p></div>
+      <div class="journey-step reveal"><div class="j-icon">✉️</div><h4>Enquire</h4><p>Submit an enquiry on any listing. The seller receives your details and can accept or decline.</p></div>
+      <div class="journey-step reveal"><div class="j-icon">🤝</div><h4>Meet &amp; Negotiate</h4><p>Meet the seller, review financials, and negotiate terms directly.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem"><a href="browse.html" style="background:var(--gold);color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;display:inline-block;transition:all 0.2s">Browse Listings Now</a></div>
+  </div>
+</section>
+
+<!-- DUE DILIGENCE CHECKLIST -->
+<section class="dd-section" id="buyers-guide">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <div class="section-label">Buyer Guide</div>
+      <h2 class="section-title">Due diligence checklist</h2>
+      <p class="section-sub" style="white-space:nowrap;margin:0 auto 0.4rem">Before you buy any business, make sure you've reviewed these key areas and more.</p>
+      <p style="font-size:0.8rem;color:var(--text-light);font-style:italic;text-align:center;margin-bottom:3rem">Guide only.</p>
+    </div>
+    <div class="dd-grid">
+      <div class="dd-card reveal">
+        <h3>💰 Financial Review</h3>
+        <ul class="dd-list">
+          <li>3 years of P&amp;L statements reviewed</li>
+          <li>BAS and tax returns verified</li>
+          <li>Current balance sheet assessed</li>
+          <li>Debts and liabilities identified</li>
+          <li>Revenue trends analysed</li>
+          <li>Working capital requirements understood</li>
+        </ul>
+      </div>
+      <div class="dd-card reveal">
+        <h3>🏢 Legal &amp; Structural</h3>
+        <ul class="dd-list">
+          <li>Business structure reviewed (sole trader, company, trust)</li>
+          <li>Lease reviewed by solicitor</li>
+          <li>Licences and permits transferable</li>
+          <li>IP, trademarks and systems assessed</li>
+          <li>Employment contracts reviewed</li>
+          <li>Any outstanding legal matters investigated</li>
+        </ul>
+      </div>
+      <div class="dd-card reveal">
+        <h3>👥 People &amp; Operations</h3>
+        <ul class="dd-list">
+          <li>Key staff and their intentions understood</li>
+          <li>Handover period discussed with seller</li>
+          <li>Supplier relationships and terms reviewed</li>
+          <li>Key customer concentration assessed</li>
+          <li>Day-to-day operations documented</li>
+          <li>Owner involvement vs system-driven understood</li>
+        </ul>
+      </div>
+      <div class="dd-card reveal">
+        <h3>📍 Market &amp; Location</h3>
+        <ul class="dd-list">
+          <li>Local competition assessed</li>
+          <li>Market trends for the industry considered</li>
+          <li>Lease length and renewal options confirmed</li>
+          <li>Foot traffic and customer demographics</li>
+          <li>Online presence and reputation reviewed</li>
+          <li>Growth opportunities identified</li>
+        </ul>
+      </div>
+    </div>
+    
+  <div style="text-align:center;margin-top:2rem"><p style="font-size:0.875rem;color:var(--text-light)">Need help with due diligence? <a href="professionals.html" style="color:var(--gold);font-weight:600">Talk to us about specialist referrals →</a></p></div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>Ready to find your next business?</h2>
+  <p>Browse active listings or register to get alerts when new businesses match your criteria.</p>
+  <a href="browse.html" class="btn-white">Browse Businesses</a>
+  <a href="join.html" class="btn-outline-white">Register for Alerts</a>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="browse.html">Browse</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div>
+  </div>
+</footer>
+<script>const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));</script>
+
+<script>
+// Dropdown: open on hover AND toggle on click
+document.querySelectorAll('.dropdown').forEach(function(dd) {
+  var menu = dd.querySelector('.dropdown-menu');
+  var trigger = dd.querySelector('.nav-trigger');
+  if (!menu || !trigger) return;
+
+  // Click toggles open/close
+  trigger.addEventListener('click', function(e) {
+    var isOpen = dd.classList.contains('open');
+    // Close all others
+    document.querySelectorAll('.dropdown.open').forEach(function(other) {
+      other.classList.remove('open');
+    });
+    if (!isOpen) dd.classList.add('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+});
+</script>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">
+        Browse Businesses <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-browse">
+        <a href="browse.html">View All Listings</a>
+        <a href="featured.html" class="featured-link">★ Featured Businesses</a>
+                      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">
+        How It Works <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-how">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">
+        Buying <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-buying">
+        <a href="browse.html">Browse Listings</a>
+        <a href="buying.html#buyers-guide">Buyer's Guide</a>
+        <a href="buying.html">Register as a Buyer</a>
+        <a href="join.html">Register for Alerts</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">
+        Selling <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-selling">
+        <a href="selling.html">List My Business</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">
+        Other <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-other">
+        <a href="faqs.html">FAQs</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="professionals.html">Partner With Us</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var f = document.querySelector('form[name="buyer-enquiry"]');
+  if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(f);
+    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString()})
+      .finally(function(){
+        f.style.display = 'none';
+        var s = document.getElementById('success-buyer-enquiry');
+        if(s) s.classList.add('visible');
+      });
+  });
+})();
+</script>
+</body>
+</html>

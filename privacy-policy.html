@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Sell & Retire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif}.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:185px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark);transition:background 0.15s}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.nav-cta:hover{background:var(--gold-light)!important}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+.page-header{background:var(--forest);padding:5rem 2rem 3.5rem;margin-top:68px;text-align:center}
+.page-header h1{font-size:clamp(2rem,4vw,3rem);color:#fff;font-weight:600;margin-bottom:0.5rem}
+.page-header p{color:rgba(255,255,255,0.5);font-size:0.875rem}
+.doc-body{max-width:780px;margin:0 auto;padding:4rem 2rem 6rem}
+.doc-body h2{font-size:1.5rem;font-weight:600;color:var(--forest);margin:2.5rem 0 0.75rem}
+.doc-body h3{font-size:1.1rem;font-weight:600;color:var(--text);margin:1.5rem 0 0.5rem}
+.doc-body p{font-size:0.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:0.85rem}
+.doc-body ul{margin:0.5rem 0 1rem 1.25rem;display:flex;flex-direction:column;gap:0.4rem}
+.doc-body ul li{font-size:0.9rem;color:var(--text-mid);line-height:1.6}
+.doc-body a{color:var(--gold);text-decoration:underline}
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-bottom a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div>
+    </a>
+    <div class="nav-links">
+      <div class="dropdown"><span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><div class="dropdown-divider"></div><a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu"><a href="browse.html">Browse Listings</a><a href="buying.html#buyers-guide">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Other</span>
+        <div class="dropdown-menu"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Privacy Policy</h1>
+</div>
+
+<div class="doc-body">
+  <p>SellandRetire.com.au ("we", "us", "our") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store and disclose personal information in accordance with the <em>Privacy Act 1988</em> (Cth) and the Australian Privacy Principles.</p>
+
+  <h2>1. What information we collect</h2>
+  <p>We collect personal information when you use our website, submit a form, or contact us directly. This may include:</p>
+  <ul>
+    <li>Your name, email address and phone number</li>
+    <li>Information about your business (if you are listing a business for sale)</li>
+    <li>Your state or territory of residence</li>
+    <li>Your professional details (if you are applying to join our referral network)</li>
+    <li>Any other information you choose to provide in a form or message</li>
+  </ul>
+
+  <h2>2. Why we collect your information</h2>
+  <p>We collect personal information for the following purposes:</p>
+  <ul>
+    <li>To process your enquiry or listing application</li>
+    <li>To connect sellers with buyers on our platform</li>
+    <li>To refer professionals to sellers and buyers who need their services</li>
+    <li>To respond to your questions or messages</li>
+    <li>To send you relevant updates about the platform (only where you have opted in)</li>
+    <li>To comply with our legal obligations</li>
+  </ul>
+
+  <h2>3. How we store your information</h2>
+  <p>Your information is stored securely using industry-standard tools and practices. We do not sell, rent or trade your personal information to any third party. Access to your information is limited to authorised personnel only.</p>
+  <p>We retain your information for as long as is necessary to fulfil the purpose for which it was collected, or as required by law.</p>
+
+  <h2>4. Who we share your information with</h2>
+  <p>We do not share your personal information with third parties except in the following circumstances:</p>
+  <ul>
+    <li><strong>With your consent</strong> — for example, when a seller agrees to share their details with a prospective buyer</li>
+    <li><strong>Service providers</strong> — we use trusted third-party tools to operate the platform. These providers are bound by their own privacy policies and do not use your data for any other purpose</li>
+    <li><strong>Legal requirements</strong> — if required to do so by law or in response to a valid legal request</li>
+  </ul>
+
+  <h2>5. Cookies</h2>
+  <p>Our website may use cookies to improve your browsing experience. Cookies are small text files stored on your device. You can disable cookies through your browser settings, though this may affect some functionality of the site.</p>
+
+  <h2>6. Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>Request access to the personal information we hold about you</li>
+    <li>Request that we correct any inaccurate information</li>
+    <li>Request that we delete your personal information, subject to any legal obligations we may have to retain it</li>
+    <li>Opt out of any marketing communications at any time</li>
+  </ul>
+  <p>To exercise any of these rights, please contact us at <a href="mailto:hello@sellandretire.com.au">hello@sellandretire.com.au</a>.</p>
+
+  <h2>7. External links</h2>
+  <p>Our website may contain links to external websites. We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies independently.</p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.</p>
+
+  <h2>9. Contact us</h2>
+  <p>If you have any questions about this Privacy Policy or how we handle your personal information, please contact us at:</p>
+  <p><strong>SellandRetire.com.au</strong><br>Email: <a href="mailto:hello@sellandretire.com.au">hello@sellandretire.com.au</a></p>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au — All rights reserved</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="contact.html">Contact</a><a href="terms-of-use.html">Terms of Use</a></div>
+  </div>
+</footer>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">Browse Businesses <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-browse"><a href="browse.html">View All Listings</a><a href="featured.html" class="featured-link">★ Featured</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">How It Works <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-how"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">Buying <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-buying"><a href="browse.html">Browse Listings</a><a href="buying.html#buyers-guide">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">Selling <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
+    </div>
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+<script>
+function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
+function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
+document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
+</script>
+</body>
+</html>

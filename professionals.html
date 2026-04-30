@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner With Us | Sell & Retire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:185px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark);transition:background 0.15s}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.nav-cta:hover{background:var(--gold-light)!important}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+.hero{background:var(--forest);padding:3.5rem 2rem 3rem;margin-top:68px}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:stretch}
+.hero-badge{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff;font-weight:600;line-height:1.1;margin-bottom:0.75rem}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.6;margin-bottom:1rem}
+.hero-pills{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.hero-pill{background:rgba(191,138,46,0.15);border:1px solid rgba(191,138,46,0.3);color:var(--gold-pale);padding:0.35rem 0.9rem;border-radius:20px;font-size:0.75rem;font-weight:600}
+.hero-points{display:flex;flex-direction:column;gap:0.4rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.1)}
+.hero-point{display:flex;gap:0.75rem;font-size:0.85rem;color:rgba(255,255,255,0.65)}
+.hero-point::before{content:'→';color:var(--gold);flex-shrink:0;font-weight:700}
+.hero-form{background:#fff;border-radius:12px;padding:1.5rem;display:flex;flex-direction:column}
+.hero-form h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:0.3rem;color:var(--forest)}
+.hero-form>p{font-size:0.82rem;color:var(--text-light);margin-bottom:1rem}
+.process-inline{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)}
+.process-step-inline{display:flex;gap:0.9rem;align-items:flex-start;margin-bottom:1rem}
+.process-num{width:32px;height:32px;border-radius:50%;background:rgba(191,138,46,0.15);border:1px solid rgba(191,138,46,0.3);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--gold);flex-shrink:0}
+.process-step-inline strong{display:block;font-size:0.875rem;font-weight:600;color:#fff;margin-bottom:2px}
+.process-step-inline p{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.5;margin:0}
+.arrangements-inline{background:rgba(191,138,46,0.08);border:1px solid rgba(191,138,46,0.2);border-radius:6px;padding:0.85rem 1rem;margin-top:0.5rem;font-size:0.8rem;color:rgba(240,217,168,0.85);line-height:1.5}
+.hstat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1.25rem}
+.hstat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;min-width:60px}
+.hstat-label{font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.4}
+
+.section-label{font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.section-title{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:600;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.6rem}
+.section-sub{font-size:1rem;color:var(--text-light);line-height:1.7}
+.prof-section{padding:3rem 2rem}
+.prof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.75rem}
+.prof-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;padding:1.5rem;transition:all 0.2s}
+.prof-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.prof-card h3{font-size:1.35rem;font-weight:600;margin-bottom:0.3rem;color:var(--forest)}
+.prof-tagline{font-size:0.82rem;font-weight:600;color:var(--gold);margin-bottom:0.6rem}
+.prof-card>p{font-size:0.85rem;color:var(--text-light);line-height:1.55;margin-bottom:0.75rem}
+.prof-benefits{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.prof-benefits li{font-size:0.83rem;color:var(--text-mid);display:flex;gap:8px;align-items:flex-start}
+.prof-benefits li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
+.process-section{background:var(--cream);padding:3rem 2rem}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.75rem}
+.process-step{text-align:center;padding:1rem}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--cream-dark);line-height:1;margin-bottom:0.5rem}
+.process-step h3{font-size:1.15rem;font-weight:600;margin-bottom:0.5rem}
+.process-step p{font-size:0.875rem;color:var(--text-light);line-height:1.6}
+.arrangements-note{background:rgba(191,138,46,0.08);border:1px solid rgba(191,138,46,0.2);border-radius:8px;padding:1rem 1.5rem;margin-top:1.5rem;text-align:center}
+.arrangements-note p{font-size:0.875rem;color:#6b4c10;line-height:1.6}
+.form-section{background:var(--forest);padding:5rem 2rem}
+.form-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:flex-start;max-width:1200px;margin:0 auto}
+.form-info h2{font-size:clamp(1.8rem,3vw,2.4rem);color:#fff;font-weight:600;margin-bottom:0.75rem;line-height:1.15}
+.form-info>p{font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:1.75rem}
+.form-points{display:flex;flex-direction:column;gap:0.75rem}
+.form-point{display:flex;gap:0.75rem;align-items:flex-start;font-size:0.875rem;color:rgba(255,255,255,0.65)}
+.form-point::before{content:'→';color:var(--gold);flex-shrink:0;font-weight:700}
+.form-card{background:#fff;border-radius:12px;padding:2.5rem;border:1px solid var(--cream-dark)}
+.form-card h3{font-size:1.5rem;font-weight:600;margin-bottom:0.4rem;color:var(--forest)}
+.form-card>p{font-size:0.85rem;color:var(--text-light);margin-bottom:1.75rem}
+.form-group{margin-bottom:0.9rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--text-mid);margin-bottom:0.4rem;letter-spacing:0.02em}
+input,select,textarea{width:100%;padding:0.7rem 0.9rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.875rem;font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;transition:border-color 0.2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+textarea{min-height:110px;resize:vertical}
+.submit-btn{width:100%;padding:1rem;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);font-size:1rem;font-weight:600;cursor:pointer;font-family:'Cormorant Garamond',serif;letter-spacing:0.02em;transition:all 0.2s}
+.submit-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+.form-note{font-size:0.75rem;color:var(--text-light);text-align:center;margin-top:0.75rem}
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-bottom a:hover{color:var(--gold)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.prof-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.process-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+
+.form-success{display:none;background:#f0faf4;border:1px solid #6ee7b7;border-radius:10px;padding:2rem;text-align:center}
+.form-success.visible{display:block}
+.form-success h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#1c3829;margin-bottom:0.5rem}
+.form-success p{font-size:0.9rem;color:#444;line-height:1.6}
+.form-success .tick{font-size:2.5rem;margin-bottom:0.75rem}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div>
+    </a>
+    <div class="nav-links">
+      <div class="dropdown"><span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><div class="dropdown-divider"></div><a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu"><a href="browse.html">Browse Listings</a><a href="buying.html#buyers-guide">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger active">Other</span>
+        <div class="dropdown-menu"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html" class="active">Partner With Us</a></div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <!-- LEFT: intro + bullets + process -->
+    <div class="reveal" style="display:flex;flex-direction:column;justify-content:space-between">
+      <div class="hero-badge">Partner With Us</div>
+      <h1>Your next client is a<br><em>retiring business owner.</em><br>We'll introduce you.</h1>
+      <p>We connect retiring business owners with the right professionals at exactly the right moment — brokers, lawyers, accountants and valuers who understand what's at stake.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">Business Brokers</span>
+        <span class="hero-pill">Lawyers</span>
+        <span class="hero-pill">Accountants</span>
+        <span class="hero-pill">Valuers</span>
+      </div>
+      <div class="hero-points">
+        <div class="hero-point">We personally review every application</div>
+        <div class="hero-point">No lock-in contracts — arrangements agreed individually</div>
+        <div class="hero-point">Early applicants get preferential placement on the platform</div>
+      </div>
+
+      <!-- THE PROCESS -->
+      <div class="process-inline">
+        <div class="section-label" style="color:var(--gold)">The Process</div>
+        <div class="process-step-inline">
+          <div class="process-num">01</div>
+          <div><strong>Apply to Join</strong><p>Fill in the form. Tell us about your practice, your services and the types of business sale transactions you handle.</p></div>
+        </div>
+        <div class="process-step-inline">
+          <div class="process-num">02</div>
+          <div><strong>We Have a Chat</strong><p>We review every application personally and arrange a brief call to discuss how we'd work together.</p></div>
+        </div>
+        <div class="process-step-inline">
+          <div class="process-num">03</div>
+          <div><strong>Receive Referrals</strong><p>Once approved, we introduce you directly to sellers and buyers who need your expertise. You manage the relationship from there.</p></div>
+        </div>
+        <div class="arrangements-inline">
+          <strong>On arrangements:</strong> Referral arrangements are discussed privately — every relationship is different. Get in touch and we'll have an honest conversation.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form — using real page CSS, no privacy note -->
+    <div class="hero-form reveal">
+      <h3>Express Your Interest</h3>
+      <p>Tell us about yourself and we'll be in touch.</p>
+      <form name="professional-enquiry" style="flex:1;display:flex;flex-direction:column" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="professional-enquiry">
+        <input type="hidden" name="bot-field" style="display:none">
+        <div class="form-row">
+          <div><label>First Name *</label><input type="text" name="first_name" required placeholder="Your first name"></div>
+          <div><label>Last Name *</label><input type="text" name="last_name" required placeholder="Your last name"></div>
+        </div>
+        <div class="form-group"><label>Email Address *</label><input type="email" name="email" required placeholder="your@firm.com.au"></div>
+        <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" required placeholder="04xx xxx xxx"></div>
+        <div class="form-group"><label>Firm / Practice Name *</label><input type="text" name="firm" required placeholder="Name of your firm or practice"></div>
+        <div class="form-row">
+          <div><label>Profession *</label>
+            <select name="profession" required>
+              <option value="">Select profession</option>
+              <option>Business Broker</option>
+              <option>Business Lawyer</option>
+              <option>Accountant</option>
+              <option>Business Valuer</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div><label>State *</label>
+            <select name="state" required>
+              <option value="">Select state</option>
+              <option>NSW</option><option>VIC</option><option>QLD</option>
+              <option>WA</option><option>SA</option><option>TAS</option><option>ACT</option><option>NT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Years of experience in business sales</label>
+          <select name="experience">
+            <option value="">Select range</option>
+            <option>Less than 2 years</option>
+            <option>2–5 years</option>
+            <option>5–10 years</option>
+            <option>10–20 years</option>
+            <option>20+ years</option>
+          </select>
+        </div>
+        <div class="form-group" style="flex:1;display:flex;flex-direction:column"><label>About your practice &amp; services</label><textarea name="message" style="flex:1" placeholder="Your practice, services you offer, types of business sale transactions you handle..."></textarea></div>
+        <button type="submit" class="submit-btn">Apply to Partner</button>
+      </form>
+<div class="form-success" id="success-professional-enquiry">
+  <div class="tick">✓</div>
+  <h4>Application received</h4>
+  <p>Thank you for your application. We'll review it and be in touch soon.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="prof-section">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <div class="section-label">Who We Work With</div>
+      <h2 class="section-title">Four types of professionals retiring owners need</h2>
+      <p class="section-sub" style="max-width:560px;margin:0 auto">Get listed in our referral network and be introduced to sellers and buyers at exactly the moment they need your expertise.</p>
+    </div>
+    <div class="prof-grid">
+      <div class="prof-card reveal">
+        <h3>Business Brokers</h3>
+        <div class="prof-tagline">Help sellers find buyers and close the deal</div>
+        <p>Our sellers are motivated, often emotional, and dealing with complex transactions. They need brokers who genuinely understand the retirement sale context — not just someone who lists businesses on a database.</p>
+        <ul class="prof-benefits">
+          <li>Referred directly to sellers who are ready to engage a broker</li>
+          <li>Listed profile on our platform visible to all visitors</li>
+          <li>Featured in our seller onboarding resources</li>
+          <li>Monthly introductions to new seller enquiries in your state</li>
+        </ul>
+      </div>
+      <div class="prof-card reveal">
+        <h3>Business Lawyers</h3>
+        <div class="prof-tagline">Guide clients through contracts and due diligence</div>
+        <p>Business sales involve complex legal documentation — heads of agreement, contracts of sale, restraint clauses, employee entitlements. Our sellers and buyers need specialists, not general practitioners.</p>
+        <ul class="prof-benefits">
+          <li>Referred at the point sellers enter due diligence</li>
+          <li>Featured as a trusted legal partner on our platform</li>
+          <li>Access to both seller and buyer referrals</li>
+          <li>Listed in our resource guides and FAQs</li>
+        </ul>
+      </div>
+      <div class="prof-card reveal">
+        <h3>Accountants</h3>
+        <div class="prof-tagline">Navigate the tax implications of selling</div>
+        <p>Capital gains, GST on business assets, super strategies, small business concessions — selling a business has real tax complexity. Our sellers need accountants who specialise in this, not just annual returns.</p>
+        <ul class="prof-benefits">
+          <li>Referred during the listing preparation stage</li>
+          <li>Introduced to sellers needing valuation and tax advice</li>
+          <li>Featured in our seller preparation resources</li>
+          <li>Ongoing referral relationship as your reputation builds</li>
+        </ul>
+      </div>
+      <div class="prof-card reveal">
+        <h3>Business Valuers</h3>
+        <div class="prof-tagline">Give sellers and buyers a credible independent figure</div>
+        <p>A price mismatch between seller and buyer is the single biggest blocker to a retirement sale completing. An independent valuation resolves this early and keeps transactions moving.</p>
+        <ul class="prof-benefits">
+          <li>Referred at the earliest stage of seller onboarding</li>
+          <li>Listed as an approved valuer on our platform</li>
+          <li>Buyer due diligence referrals as well as seller referrals</li>
+          <li>Featured in our How It Works seller resources</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au — All rights reserved</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="browse.html">Browse</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div>
+  </div>
+</footer>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">Browse Businesses <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-browse"><a href="browse.html">View All Listings</a><a href="featured.html" class="featured-link">★ Featured Businesses</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">How It Works <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-how"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">Buying <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-buying"><a href="browse.html">Browse Listings</a><a href="buying.html#buyers-guide">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">Selling <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">For Professionals</a></div>
+    </div>
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+<script>
+function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
+function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
+document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+(function(){
+  var f = document.querySelector('form[name="professional-enquiry"]');
+  if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(f);
+    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString()})
+      .finally(function(){
+        f.style.display = 'none';
+        var s = document.getElementById('success-professional-enquiry');
+        if(s) s.classList.add('visible');
+      });
+  });
+})();
+</script>
+</body>
+</html>

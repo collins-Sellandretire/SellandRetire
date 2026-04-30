@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell & Retire | Australia's Retirement Business Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--forest-light:#2a5240;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow:0 4px 24px rgba(28,56,41,0.10);--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+
+
+
+
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+
+
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.dropdown.open .dropdown-menu{display:block}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-trigger.active{color:#fff}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.dropdown{position:relative}
+.dropdown>a::after{content:' ▾';font-size:0.7rem}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:180px;overflow:hidden}
+.dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark);transition:background 0.15s}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.nav-login{border:1px solid rgba(255,255,255,0.3)!important;color:rgba(255,255,255,0.82)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important}
+.nav-login:hover{border-color:rgba(255,255,255,0.7)!important;color:#fff!important}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important}
+.nav-join:hover{background:var(--gold)!important;color:#fff!important}
+.nav-cta:hover{background:var(--gold-light)!important}
+/* HERO */
+.hero{min-height:88vh;background:var(--forest);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(191,138,46,0.13) 0%,transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(42,82,64,0.7) 0%,transparent 50%);pointer-events:none}
+.hero-inner{max-width:860px;margin:0 auto;padding:4rem 2rem 3.5rem;text-align:center;position:relative;z-index:1;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(191,138,46,0.15);border:1px solid rgba(191,138,46,0.35);color:var(--gold-pale);padding:0.45rem 1.1rem;border-radius:20px;font-size:0.82rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,5vw,3.8rem);color:#fff;line-height:1.1;font-weight:600;letter-spacing:-0.02em;margin-bottom:1rem;transition:opacity 0.2s ease}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.68);line-height:1.7;margin-bottom:2.5rem;font-weight:300;white-space:nowrap;margin-left:auto;margin-right:auto;transition:opacity 0.2s ease;min-height:2em}
+
+/* TAB HERO */
+.hero-tabs{display:flex;border-radius:10px 10px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,0.15);border-bottom:none;max-width:640px;margin:0 auto}
+.hero-tab{flex:1;padding:0.9rem;font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.01em}
+.hero-tab.active{background:var(--gold);color:#fff}
+.hero-tab.inactive{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7)}
+.hero-tab.inactive:hover{background:rgba(255,255,255,0.14);color:#fff}
+.hero-panel{background:#fff;border-radius:0 0 10px 10px;padding:1.5rem;border:1px solid rgba(255,255,255,0.15);border-top:none;max-width:640px;margin:0 auto 1.5rem;display:none}
+.hero-panel.active{display:block}
+.search-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem}
+.search-field label{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
+.search-field select,.search-field input{width:100%;padding:0.55rem 0.75rem;border:1.5px solid var(--cream-dark);border-radius:var(--radius);font-size:0.875rem;font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;transition:border-color 0.2s;box-sizing:border-box}
+.search-field select:focus,.search-field input:focus{outline:none;border-color:var(--gold)}
+.search-field input::placeholder{color:#bbb}
+.search-submit{width:100%;padding:0.82rem;background:var(--forest);color:#fff;border:none;border-radius:var(--radius);font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.search-submit:hover{background:var(--gold)}
+.search-submit svg{width:16px;height:16px;flex-shrink:0}
+.search-tags{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;font-size:0.8rem;align-items:center;margin-bottom:0}
+.search-tags span{color:rgba(255,255,255,0.4);font-size:0.78rem}
+.search-tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);padding:3px 10px;border-radius:12px;font-size:0.78rem;cursor:pointer;transition:all 0.2s;text-decoration:none;border:1px solid rgba(255,255,255,0.15)}
+.search-tag:hover{background:rgba(191,138,46,0.25);color:var(--gold-pale);border-color:rgba(191,138,46,0.4)}
+.sell-panel-inner{text-align:center}
+.founding-badge{display:inline-block;background:var(--cream);border:1px solid var(--cream-dark);border-radius:6px;padding:0.6rem 1.2rem;margin-bottom:1.25rem}
+.founding-badge .badge-title{font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase}
+.founding-badge p{font-size:0.82rem;color:var(--text-mid);margin:3px 0 0}
+.sell-desc{font-size:0.875rem;color:var(--text-light);margin:0 0 1.25rem;line-height:1.5}
+.sell-cta{width:100%;padding:0.9rem;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);font-size:1rem;font-weight:600;cursor:pointer;font-family:'Cormorant Garamond',serif;letter-spacing:0.03em;transition:background 0.2s;display:block;text-align:center}
+.sell-cta:hover{background:var(--gold-light)}
+.sell-note{font-size:0.75rem;color:var(--text-light);margin:0.75rem 0 0;text-align:center}
+
+/* HERO STATS */
+.hero-stats{display:flex;gap:0;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);justify-content:center}
+.hero-stat{flex:1;max-width:200px;padding:0 1.5rem;border-right:1px solid rgba(255,255,255,0.12)}
+.hero-stat:last-child{border-right:none}
+.hero-stat .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold);line-height:1}
+.hero-stat .label{font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:5px;line-height:1.4}
+
+.btn-primary{background:var(--gold);color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;border:2px solid var(--gold);transition:all 0.2s;cursor:pointer;display:inline-block}
+.btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(191,138,46,0.35)}
+.btn-outline{background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;border:2px solid rgba(255,255,255,0.35);transition:all 0.2s;display:inline-block}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
+.trust-bar{background:var(--cream);padding:1.2rem 2rem;border-bottom:1px solid var(--cream-dark)}
+.trust-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--text-mid);font-weight:500}
+.trust-item .icon{color:var(--gold)}
+section{padding:5rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.section-title{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:600;line-height:1.15;letter-spacing:-0.02em;margin-bottom:1rem}
+.section-sub{font-size:1.05rem;color:var(--text-light);line-height:1.7;max-width:560px}
+.section-header{margin-bottom:3.5rem}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+.how-bg{background:var(--cream)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.step{position:relative;padding:2rem}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:var(--cream-dark);line-height:1;position:absolute;top:0.5rem;right:1rem}
+.step-icon{font-size:2rem;margin-bottom:1rem}
+.step h3{font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;position:relative}
+.step p{font-size:0.9rem;color:var(--text-light);line-height:1.6;position:relative}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.listing-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+.listing-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.lc-header{background:var(--forest);padding:1.5rem}
+.lc-category{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:6px}
+.lc-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:#fff;font-weight:600;line-height:1.3}
+.lc-body{padding:1.25rem}
+.lc-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--forest);font-weight:700;margin-bottom:0.75rem}
+.lc-details{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
+.lc-detail{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--text-mid)}
+.lc-footer{padding:0 1.25rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
+.lc-badge{font-size:0.72rem;font-weight:600;background:var(--cream);color:var(--forest);padding:4px 10px;border-radius:3px;border:1px solid var(--cream-dark)}
+.view-link{font-size:0.82rem;color:var(--gold);font-weight:600}
+.why-bg{background:var(--forest)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.why-features{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
+.why-feat{display:flex;gap:1rem;align-items:flex-start}
+.why-feat-icon{background:rgba(191,138,46,0.15);color:var(--gold);width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:1px solid rgba(191,138,46,0.25)}
+.why-feat h4{font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:4px}
+.why-feat p{font-size:0.83rem;color:rgba(255,255,255,0.55);line-height:1.5}
+.why-visual{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1.5rem;text-align:center}
+.stat-card .num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-card .label{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.test-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;padding:2rem}
+.test-stars{color:var(--gold);font-size:0.9rem;margin-bottom:1rem;letter-spacing:2px}
+.test-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);line-height:1.7;margin-bottom:1.25rem;font-style:italic}
+.test-author{font-size:0.82rem;color:var(--text-light)}
+.test-author strong{color:var(--text);display:block;font-style:normal;font-size:0.88rem}
+.cta-section{background:var(--gold);padding:4rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;font-weight:600;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:2rem}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--gold);padding:0.9rem 2rem;border-radius:var(--radius);font-weight:600;font-size:0.95rem;border:2px solid #fff;transition:all 0.2s;display:inline-block}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-outline-white{background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;border:2px solid rgba(255,255,255,0.6);transition:all 0.2s;display:inline-block}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);border-color:#fff}
+footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:3rem 2rem 1.5rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;align-items:start}
+.footer-brand p{font-size:0.85rem;line-height:1.6;margin-top:0.75rem;color:rgba(255,255,255,0.5)}
+.footer-col h4{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.75rem}
+.footer-col a{display:block;font-size:0.85rem;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;transition:color 0.2s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.steps-grid{grid-template-columns:1fr 1fr}.listings-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr}.test-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.search-row-1{grid-template-columns:1fr 1fr}.search-row-2{grid-template-columns:1fr 1fr auto}}
+@media(max-width:600px){.steps-grid,.listings-grid{grid-template-columns:1fr}.nav-links{display:none}.footer-top{grid-template-columns:1fr 1fr}.hero-stats{flex-direction:column;gap:0;align-items:center}.hero-stat{border-right:none!important;border-bottom:1px solid rgba(255,255,255,0.1);padding:0.75rem 0;width:100%;max-width:100%}.search-row-1{grid-template-columns:1fr}.search-row-2{grid-template-columns:1fr 1fr}.search-btn-wrap{grid-column:1/-1}.search-submit{border-radius:0 0 12px 12px;width:100%;justify-content:center;padding:1rem}.search-tags{display:none}}
+
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}
+.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}
+.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6;transition:transform 0.2s}
+.mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column;gap:0}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a:last-child{border-bottom:none}
+.mobile-submenu a:hover{color:#fff}
+.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s}
+.mobile-btn-join:hover{background:var(--gold);color:#fff}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">View All Listings</a>
+          <div class="dropdown-divider"></div>
+          <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu">
+          <a href="browse.html">Browse Listings</a>
+          <a href="buying.html#buyers-guide">Buyer's Guide</a>
+          <a href="buying.html">Register as a Buyer</a>
+          <a href="join.html">Register for Alerts</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu">
+          <a href="selling.html">List My Business</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-trigger">Other</span>
+        <div class="dropdown-menu">
+          <a href="faqs.html">FAQs</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="professionals.html">Partner With Us</a>
+        </div>
+      </div>
+      <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    </div>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">★ Australia's trusted marketplace for retiring business owners</div>
+    <h1 id="hero-heading">Find a business with <em>real history.</em></h1>
+    <p class="hero-sub" id="hero-sub">Browse businesses from retiring owners — proven models, real customers, real revenue.</p>
+
+    <!-- TABS -->
+    <div class="hero-tabs">
+      <button class="hero-tab active" id="tab-buy" onclick="switchTab('buy')">I want to Buy</button>
+      <button class="hero-tab inactive" id="tab-sell" onclick="switchTab('sell')">I want to Sell</button>
+    </div>
+
+    <!-- BUY PANEL -->
+    <div class="hero-panel active" id="panel-buy">
+      <div class="search-grid">
+        <div class="search-field">
+          <label>Category</label>
+          <select id="s-category">
+            <option value="">All Categories</option>
+            <option value="Hospitality">Hospitality / Food &amp; Bev</option>
+            <option value="Trade">Trade Services</option>
+            <option value="Retail">Retail</option>
+            <option value="Professional">Professional Services</option>
+            <option value="Health">Health &amp; Beauty</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Other">Transport / Logistics</option>
+            <option value="Other">Agriculture / Rural</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>State</label>
+          <select id="s-state">
+            <option value="">All States</option>
+            <option>NSW</option><option>VIC</option><option>QLD</option>
+            <option>WA</option><option>SA</option><option>TAS</option>
+            <option>ACT</option><option>NT</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>Min Price</label>
+          <input type="text" id="s-min" placeholder="e.g. $100,000" oninput="fmtPrice(this)">
+        </div>
+        <div class="search-field">
+          <label>Max Price</label>
+          <input type="text" id="s-max" placeholder="e.g. $500,000" oninput="fmtPrice(this)">
+        </div>
+      </div>
+      <button class="search-submit" onclick="doSearch()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search Businesses
+      </button>
+      <div style="margin-top:0.9rem">
+        <div class="search-tags">
+          <span>Popular:</span>
+          <a href="browse.html" class="search-tag">Cafés &amp; Restaurants</a>
+          <a href="browse.html" class="search-tag">Trade Services</a>
+          <a href="browse.html" class="search-tag">Under $200K</a>
+          <a href="browse.html" class="search-tag">Victoria</a>
+          <a href="browse.html" class="search-tag">NSW</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELL PANEL -->
+    <div class="hero-panel" id="panel-sell">
+      <div class="sell-panel-inner">
+        <div class="founding-badge">
+          <div class="badge-title">🎉 Founding Member Offer</div>
+          <p>First 50 sellers get <strong>12 months free listing</strong></p>
+        </div>
+        <p class="sell-desc">Free to get started. List your business and connect with buyers who understand what you've built.</p>
+        <a href="selling.html" class="sell-cta">List My Business — Free</a>
+        <p class="sell-note">🔒 Your details are kept completely private until you're ready.</p>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">420K</div><div class="label">Boomer-owned<br>businesses in AU</div></div>
+      <div class="hero-stat"><div class="num">800+</div><div class="label">Australians<br>retire daily</div></div>
+      <div class="hero-stat"><div class="num">$500B</div><div class="label">Annual revenue<br>at stake</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="icon">✓</span> Purpose-built for retiring owners</div>
+    <div class="trust-item"><span class="icon">✓</span> Interested, motivated buyers</div>
+    <div class="trust-item"><span class="icon">✓</span> Free to list</div>
+    <div class="trust-item"><span class="icon">✓</span> Expert handover support</div>
+    <div class="trust-item"><span class="icon">✓</span> 100% Australian platform</div>
+  </div>
+</div>
+
+<section class="how-bg">
+  <div class="section-inner">
+    <div class="section-header center reveal">
+      <div class="section-label">Simple Process</div>
+      <h2 class="section-title">From listing to retirement in four steps</h2>
+      <p class="section-sub">We've simplified the selling process so you can focus on what comes next.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-num">01</div><div class="step-icon">📋</div><h3>Create Your Listing</h3><p>Tell us about your business — the years, the story, the numbers. We make it simple and dignified.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><div class="step-icon">🔍</div><h3>Buyers Find You</h3><p>Qualified buyers searching specifically for retirement handovers find your listing and make enquiries.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><div class="step-icon">🤝</div><h3>Connect &amp; Negotiate</h3><p>We connect you with serious buyers. We can also refer specialist accountants, lawyers and brokers.</p></div>
+      <div class="step reveal"><div class="step-num">04</div><div class="step-icon">🎉</div><h3>Enjoy Retirement</h3><p>Complete the sale knowing you found the right buyer for the business you spent years building.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem"><a href="how-it-works.html" class="btn-primary">See Full Process</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-label">Featured Listings</div>
+      <h2 class="section-title">Businesses ready for their next chapter</h2>
+      <p class="section-sub">Every business here is listed by an owner ready to retire and hand over to the right person.</p>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Hospitality</div><div class="lc-title">Established Café &amp; Catering, Melbourne CBD</div></div><div class="lc-body"><div class="lc-price">$340,000</div><div class="lc-details"><div class="lc-detail">📍 Melbourne, VIC</div><div class="lc-detail">📅 19 years trading</div><div class="lc-detail">💰 $1.2M annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
+      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Trade Services</div><div class="lc-title">Electrical Contracting Business, Sydney</div></div><div class="lc-body"><div class="lc-price">$620,000</div><div class="lc-details"><div class="lc-detail">📍 Western Sydney, NSW</div><div class="lc-detail">📅 24 years trading</div><div class="lc-detail">💰 $2.4M annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
+      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Retail</div><div class="lc-title">Hardware &amp; Homewares Store, Brisbane</div></div><div class="lc-body"><div class="lc-price">$195,000</div><div class="lc-details"><div class="lc-detail">📍 Fortitude Valley, QLD</div><div class="lc-detail">📅 16 years trading</div><div class="lc-detail">💰 $850K annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem"><a href="browse.html" class="btn-primary">Browse All Businesses</a></div>
+  </div>
+</section>
+
+<section class="why-bg">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="reveal">
+        <div class="section-label">Why Sell &amp; Retire</div>
+        <h2 class="section-title" style="color:#fff">Built for owners like you</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.65)">Generic business platforms treat your life's work like a used car listing. We don't.</p>
+        <div class="why-features">
+          <div class="why-feat"><div class="why-feat-icon">🎯</div><div><h4>Retirement-focused buyers</h4><p>Our buyers are specifically looking for businesses from retiring owners — they respect the legacy.</p></div></div>
+          <div class="why-feat"><div class="why-feat-icon">🛡️</div><div><h4>Confidential process</h4><p>Your listing is managed with discretion. Staff and customers don't know until you're ready.</p></div></div>
+          <div class="why-feat"><div class="why-feat-icon">🆓</div><div><h4>Free to get started</h4><p>List your business at no cost. We only charge when we've proven our value to you.</p></div></div>
+        </div>
+      </div>
+      <div class="why-visual reveal">
+        <div class="stat-card"><div class="num">70%</div><div class="label">of retirement businesses fail to sell without the right platform</div></div>
+        <div class="stat-card"><div class="num">156K</div><div class="label">Australians retire every year</div></div>
+        <div class="stat-card"><div class="num">40%</div><div class="label">of small businesses owned by baby boomers</div></div>
+        <div class="stat-card"><div class="num">$0</div><div class="label">to list your business and receive enquiries</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream)">
+  <div class="section-inner">
+    <div class="section-header center reveal">
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">Owners who found their exit</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"After 26 years running my bakery, I was terrified no one would see the value. Sell &amp; Retire found a buyer who genuinely cared about continuing the legacy."</p><div class="test-author"><strong>Margaret T.</strong>Melbourne, VIC — Bakery owner, 26 years</div></div>
+      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"The other platforms made me feel like just another listing number. Here, they understood this was my retirement — my financial future and legacy both mattered."</p><div class="test-author"><strong>Brian K.</strong>Sydney, NSW — Plumbing business, 21 years</div></div>
+      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"I sold within four months. The buyer kept all my staff on and has grown the business. I couldn't have asked for a better outcome."</p><div class="test-author"><strong>Diane &amp; Robert M.</strong>Brisbane, QLD — Garden centre, 18 years</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>Ready to find your buyer?</h2>
+  <p>List your business today — it's free to get started, and founding members get 12 months free.</p>
+  <div class="cta-actions">
+    <a href="selling.html" class="btn-white">List My Business — Free</a>
+    <a href="how-it-works.html" class="btn-outline-white">Learn How It Works</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="logo" style="font-size:1.3rem"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></div><p>Australia's only marketplace built specifically for retiring business owners.</p></div>
+      <div class="footer-col"><h4>For Sellers</h4><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="faqs.html#sellers">Seller FAQs</a><a href="contact.html">Get Support</a></div>
+      <div class="footer-col"><h4>For Buyers</h4><a href="browse.html">Browse Businesses</a><a href="buying.html">Buyer Guide</a><a href="faqs.html#buyers">Buyer FAQs</a><a href="contact.html">Register Interest</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 SellandRetire.com.au — All rights reserved</span><span>100% Australian owned</span></div>
+  </div>
+</footer>
+<script>
+const heroHeadings = {
+  buy: {
+    h: 'Find a business with <em>real history.</em>',
+    s: 'Browse businesses from retiring owners — proven models, real customers, real revenue.'
+  },
+  sell: {
+    h: 'You built it right. Now <em>sell it right.</em>',
+    s: 'Find a buyer who sees the value in what you\'ve spent a lifetime creating.'
+  }
+};
+
+function switchTab(tab) {
+  const buyActive = tab === 'buy';
+  document.getElementById('tab-buy').className = 'hero-tab ' + (buyActive ? 'active' : 'inactive');
+  document.getElementById('tab-sell').className = 'hero-tab ' + (!buyActive ? 'active' : 'inactive');
+  document.getElementById('panel-buy').className = 'hero-panel' + (buyActive ? ' active' : '');
+  document.getElementById('panel-sell').className = 'hero-panel' + (!buyActive ? ' active' : '');
+
+  const hEl = document.getElementById('hero-heading');
+  const sEl = document.getElementById('hero-sub');
+  hEl.style.opacity = '0';
+  sEl.style.opacity = '0';
+  setTimeout(() => {
+    hEl.innerHTML = heroHeadings[tab].h;
+    sEl.textContent = heroHeadings[tab].s;
+    hEl.style.opacity = '1';
+    sEl.style.opacity = '1';
+  }, 200);
+}
+
+function fmtPrice(el) {
+  const raw = el.value.replace(/[^0-9]/g,'');
+  el.value = raw ? '$' + parseInt(raw).toLocaleString('en-AU') : '';
+}
+
+function doSearch() {
+  const cat = document.getElementById('s-category').value;
+  const state = document.getElementById('s-state').value;
+  const min = document.getElementById('s-min').value.replace(/[^0-9]/g,'');
+  const max = document.getElementById('s-max').value.replace(/[^0-9]/g,'');
+  const params = new URLSearchParams();
+  if (cat) params.set('cat', cat);
+  if (state) params.set('state', state);
+  if (min) params.set('min', min);
+  if (max) params.set('max', max);
+  window.location.href = 'browse.html' + (params.toString() ? '?' + params.toString() : '');
+}
+
+const obs = new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+// Dropdown: open on hover AND toggle on click
+document.querySelectorAll('.dropdown').forEach(function(dd) {
+  var menu = dd.querySelector('.dropdown-menu');
+  var trigger = dd.querySelector('.nav-trigger');
+  if (!menu || !trigger) return;
+
+  // Click toggles open/close
+  trigger.addEventListener('click', function(e) {
+    var isOpen = dd.classList.contains('open');
+    // Close all others
+    document.querySelectorAll('.dropdown.open').forEach(function(other) {
+      other.classList.remove('open');
+    });
+    if (!isOpen) dd.classList.add('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+});
+</script>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">
+        Browse Businesses <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-browse">
+        <a href="browse.html">View All Listings</a>
+        <a href="featured.html" class="featured-link">★ Featured Businesses</a>
+                      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">
+        How It Works <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-how">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-buying',this)">
+        Buying <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-buying">
+        <a href="browse.html">Browse Listings</a>
+        <a href="buying.html#buyers-guide">Buyer's Guide</a>
+        <a href="buying.html">Register as a Buyer</a>
+        <a href="join.html">Register for Alerts</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">
+        Selling <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-selling">
+        <a href="selling.html">List My Business</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">
+        Other <span class="arrow">▾</span>
+      </div>
+      <div class="mobile-submenu" id="sub-other">
+        <a href="faqs.html">FAQs</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="professionals.html">Partner With Us</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-join">Join</a>
+    <a href="selling.html" class="mobile-btn-list">List My Business — Free</a>
+  </div>
+</div>
+
+</body>
+</html>
