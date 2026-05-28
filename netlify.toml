@@ -1,7 +1,2 @@
-sellandretire/
-├── index.html
-├── browse.html
-├── netlify.toml        ← goes here
-├── netlify/
-│   └── functions/
-│       └── listings.js
+[functions]
+  directory = "netlify/functions"
