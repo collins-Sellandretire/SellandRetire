@@ -520,17 +520,17 @@ function handleFeaturedClick(e) {
   allListings = records;
 
   const grid = document.getElementById('listingsGrid');
-  const featuredGrid = document.getElementById('featuredGrid');
+  const track = document.getElementById('featuredTrack');
   grid.innerHTML = '';
-  featuredGrid.innerHTML = '';
+  if (track) track.innerHTML = '';
 
   const featured = records.filter(r => r.fields.Featured);
   const regular = records;
 
   // Featured carousel
-  const track = document.getElementById('featuredTrack');
-  track.innerHTML = '';
-  if (featured.length === 0) {
+  if (!track) {
+    console.error('featuredTrack not found');
+  } else if (featured.length === 0) {
     track.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.875rem;padding:1rem">Featured listings coming soon.</p>';
   } else {
     featured.forEach(r => track.appendChild(buildFeaturedCard(r)));
