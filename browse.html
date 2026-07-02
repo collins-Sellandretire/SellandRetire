@@ -67,6 +67,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .featured-section{background:var(--forest);padding:2rem;cursor:pointer}
 .featured-inner{max-width:1200px;margin:0 auto}
 .featured-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.featured-carousel{position:relative;overflow:hidden}
+.featured-track{display:flex;gap:1rem;transition:transform 0.4s ease}
+.featured-track .featured-card{flex:0 0 calc(33.333% - 0.67rem);min-width:0}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s}
+.carousel-btn:hover{background:var(--gold);border-color:var(--gold)}
+.carousel-btn.prev{left:-12px}
+.carousel-btn.next{right:-12px}
+.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:0.75rem}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.2s}
+.carousel-dot.active{background:var(--gold);width:18px;border-radius:3px}
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .featured-card{background:rgba(255,255,255,0.07);border:1px solid rgba(191,138,46,0.3);border-radius:10px;overflow:hidden;cursor:pointer;position:relative;transition:all 0.2s}
 .featured-card:hover{border-color:rgba(191,138,46,0.7);transform:translateY(-2px)}
@@ -176,9 +186,14 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
 <div class="featured-section" id="featured" onclick="handleFeaturedClick(event)">
   <div class="featured-inner">
     <div class="featured-label">★ Featured Businesses — Premium Listings</div>
-    <div class="featured-grid" id="featuredGrid">
-      <div class="loading-state" style="grid-column:1/-1"><div class="loading-spinner"></div><p>Loading featured listings...</p></div>
+    <div class="featured-carousel" id="featuredCarousel">
+      <button class="carousel-btn prev" id="carouselPrev" onclick="slideCarousel(-1)" style="display:none">&#8249;</button>
+      <div class="featured-track" id="featuredTrack">
+        <div class="loading-state" style="width:100%;text-align:center"><div class="loading-spinner"></div><p>Loading featured listings...</p></div>
+      </div>
+      <button class="carousel-btn next" id="carouselNext" onclick="slideCarousel(1)" style="display:none">&#8250;</button>
     </div>
+    <div class="carousel-dots" id="carouselDots"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
       <a href="featured.html" style="background:var(--gold);color:#fff;padding:0.55rem 1.2rem;border-radius:var(--radius);font-size:0.82rem;font-weight:600;display:inline-block">View All Featured Listings →</a>
       <a href="selling.html" style="font-size:0.8rem;color:var(--gold-pale);font-weight:500;border-bottom:1px solid rgba(191,138,46,0.4)">Want your business featured? Learn about Premium listings →</a>
@@ -430,6 +445,51 @@ function applyFilters() {
   });
 }
 
+// ── CAROUSEL ──
+let carouselIndex = 0;
+let carouselTotal = 0;
+const carouselVisible = 3;
+
+function updateCarousel() {
+  const track = document.getElementById('featuredTrack');
+  const cards = track.querySelectorAll('.featured-card');
+  if (cards.length === 0) return;
+  const cardWidth = cards[0].offsetWidth + 16; // width + gap
+  track.style.transform = 'translateX(-' + (carouselIndex * cardWidth) + 'px)';
+  // Update dots
+  document.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === carouselIndex);
+  });
+  // Show/hide buttons
+  const maxIndex = Math.max(0, carouselTotal - carouselVisible);
+  document.getElementById('carouselPrev').style.display = carouselIndex > 0 ? 'flex' : 'none';
+  document.getElementById('carouselNext').style.display = carouselIndex < maxIndex ? 'flex' : 'none';
+}
+
+function slideCarousel(dir) {
+  const maxIndex = Math.max(0, carouselTotal - carouselVisible);
+  carouselIndex = Math.max(0, Math.min(carouselIndex + dir, maxIndex));
+  updateCarousel();
+}
+
+function initCarousel(total) {
+  carouselTotal = total;
+  carouselIndex = 0;
+  // Build dots
+  const dotsEl = document.getElementById('carouselDots');
+  dotsEl.innerHTML = '';
+  const pages = Math.max(1, total - carouselVisible + 1);
+  if (total > carouselVisible) {
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = (function(idx) { return function() { carouselIndex = idx; updateCarousel(); }; })(i);
+      dotsEl.appendChild(dot);
+    }
+  }
+  setTimeout(updateCarousel, 50);
+}
+
 // ── FEATURED SECTION CLICK ──
 function handleFeaturedClick(e) {
   if (e.target.closest('.featured-card') || e.target.tagName === 'A' || e.target.closest('a')) return;
@@ -467,11 +527,14 @@ function handleFeaturedClick(e) {
   const featured = records.filter(r => r.fields.Featured);
   const regular = records;
 
-  // Featured cards
+  // Featured carousel
+  const track = document.getElementById('featuredTrack');
+  track.innerHTML = '';
   if (featured.length === 0) {
-    featuredGrid.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.875rem;grid-column:1/-1">Featured listings coming soon.</p>';
+    track.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.875rem;padding:1rem">Featured listings coming soon.</p>';
   } else {
-    featured.forEach(r => featuredGrid.appendChild(buildFeaturedCard(r)));
+    featured.forEach(r => track.appendChild(buildFeaturedCard(r)));
+    initCarousel(featured.length);
   }
 
   // All listing cards
