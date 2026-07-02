@@ -8,7 +8,7 @@
 <style>
 :root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:clip}
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
 a{text-decoration:none;color:inherit}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
@@ -19,7 +19,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
 .logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif}.logo-retire{color:var(--gold)}
 .logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
-.dropdown.open .dropdown-menu{display:block}
 .nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none}
 .nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
 .dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
@@ -51,22 +50,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .mobile-nav-link.expanded .arrow{transform:rotate(180deg)}
 .mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column}
 .mobile-submenu.open{display:flex}
-.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;font-family:'DM Sans',sans-serif;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05);text-decoration:none;display:block}
 .mobile-submenu a:last-child{border-bottom:none}
-.mobile-submenu .featured-link{color:var(--gold);font-weight:600}
 .mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
-.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
-.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
+.mobile-btn-join{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600;text-decoration:none}
+.mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;text-decoration:none}
 @media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
 
 /* PAGE */
 .page-header{background:linear-gradient(135deg,var(--forest) 0%,#2a5240 100%);padding:5rem 2rem 3.5rem;margin-top:68px;text-align:center}
+.premium-badge{display:inline-block;background:var(--gold);color:#fff;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:20px;margin-bottom:1rem}
 .page-header h1{font-size:clamp(2rem,4vw,3rem);color:#fff;font-weight:600;margin-bottom:0.75rem}
 .page-header p{font-size:1rem;color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 1.5rem}
-.premium-badge{display:inline-block;background:var(--gold);color:#fff;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:20px;margin-bottom:1rem}
 
 .featured-body{max-width:1200px;margin:0 auto;padding:3rem 2rem}
-
 .featured-intro{text-align:center;margin-bottom:3rem}
 .featured-intro p{font-size:0.95rem;color:var(--text-light);max-width:600px;margin:0 auto 1rem}
 .featured-intro a{color:var(--gold);font-weight:600;font-size:0.875rem}
@@ -89,17 +86,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .fc-footer{padding:0 1.25rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
 .fc-badge{font-size:0.7rem;font-weight:700;background:rgba(191,138,46,0.12);color:#8a6020;padding:3px 9px;border-radius:3px;border:1px solid rgba(191,138,46,0.3)}
 .fc-view{font-size:0.82rem;color:var(--gold);font-weight:600}
-.example-badge{position:absolute;top:0.75rem;right:0.75rem;background:rgba(191,138,46,0.15);border:1px solid rgba(191,138,46,0.3);color:var(--gold-pale);padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;font-weight:600;z-index:1}
+
+.loading-state{text-align:center;padding:4rem 2rem;color:var(--text-light)}
+.loading-spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.empty-state{text-align:center;padding:3rem;background:var(--cream);border-radius:12px;border:1px solid var(--cream-dark)}
+.empty-state p{font-size:1rem;color:var(--text-light);font-style:italic;margin-bottom:0.5rem}
+.empty-state a{font-size:0.875rem;color:var(--gold);font-weight:600}
 
 .cta-section{background:var(--forest);padding:4rem 2rem;text-align:center;margin-top:4rem}
 .cta-section h2{font-size:2rem;color:#fff;font-weight:600;margin-bottom:0.75rem}
 .cta-section p{color:rgba(255,255,255,0.7);margin-bottom:2rem;font-size:0.95rem}
 .btn-gold{background:var(--gold);color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;display:inline-block;border:2px solid var(--gold);transition:all 0.2s;margin:0 0.5rem}
-.btn-gold:hover{background:var(--gold-light);border-color:var(--gold-light)}
+.btn-gold:hover{background:var(--gold-light)}
 .btn-outline-white{background:transparent;color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-weight:500;font-size:0.95rem;display:inline-block;border:2px solid rgba(255,255,255,0.4);transition:all 0.2s;margin:0 0.5rem}
 .btn-outline-white:hover{background:rgba(255,255,255,0.1)}
 
-footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35)}
 .footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
 .footer-bottom a:hover{color:var(--gold)}
@@ -109,28 +113,16 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div>
-    </a>
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
     <div class="nav-links">
-      <div class="dropdown"><span class="nav-trigger active">Browse Businesses</span>
-        <div class="dropdown-menu">
-          <a href="browse.html">View All Listings</a>
-          <div class="dropdown-divider"></div>
-          <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
-        </div>
+      <div class="dropdown"><span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><div class="dropdown-divider"></div><a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a></div>
       </div>
       <div class="dropdown"><span class="nav-trigger">How It Works</span>
         <div class="dropdown-menu"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
       </div>
       <div class="dropdown"><span class="nav-trigger">Buying</span>
-        <div class="dropdown-menu">
-          <a href="browse.html">Browse Listings</a>
-          <a href="buying.html#buyers-guide">Buyer's Guide</a>
-          <a href="buying.html">Register as a Buyer</a>
-          <a href="join.html">Register for Alerts</a>
-        </div>
+        <div class="dropdown-menu"><a href="browse.html">Browse Listings</a><a href="buying.html#buyers-guide">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
       </div>
       <div class="dropdown"><span class="nav-trigger">Selling</span>
         <div class="dropdown-menu"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
@@ -140,7 +132,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
       </div>
       <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
     </div>
-    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -151,75 +143,24 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 </div>
 
 <div class="featured-body">
-
   <div class="featured-intro">
     <p>These businesses have invested in Premium listings to give you the most complete picture possible — detailed financials, photos, and a seller ready to talk.</p>
     <a href="browse.html">View all listings →</a>
   </div>
 
-  <div class="featured-grid">
-
-    <div class="featured-card" onclick="window.location.href='listing-template.html'">
-      <div class="example-badge">Example</div>
-      <div class="fc-thumb"><img src="https://picsum.photos/seed/feat1/400/260" alt="Bakery listing"></div>
-      <div class="fc-header">
-        <div class="fc-category">Hospitality · VIC</div>
-        <div class="fc-title">Artisan Bakery & Café, Melbourne</div>
-      </div>
-      <div class="fc-body">
-        <div class="fc-price">$285,000</div>
-        <div class="fc-details">
-          <div class="fc-detail">📍 Richmond, VIC</div>
-          <div class="fc-detail">📅 22 years trading</div>
-          <div class="fc-detail">💰 $980K annual turnover</div>
-        </div>
-      </div>
-      <div class="fc-footer"><span class="fc-badge">★ Premium</span><span class="fc-view">View →</span></div>
+  <div id="featuredGrid" class="featured-grid">
+    <div class="loading-state" style="grid-column:1/-1">
+      <div class="loading-spinner"></div>
+      <p>Loading featured listings...</p>
     </div>
-
-    <div class="featured-card" onclick="window.location.href='listing-template.html'">
-      <div class="example-badge">Example</div>
-      <div class="fc-thumb"><img src="https://picsum.photos/seed/feat2/400/260" alt="Electrical listing"></div>
-      <div class="fc-header">
-        <div class="fc-category">Trade Services · NSW</div>
-        <div class="fc-title">Electrical Contracting Business, Western Sydney</div>
-      </div>
-      <div class="fc-body">
-        <div class="fc-price">$620,000</div>
-        <div class="fc-details">
-          <div class="fc-detail">📍 Parramatta, NSW</div>
-          <div class="fc-detail">📅 24 years trading</div>
-          <div class="fc-detail">💰 $2.4M annual turnover</div>
-        </div>
-      </div>
-      <div class="fc-footer"><span class="fc-badge">★ Premium</span><span class="fc-view">View →</span></div>
-    </div>
-
-    <div class="featured-card" onclick="window.location.href='listing-template.html'">
-      <div class="example-badge">Example</div>
-      <div class="fc-thumb"><img src="https://picsum.photos/seed/feat3/400/260" alt="Metal fabrication listing"></div>
-      <div class="fc-header">
-        <div class="fc-category">Manufacturing · WA</div>
-        <div class="fc-title">Metal Fabrication Workshop, Perth</div>
-      </div>
-      <div class="fc-body">
-        <div class="fc-price">$750,000</div>
-        <div class="fc-details">
-          <div class="fc-detail">📍 Osborne Park, WA</div>
-          <div class="fc-detail">📅 32 years trading</div>
-          <div class="fc-detail">💰 $3.1M annual turnover</div>
-        </div>
-      </div>
-      <div class="fc-footer"><span class="fc-badge">★ Premium</span><span class="fc-view">View →</span></div>
-    </div>
-
   </div>
 
-  <div style="text-align:center;margin-top:3rem;padding:2rem;background:var(--cream);border-radius:12px;border:1px solid var(--cream-dark)">
-    <p style="font-size:1rem;color:var(--text-light);font-style:italic;margin-bottom:0.5rem">More featured listings coming soon.</p>
-    <p style="font-size:0.875rem;color:var(--text-light)">Want your business featured? <a href="pricing.html" style="color:var(--gold);font-weight:600">Learn about Premium listings →</a></p>
+  <div id="emptyState" style="display:none;margin-top:1rem">
+    <div class="empty-state">
+      <p>More featured listings coming soon.</p>
+      <a href="pricing.html">Want your business featured? Learn about Premium listings →</a>
+    </div>
   </div>
-
 </div>
 
 <div class="cta-section">
@@ -239,7 +180,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-inner">
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">Browse Businesses <span class="arrow">▾</span></div>
-      <div class="mobile-submenu" id="sub-browse"><a href="browse.html">View All Listings</a><a href="featured.html" class="featured-link">★ Featured Businesses</a></div>
+      <div class="mobile-submenu" id="sub-browse"><a href="browse.html">View All Listings</a><a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured</a></div>
     </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-how',this)">How It Works <span class="arrow">▾</span></div>
       <div class="mobile-submenu" id="sub-how"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
@@ -261,6 +202,59 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 </div>
 
 <script>
+async function fetchFeatured() {
+  try {
+    const res = await fetch('/.netlify/functions/listings');
+    if (!res.ok) throw new Error('Failed to fetch');
+    const data = await res.json();
+    return (data.records || []).filter(r => r.fields.Featured);
+  } catch (err) {
+    console.error('Error:', err);
+    return [];
+  }
+}
+
+function buildCard(record) {
+  const f = record.fields;
+  const price = f.Price ? '$' + parseInt(f.Price).toLocaleString('en-AU') : 'Price on enquiry';
+  const photo = f.Photo1 || 'https://picsum.photos/seed/' + record.id + '/400/260';
+  const div = document.createElement('div');
+  div.className = 'featured-card';
+  div.innerHTML = `
+    <div class="fc-thumb"><img src="${photo}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/260'"></div>
+    <div class="fc-header">
+      <div class="fc-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
+      <div class="fc-title">${f.Title || 'Business listing'}</div>
+    </div>
+    <div class="fc-body">
+      <div class="fc-price">${price}</div>
+      <div class="fc-details">
+        ${f.Location ? '<div class="fc-detail">📍 ' + f.Location + '</div>' : ''}
+        ${f['Years Trading'] ? '<div class="fc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : ''}
+        ${f['Annual Turnover'] ? '<div class="fc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : ''}
+      </div>
+    </div>
+    <div class="fc-footer">
+      <span class="fc-badge">★ Premium</span>
+      <span class="fc-view">View →</span>
+    </div>`;
+  div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
+  return div;
+}
+
+(async function init() {
+  const featured = await fetchFeatured();
+  const grid = document.getElementById('featuredGrid');
+  grid.innerHTML = '';
+
+  if (featured.length === 0) {
+    grid.style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+  } else {
+    featured.forEach(r => grid.appendChild(buildCard(r)));
+  }
+})();
+
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
 function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
 document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
