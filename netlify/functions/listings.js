@@ -65,6 +65,20 @@ exports.handler = async function(event, context) {
 
     const data = await response.json();
 
+    // Sort by Plan order: Premium first, Standard second, Starter last
+    if (data.records) {
+      const planOrder = { 'Premium': 0, 'Standard': 1, 'Starter': 2 };
+      data.records.sort(function(a, b) {
+        const planA = planOrder[a.fields.Plan] !== undefined ? planOrder[a.fields.Plan] : 3;
+        const planB = planOrder[b.fields.Plan] !== undefined ? planOrder[b.fields.Plan] : 3;
+        if (planA !== planB) return planA - planB;
+        // Within same plan, sort by date listed (newest first)
+        const dateA = a.fields['Date Listed'] || '';
+        const dateB = b.fields['Date Listed'] || '';
+        return dateB.localeCompare(dateA);
+      });
+    }
+
     // Return the data to the browser
     return {
       statusCode: 200,
