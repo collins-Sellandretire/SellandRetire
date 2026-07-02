@@ -69,12 +69,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 
 .listing-body{max-width:1200px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;min-height:100vh}
 
-.photo-gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 160px;gap:8px;margin-bottom:2.5rem;border-radius:10px;overflow:hidden}
-.photo-main{grid-row:1/3;overflow:hidden;background:var(--cream);position:relative;cursor:pointer}
-.photo-main img,.photo-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.2s}
+.photo-gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:200px 200px;gap:6px;margin-bottom:2.5rem;border-radius:10px;overflow:hidden}
+.photo-main{grid-row:1/3;overflow:hidden;background:var(--cream);cursor:pointer;position:relative}
+.photo-main img{width:100%;height:100%;object-fit:cover;transition:opacity 0.2s}
 .photo-thumb{overflow:hidden;background:var(--cream);cursor:pointer;position:relative}
-.photo-thumb img:hover{transform:scale(1.05)}
-.photo-thumb.active{outline:3px solid var(--gold)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;transition:all 0.2s}
+.photo-thumb:hover img{opacity:0.8}
+.photo-thumb.active{outline:3px solid var(--gold);outline-offset:-3px}
+.photo-more{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;font-weight:600;font-family:"DM Sans",sans-serif;cursor:pointer}
 
 /* LIGHTBOX */
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;align-items:center;justify-content:center;flex-direction:column}
@@ -310,15 +312,25 @@ function renderListing(record) {
   // Build left column
   let html = '';
 
-  // Photo gallery
+  // Photo gallery — main + clickable thumbnails
   const photos = [f.Photo1, f.Photo2, f.Photo3, f.Photo4, f.Photo5].filter(Boolean);
-  // Store photos globally so onclick can reference them
   window._listingPhotos = photos;
+  window._galleryIndex = 0;
   if (photos.length > 0) {
     html += '<div class="photo-gallery">';
-    html += `<div class="photo-main" onclick="openLightbox(window._listingPhotos, 0)"><img src="${photos[0]}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/800/600'"></div>`;
-    for (let i = 1; i < Math.min(photos.length, 5); i++) {
-      html += `<div class="photo-thumb" onclick="openLightbox(window._listingPhotos, ${i})"><img src="${photos[i]}" alt="Photo ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+    // Main photo
+    html += `<div class="photo-main" id="galleryMain" onclick="openLightbox(window._listingPhotos, window._galleryIndex)">`;
+    html += `<img id="galleryMainImg" src="${photos[0]}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/800/600'">`;
+    html += '</div>';
+    // Up to 2 thumbnails
+    for (let i = 1; i < Math.min(photos.length, 3); i++) {
+      const isLast = i === 2 && photos.length > 3;
+      html += `<div class="photo-thumb${i === 1 ? ' active' : ''}" onclick="galleryGoTo(${i})">`;
+      html += `<img src="${photos[i]}" alt="Photo ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
+      if (isLast) {
+        html += `<div class="photo-more" onclick="event.stopPropagation();openLightbox(window._listingPhotos,${i})">+${photos.length - 2} more</div>`;
+      }
+      html += '</div>';
     }
     html += '</div>';
   }
@@ -400,6 +412,19 @@ document.getElementById('enquiryForm').addEventListener('submit', function(e) {
     });
 });
 
+
+
+// ── PHOTO GALLERY ──
+function galleryGoTo(index) {
+  const photos = window._listingPhotos || [];
+  if (!photos[index]) return;
+  window._galleryIndex = index;
+  const img = document.getElementById('galleryMainImg');
+  if (img) img.src = photos[index];
+  document.querySelectorAll('.photo-thumb').forEach(function(t, i) {
+    t.classList.toggle('active', i + 1 === index);
+  });
+}
 
 // ── LIGHTBOX ──
 let lightboxPhotos = [];
