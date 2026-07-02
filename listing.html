@@ -70,9 +70,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .listing-body{max-width:1200px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;min-height:100vh}
 
 .photo-gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 160px;gap:8px;margin-bottom:2.5rem;border-radius:10px;overflow:hidden}
-.photo-main{grid-row:1/3;overflow:hidden;background:var(--cream)}
-.photo-main img,.photo-thumb img{width:100%;height:100%;object-fit:cover}
-.photo-thumb{overflow:hidden;background:var(--cream)}
+.photo-main{grid-row:1/3;overflow:hidden;background:var(--cream);position:relative;cursor:pointer}
+.photo-main img,.photo-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.2s}
+.photo-thumb{overflow:hidden;background:var(--cream);cursor:pointer;position:relative}
+.photo-thumb img:hover{transform:scale(1.05)}
+.photo-thumb.active{outline:3px solid var(--gold)}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;align-items:center;justify-content:center;flex-direction:column}
+.lightbox.open{display:flex}
+.lightbox-img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:6px;user-select:none}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.15);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+.lightbox-close:hover{background:var(--gold)}
+.lightbox-btn{position:absolute;top:50%;transform:translateY(-50%);background:#fff;border:none;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.4);transition:all 0.2s;z-index:10}
+.lightbox-btn:hover{background:var(--gold)}
+.lightbox-btn:hover svg{stroke:#fff}
+.lightbox-btn svg{stroke:#1c3829}
+.lightbox-btn.prev{left:2rem}
+.lightbox-btn.next{right:2rem}
+.lightbox-counter{color:rgba(255,255,255,0.6);font-size:0.85rem;margin-top:1rem;font-family:"DM Sans",sans-serif}
+.lightbox-thumbs{display:flex;gap:8px;margin-top:1rem}
+.lightbox-thumb{width:60px;height:45px;object-fit:cover;border-radius:4px;cursor:pointer;opacity:0.5;transition:opacity 0.2s;border:2px solid transparent}
+.lightbox-thumb.active{opacity:1;border-color:var(--gold)}
 
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}
 .stat-box{background:var(--cream);border:1px solid var(--cream-dark);border-radius:8px;padding:1rem;text-align:center}
@@ -229,6 +248,21 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
   </div>
 </div>
 
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-btn prev" onclick="lightboxSlide(-1)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c3829" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-btn next" onclick="lightboxSlide(1)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c3829" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+  <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+</div>
+
 <script>
 // ── FETCH SINGLE LISTING ──
 async function fetchListing(id) {
@@ -273,10 +307,11 @@ function renderListing(record) {
   // Photo gallery
   const photos = [f.Photo1, f.Photo2, f.Photo3, f.Photo4, f.Photo5].filter(Boolean);
   if (photos.length > 0) {
+    const photosJson = JSON.stringify(photos);
     html += '<div class="photo-gallery">';
-    html += `<div class="photo-main"><img src="${photos[0]}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/800/600'"></div>`;
+    html += `<div class="photo-main" onclick="openLightbox(${photosJson}, 0)"><img src="${photos[0]}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/800/600'"></div>`;
     for (let i = 1; i < Math.min(photos.length, 5); i++) {
-      html += `<div class="photo-thumb"><img src="${photos[i]}" alt="Photo ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+      html += `<div class="photo-thumb" onclick="openLightbox(${photosJson}, ${i})"><img src="${photos[i]}" alt="Photo ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
     }
     html += '</div>';
   }
@@ -356,6 +391,58 @@ document.getElementById('enquiryForm').addEventListener('submit', function(e) {
       document.getElementById('enquiryForm').style.display = 'none';
       document.getElementById('enquirySuccess').classList.add('visible');
     });
+});
+
+
+// ── LIGHTBOX ──
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(photos, index) {
+  lightboxPhotos = photos;
+  lightboxIndex = index;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lightboxSlide(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex];
+  document.getElementById('lightboxCounter').textContent = (lightboxIndex + 1) + ' / ' + lightboxPhotos.length;
+  // Update thumbs
+  const thumbsEl = document.getElementById('lightboxThumbs');
+  thumbsEl.innerHTML = '';
+  lightboxPhotos.forEach(function(photo, i) {
+    const img = document.createElement('img');
+    img.src = photo;
+    img.className = 'lightbox-thumb' + (i === lightboxIndex ? ' active' : '');
+    img.onclick = function() { lightboxIndex = i; updateLightbox(); };
+    thumbsEl.appendChild(img);
+  });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') lightboxSlide(-1);
+  if (e.key === 'ArrowRight') lightboxSlide(1);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Click outside image to close
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
 });
 
 // ── INIT ──
