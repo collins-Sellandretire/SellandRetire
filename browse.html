@@ -67,15 +67,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .featured-section{background:var(--forest);padding:2rem;cursor:pointer}
 .featured-inner{max-width:1200px;margin:0 auto}
 .featured-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.featured-carousel{position:relative;overflow:hidden}
+.featured-carousel{position:relative;padding:0 30px}
+.featured-track-wrapper{overflow:hidden}
 .featured-track{display:flex;gap:1rem;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1)}
 .featured-track .featured-card{flex:0 0 calc(33.333% - 0.67rem);min-width:0}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:#fff;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.5);padding:0}
 .carousel-btn:hover{background:var(--gold)}
 .carousel-btn:hover svg{stroke:#fff}
 .carousel-btn svg{stroke:#1c3829}
-.carousel-btn.prev{left:-22px}
-.carousel-btn.next{right:-22px}
+.carousel-btn.prev{left:0}
+.carousel-btn.next{right:0}
 .carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:0.75rem}
 .carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.2s}
 .carousel-dot.active{background:var(--gold);width:18px;border-radius:3px}
@@ -189,11 +190,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
   <div class="featured-inner">
     <div class="featured-label">★ Featured Businesses — Premium Listings</div>
     <div class="featured-carousel" id="featuredCarousel">
-      <button class="carousel-btn prev" id="carouselPrev" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-      <div class="featured-track" id="featuredTrack">
+      <button class="carousel-btn prev" id="carouselPrev" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <div class="featured-track-wrapper"><div class="featured-track" id="featuredTrack">
         <div class="loading-state" style="width:100%;text-align:center"><div class="loading-spinner"></div><p>Loading featured listings...</p></div>
-      </div>
-      <button class="carousel-btn next" id="carouselNext" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      </div></div>
+      <button class="carousel-btn next" id="carouselNext" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
