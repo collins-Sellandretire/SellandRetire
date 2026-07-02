@@ -70,10 +70,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .featured-carousel{position:relative;overflow:hidden}
 .featured-track{display:flex;gap:1rem;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1)}
 .featured-track .featured-card{flex:0 0 calc(33.333% - 0.67rem);min-width:0}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.5);width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.4);padding:0}
-.carousel-btn:hover{background:var(--gold);border-color:var(--gold)}
-.carousel-btn.prev{left:-24px}
-.carousel-btn.next{right:-24px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:#fff;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.5);padding:0}
+.carousel-btn:hover{background:var(--gold)}
+.carousel-btn:hover svg{stroke:#fff}
+.carousel-btn svg{stroke:#1c3829}
+.carousel-btn.prev{left:-22px}
+.carousel-btn.next{right:-22px}
 .carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:0.75rem}
 .carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.2s}
 .carousel-dot.active{background:var(--gold);width:18px;border-radius:3px}
