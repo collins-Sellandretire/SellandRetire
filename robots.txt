@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sellandretire.com.au/sitemap.xml
