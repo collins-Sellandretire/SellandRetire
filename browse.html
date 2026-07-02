@@ -68,12 +68,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .featured-inner{max-width:1200px;margin:0 auto}
 .featured-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
 .featured-carousel{position:relative;overflow:hidden}
-.featured-track{display:flex;gap:1rem;transition:transform 0.4s ease}
+.featured-track{display:flex;gap:1rem;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1)}
 .featured-track .featured-card{flex:0 0 calc(33.333% - 0.67rem);min-width:0}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s}
-.carousel-btn:hover{background:var(--gold);border-color:var(--gold)}
-.carousel-btn.prev{left:-12px}
-.carousel-btn.next{right:-12px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.carousel-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-50%) scale(1.1)}
+.carousel-btn.prev{left:-20px}
+.carousel-btn.next{right:-20px}
 .carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:0.75rem}
 .carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.2s}
 .carousel-dot.active{background:var(--gold);width:18px;border-radius:3px}
@@ -187,11 +187,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
   <div class="featured-inner">
     <div class="featured-label">★ Featured Businesses — Premium Listings</div>
     <div class="featured-carousel" id="featuredCarousel">
-      <button class="carousel-btn prev" id="carouselPrev" onclick="slideCarousel(-1)" style="display:none">&#8249;</button>
+      <button class="carousel-btn prev" id="carouselPrev" onclick="event.stopPropagation();slideCarousel(-1)" style="display:none">&#8592;</button>
       <div class="featured-track" id="featuredTrack">
         <div class="loading-state" style="width:100%;text-align:center"><div class="loading-spinner"></div><p>Loading featured listings...</p></div>
       </div>
-      <button class="carousel-btn next" id="carouselNext" onclick="slideCarousel(1)" style="display:none">&#8250;</button>
+      <button class="carousel-btn next" id="carouselNext" onclick="event.stopPropagation();slideCarousel(1)" style="display:none">&#8594;</button>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
@@ -500,7 +500,7 @@ function startAutoScroll() {
     const maxIndex = Math.max(0, carouselTotal - carouselVisible);
     carouselIndex = carouselIndex >= maxIndex ? 0 : carouselIndex + 1;
     updateCarousel();
-  }, 3500);
+  }, 2500);
 }
 
 function resetAutoScroll() {
