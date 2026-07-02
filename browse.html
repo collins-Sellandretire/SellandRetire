@@ -70,10 +70,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .featured-carousel{position:relative;overflow:hidden}
 .featured-track{display:flex;gap:1rem;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1)}
 .featured-track .featured-card{flex:0 0 calc(33.333% - 0.67rem);min-width:0}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.3)}
-.carousel-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-50%) scale(1.1)}
-.carousel-btn.prev{left:-20px}
-.carousel-btn.next{right:-20px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.5);width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100;transition:all 0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.4);padding:0}
+.carousel-btn:hover{background:var(--gold);border-color:var(--gold)}
+.carousel-btn.prev{left:-24px}
+.carousel-btn.next{right:-24px}
 .carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:0.75rem}
 .carousel-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.2s}
 .carousel-dot.active{background:var(--gold);width:18px;border-radius:3px}
@@ -187,11 +187,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
   <div class="featured-inner">
     <div class="featured-label">★ Featured Businesses — Premium Listings</div>
     <div class="featured-carousel" id="featuredCarousel">
-      <button class="carousel-btn prev" id="carouselPrev" onclick="event.stopPropagation();slideCarousel(-1)" style="display:none">&#8592;</button>
+      <button class="carousel-btn prev" id="carouselPrev" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <div class="featured-track" id="featuredTrack">
         <div class="loading-state" style="width:100%;text-align:center"><div class="loading-spinner"></div><p>Loading featured listings...</p></div>
       </div>
-      <button class="carousel-btn next" id="carouselNext" onclick="event.stopPropagation();slideCarousel(1)" style="display:none">&#8594;</button>
+      <button class="carousel-btn next" id="carouselNext" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem">
@@ -445,61 +445,112 @@ function applyFilters() {
   });
 }
 
-// ── CAROUSEL ──
+// ── INFINITE CAROUSEL ──
 let carouselIndex = 0;
 let carouselTotal = 0;
 const carouselVisible = 3;
+let isTransitioning = false;
+let autoScrollTimer = null;
 
-function updateCarousel() {
+function getCardWidth() {
   const track = document.getElementById('featuredTrack');
-  const cards = track.querySelectorAll('.featured-card');
-  if (cards.length === 0) return;
-  const cardWidth = cards[0].offsetWidth + 16; // width + gap
-  track.style.transform = 'translateX(-' + (carouselIndex * cardWidth) + 'px)';
-  // Update dots
+  const card = track.querySelector('.featured-card');
+  if (!card) return 0;
+  return card.offsetWidth + 16;
+}
+
+function updateCarousel(animate) {
+  const track = document.getElementById('featuredTrack');
+  if (!track) return;
+  if (animate === false) {
+    track.style.transition = 'none';
+  } else {
+    track.style.transition = 'transform 0.8s cubic-bezier(0.4,0,0.2,1)';
+  }
+  track.style.transform = 'translateX(-' + (carouselIndex * getCardWidth()) + 'px)';
+  const realIndex = (carouselIndex - carouselVisible) % carouselTotal;
   document.querySelectorAll('.carousel-dot').forEach(function(d, i) {
-    d.classList.toggle('active', i === carouselIndex);
+    d.classList.toggle('active', i === realIndex);
   });
-  // Show/hide buttons
-  const maxIndex = Math.max(0, carouselTotal - carouselVisible);
-  document.getElementById('carouselPrev').style.display = carouselIndex > 0 ? 'flex' : 'none';
-  document.getElementById('carouselNext').style.display = carouselIndex < maxIndex ? 'flex' : 'none';
+  document.getElementById('carouselPrev').style.display = 'flex';
+  document.getElementById('carouselNext').style.display = 'flex';
 }
 
 function slideCarousel(dir) {
-  const maxIndex = Math.max(0, carouselTotal - carouselVisible);
-  carouselIndex = Math.max(0, Math.min(carouselIndex + dir, maxIndex));
-  updateCarousel();
+  if (isTransitioning) return;
+  isTransitioning = true;
+  carouselIndex += dir;
+  updateCarousel(true);
   resetAutoScroll();
 }
 
-let autoScrollTimer = null;
-
 function initCarousel(total) {
   carouselTotal = total;
-  carouselIndex = 0;
-  // Build dots
+  const track = document.getElementById('featuredTrack');
+  const cards = [...track.querySelectorAll('.featured-card')];
+
+  // Clone last N cards and prepend
+  cards.slice(-carouselVisible).reverse().forEach(function(card) {
+    const clone = card.cloneNode(true);
+    clone.onclick = card.onclick;
+    track.insertBefore(clone, track.firstChild);
+  });
+  // Clone first N cards and append
+  cards.slice(0, carouselVisible).forEach(function(card) {
+    const clone = card.cloneNode(true);
+    clone.onclick = card.onclick;
+    track.appendChild(clone);
+  });
+
+  // Start at first real card
+  carouselIndex = carouselVisible;
+  updateCarousel(false);
+
+  // Silent jump at boundaries
+  track.addEventListener('transitionend', function() {
+    isTransitioning = false;
+    const totalCards = track.querySelectorAll('.featured-card').length;
+    if (carouselIndex >= totalCards - carouselVisible) {
+      carouselIndex = carouselVisible;
+      updateCarousel(false);
+    }
+    if (carouselIndex < carouselVisible) {
+      carouselIndex = totalCards - carouselVisible * 2;
+      updateCarousel(false);
+    }
+  });
+
+  // Arrow listeners
+  document.getElementById('carouselPrev').addEventListener('click', function(e) {
+    e.stopPropagation(); slideCarousel(-1);
+  });
+  document.getElementById('carouselNext').addEventListener('click', function(e) {
+    e.stopPropagation(); slideCarousel(1);
+  });
+
+  // Dots
   const dotsEl = document.getElementById('carouselDots');
   dotsEl.innerHTML = '';
-  const pages = Math.max(1, total - carouselVisible + 1);
-  if (total > carouselVisible) {
-    for (let i = 0; i < pages; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.onclick = (function(idx) { return function() { carouselIndex = idx; updateCarousel(); resetAutoScroll(); }; })(i);
-      dotsEl.appendChild(dot);
-    }
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    (function(idx) {
+      dot.onclick = function() {
+        carouselIndex = idx + carouselVisible;
+        updateCarousel(true);
+        resetAutoScroll();
+      };
+    })(i);
+    dotsEl.appendChild(dot);
   }
-  setTimeout(updateCarousel, 50);
+
   startAutoScroll();
 }
 
 function startAutoScroll() {
   if (autoScrollTimer) clearInterval(autoScrollTimer);
   autoScrollTimer = setInterval(function() {
-    const maxIndex = Math.max(0, carouselTotal - carouselVisible);
-    carouselIndex = carouselIndex >= maxIndex ? 0 : carouselIndex + 1;
-    updateCarousel();
+    if (!isTransitioning) slideCarousel(1);
   }, 2500);
 }
 
