@@ -123,6 +123,14 @@ section{padding:5rem 2rem}
 .step h3{font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;position:relative}
 .step p{font-size:0.9rem;color:var(--text-light);line-height:1.6;position:relative}
 .listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.home-carousel{position:relative;padding:0 50px}
+.home-carousel-track{display:flex;gap:1.5rem;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+.home-carousel-track .listing-card{flex:0 0 calc(33.333% - 1rem);min-width:0}
+.home-carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:#fff;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(28,56,41,0.2);transition:all 0.2s;z-index:10}
+.home-carousel-btn:hover{background:var(--gold)}
+.home-carousel-btn:hover svg{stroke:#fff}
+.home-carousel-btn.prev{left:0}
+.home-carousel-btn.next{right:0}
 .listing-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;transition:all 0.25s;cursor:pointer}
 .listing-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .lc-header{background:var(--forest);padding:1.5rem}
@@ -379,10 +387,20 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:3rem 2r
       <h2 class="section-title">Businesses ready for their next chapter</h2>
       <p class="section-sub">Every business here is listed by an owner ready to retire and hand over to the right person.</p>
     </div>
-    <div class="listings-grid">
-      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Hospitality</div><div class="lc-title">Established Café &amp; Catering, Melbourne CBD</div></div><div class="lc-body"><div class="lc-price">$340,000</div><div class="lc-details"><div class="lc-detail">📍 Melbourne, VIC</div><div class="lc-detail">📅 19 years trading</div><div class="lc-detail">💰 $1.2M annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
-      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Trade Services</div><div class="lc-title">Electrical Contracting Business, Sydney</div></div><div class="lc-body"><div class="lc-price">$620,000</div><div class="lc-details"><div class="lc-detail">📍 Western Sydney, NSW</div><div class="lc-detail">📅 24 years trading</div><div class="lc-detail">💰 $2.4M annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
-      <div class="listing-card reveal"><div class="lc-header"><div class="lc-category">Retail</div><div class="lc-title">Hardware &amp; Homewares Store, Brisbane</div></div><div class="lc-body"><div class="lc-price">$195,000</div><div class="lc-details"><div class="lc-detail">📍 Fortitude Valley, QLD</div><div class="lc-detail">📅 16 years trading</div><div class="lc-detail">💰 $850K annual turnover</div></div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><a href="browse.html" class="view-link">View →</a></div></div>
+    <div class="home-carousel">
+      <button class="home-carousel-btn prev" id="homePrev" onclick="homeSlide(-1)" style="display:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1c3829" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div style="overflow:hidden">
+        <div class="home-carousel-track" id="homepageFeaturedGrid">
+          <div style="text-align:center;padding:2rem;color:var(--text-light);width:100%">
+            <div style="display:inline-block;width:28px;height:28px;border:3px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite"></div>
+          </div>
+        </div>
+      </div>
+      <button class="home-carousel-btn next" id="homeNext" onclick="homeSlide(1)" style="display:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1c3829" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
     <div style="text-align:center;margin-top:2.5rem"><a href="browse.html" class="btn-primary">Browse All Businesses</a></div>
   </div>
@@ -493,6 +511,71 @@ function doSearch() {
   if (max) params.set('max', max);
   window.location.href = 'browse.html' + (params.toString() ? '?' + params.toString() : '');
 }
+
+// ── HOMEPAGE FEATURED LISTINGS FROM AIRTABLE ──
+let homeCarouselIndex = 0;
+let homeCarouselTotal = 0;
+const homeCarouselVisible = 3;
+
+function homeSlide(dir) {
+  const track = document.getElementById('homepageFeaturedGrid');
+  const cards = track.querySelectorAll('.listing-card');
+  if (!cards.length) return;
+  const maxIndex = Math.max(0, homeCarouselTotal - homeCarouselVisible);
+  homeCarouselIndex = Math.max(0, Math.min(homeCarouselIndex + dir, maxIndex));
+  const cardWidth = cards[0].offsetWidth + 24;
+  track.style.transform = 'translateX(-' + (homeCarouselIndex * cardWidth) + 'px)';
+  document.getElementById('homePrev').style.display = homeCarouselIndex > 0 ? 'flex' : 'none';
+  document.getElementById('homeNext').style.display = homeCarouselIndex < maxIndex ? 'flex' : 'none';
+}
+
+(async function loadHomepageFeatured() {
+  try {
+    const res = await fetch('/.netlify/functions/listings');
+    if (!res.ok) throw new Error('Failed');
+    const data = await res.json();
+    const featured = (data.records || []).filter(r => r.fields.Featured);
+    const grid = document.getElementById('homepageFeaturedGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    if (featured.length === 0) {
+      grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-light);width:100%">Listings coming soon.</div>';
+      return;
+    }
+    homeCarouselTotal = featured.length;
+    featured.forEach(function(record) {
+      const f = record.fields;
+      const price = f.Price ? '$' + parseInt(f.Price).toLocaleString('en-AU') : 'Price on enquiry';
+      const photo = f.Photo1 || '';
+      const div = document.createElement('div');
+      div.className = 'listing-card';
+      div.style.cursor = 'pointer';
+      div.innerHTML = `
+        ${photo ? '<div style="width:100%;height:160px;overflow:hidden;background:var(--cream)"><img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentElement.style.display='none'"></div>' : ''}
+        <div class="lc-header">
+          <div class="lc-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
+          <div class="lc-title">${f.Title || ''}</div>
+        </div>
+        <div class="lc-body">
+          <div class="lc-price">${price}</div>
+          <div class="lc-details">
+            ${f.Location ? '<div class="lc-detail">📍 ' + f.Location + '</div>' : ''}
+            ${f['Years Trading'] ? '<div class="lc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : ''}
+            ${f['Annual Turnover'] ? '<div class="lc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : ''}
+          </div>
+        </div>
+        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><span class="view-link">View →</span></div>`;
+      div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
+      grid.appendChild(div);
+    });
+    // Show next arrow only if more than 3
+    if (homeCarouselTotal > homeCarouselVisible) {
+      document.getElementById('homeNext').style.display = 'flex';
+    }
+  } catch(e) {
+    console.error('Homepage featured error:', e);
+  }
+})();
 
 const obs = new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
