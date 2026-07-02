@@ -470,7 +470,10 @@ function slideCarousel(dir) {
   const maxIndex = Math.max(0, carouselTotal - carouselVisible);
   carouselIndex = Math.max(0, Math.min(carouselIndex + dir, maxIndex));
   updateCarousel();
+  resetAutoScroll();
 }
+
+let autoScrollTimer = null;
 
 function initCarousel(total) {
   carouselTotal = total;
@@ -483,11 +486,25 @@ function initCarousel(total) {
     for (let i = 0; i < pages; i++) {
       const dot = document.createElement('div');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.onclick = (function(idx) { return function() { carouselIndex = idx; updateCarousel(); }; })(i);
+      dot.onclick = (function(idx) { return function() { carouselIndex = idx; updateCarousel(); resetAutoScroll(); }; })(i);
       dotsEl.appendChild(dot);
     }
   }
   setTimeout(updateCarousel, 50);
+  startAutoScroll();
+}
+
+function startAutoScroll() {
+  if (autoScrollTimer) clearInterval(autoScrollTimer);
+  autoScrollTimer = setInterval(function() {
+    const maxIndex = Math.max(0, carouselTotal - carouselVisible);
+    carouselIndex = carouselIndex >= maxIndex ? 0 : carouselIndex + 1;
+    updateCarousel();
+  }, 3500);
+}
+
+function resetAutoScroll() {
+  startAutoScroll();
 }
 
 // ── FEATURED SECTION CLICK ──
