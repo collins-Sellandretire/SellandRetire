@@ -563,21 +563,12 @@ function homeSlide(dir) {
       const div = document.createElement('div');
       div.className = 'listing-card';
       div.style.cursor = 'pointer';
-      div.innerHTML = `
-        ${photo ? '<div style="width:100%;height:160px;overflow:hidden;background:var(--cream)"><img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentElement.style.display='none'"></div>' : ''}
-        <div class="lc-header">
-          <div class="lc-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
-          <div class="lc-title">${f.Title || ''}</div>
-        </div>
-        <div class="lc-body">
-          <div class="lc-price">${price}</div>
-          <div class="lc-details">
-            ${f.Location ? '<div class="lc-detail">📍 ' + f.Location + '</div>' : ''}
-            ${f['Years Trading'] ? '<div class="lc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : ''}
-            ${f['Annual Turnover'] ? '<div class="lc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : ''}
-          </div>
-        </div>
-        <div class="lc-footer"><span class="lc-badge">Retiring Owner</span><span class="view-link">View →</span></div>`;
+      var photoHtml = photo ? '<div style="width:100%;height:160px;overflow:hidden;background:var(--cream)"><img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>' : '';
+      var catStr = (f.Category || '') + (f.State ? ' · ' + f.State : '');
+      var locHtml = f.Location ? '<div class="lc-detail">📍 ' + f.Location + '</div>' : '';
+      var yrsHtml = f['Years Trading'] ? '<div class="lc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : '';
+      var tovHtml = f['Annual Turnover'] ? '<div class="lc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : '';
+      div.innerHTML = photoHtml + '<div class="lc-header"><div class="lc-category">' + catStr + '</div><div class="lc-title">' + (f.Title || '') + '</div></div><div class="lc-body"><div class="lc-price">' + price + '</div><div class="lc-details">' + locHtml + yrsHtml + tovHtml + '</div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><span class="view-link">View →</span></div>';
       div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
       grid.appendChild(div);
     });
