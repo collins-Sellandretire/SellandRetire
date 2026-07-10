@@ -11,7 +11,7 @@
 :root{--forest:#1c3829;--forest-dark:#122318;--forest-light:#2a5240;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow:0 4px 24px rgba(28,56,41,0.10);--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:clip}
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
 a{text-decoration:none;color:inherit}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
@@ -291,7 +291,7 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:3rem 2r
     </div>
 
     <!-- BUY PANEL -->
-    <div class="hero-panel active" id="panel-buy">
+    <div class="hero-panel active" id="panel-buy" class="hero-panel active">
       <div class="search-grid">
         <div class="search-field">
           <label>Category</label>
@@ -343,7 +343,7 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:3rem 2r
     </div>
 
     <!-- SELL PANEL -->
-    <div class="hero-panel" id="panel-sell">
+    <div class="hero-panel" id="panel-sell" class="hero-panel">
       <div class="sell-panel-inner">
         <div class="founding-badge">
           <div class="badge-title">🎉 Founding Member Offer</div>
@@ -529,14 +529,17 @@ const homeCarouselVisible = 3;
 
 function homeSlide(dir) {
   const track = document.getElementById('homepageFeaturedGrid');
+  if (!track) return;
   const cards = track.querySelectorAll('.listing-card');
   if (!cards.length) return;
   const maxIndex = Math.max(0, homeCarouselTotal - homeCarouselVisible);
   homeCarouselIndex = Math.max(0, Math.min(homeCarouselIndex + dir, maxIndex));
   const cardWidth = cards[0].offsetWidth + 24;
   track.style.transform = 'translateX(-' + (homeCarouselIndex * cardWidth) + 'px)';
-  document.getElementById('homePrev').style.display = homeCarouselIndex > 0 ? 'flex' : 'none';
-  document.getElementById('homeNext').style.display = homeCarouselIndex < maxIndex ? 'flex' : 'none';
+  const prevBtn = document.getElementById('homePrev');
+  const nextBtn = document.getElementById('homeNext');
+  if (prevBtn) prevBtn.style.display = homeCarouselIndex > 0 ? 'flex' : 'none';
+  if (nextBtn) nextBtn.style.display = homeCarouselIndex < maxIndex ? 'flex' : 'none';
 }
 
 (async function loadHomepageFeatured() {
@@ -580,7 +583,8 @@ function homeSlide(dir) {
     });
     // Show next arrow only if more than 3
     if (homeCarouselTotal > homeCarouselVisible) {
-      document.getElementById('homeNext').style.display = 'flex';
+      const nextBtn = document.getElementById('homeNext');
+      if (nextBtn) nextBtn.style.display = 'flex';
     }
   } catch(e) {
     console.error('Homepage featured error:', e);
