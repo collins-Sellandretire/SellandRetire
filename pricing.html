@@ -286,6 +286,9 @@ document.querySelectorAll('.dropdown').forEach(function(dd) {
 });
 const obs = new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
+function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
 </script>
 
 <div class="mobile-menu" id="mobileMenu">
