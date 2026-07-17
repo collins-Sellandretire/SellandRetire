@@ -90,6 +90,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .team-avatar{width:64px;height:64px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:600;margin:0 auto 0.75rem;overflow:hidden;flex-shrink:0}.team-avatar img{width:100%;height:100%;object-fit:cover}.team-bio{font-size:0.78rem;color:var(--text-light);line-height:1.5;margin-top:0.4rem}.team-speciality{font-size:0.75rem;color:var(--gold);font-weight:500;margin-top:0.25rem}
 .team-name{font-size:0.95rem;font-weight:600;color:var(--forest);margin-bottom:0.2rem;font-family:'Cormorant Garamond',serif}
 .team-title{font-size:0.78rem;color:var(--text-light)}
+.team-card{cursor:pointer;transition:box-shadow 0.2s,transform 0.2s}
+.team-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.team-contact-btn{display:inline-block;margin-top:0.75rem;font-size:0.75rem;color:var(--gold);font-weight:600;border:1px solid rgba(191,138,46,0.4);border-radius:3px;padding:0.25rem 0.65rem;cursor:pointer}
+.profile-body{background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.75rem;margin-bottom:2.5rem}
+.profile-body p{font-size:0.925rem;color:var(--text-mid);line-height:1.75;margin-bottom:1rem}
+.profile-body p:last-child{margin-bottom:0}
+/* Agent modal */
+.agent-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:2000;align-items:center;justify-content:center}
+.agent-modal-overlay.open{display:flex}
+.agent-modal{background:#fff;border-radius:16px;padding:2.5rem;max-width:480px;width:90%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.25)}
+.agent-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-light);line-height:1}
+.agent-modal-avatar{width:90px;height:90px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fff;font-weight:700;margin:0 auto 1.25rem;overflow:hidden;flex-shrink:0}
+.agent-modal-avatar img{width:100%;height:100%;object-fit:cover}
+.agent-modal-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--forest);font-weight:600;text-align:center;margin-bottom:0.25rem}
+.agent-modal-speciality{font-size:0.82rem;color:var(--gold);font-weight:600;text-align:center;margin-bottom:0.25rem}
+.agent-modal-years{font-size:0.82rem;color:var(--text-light);text-align:center;margin-bottom:1.25rem}
+.agent-modal-bio{font-size:0.875rem;color:var(--text-mid);line-height:1.7;margin-bottom:1.25rem}
+.agent-modal-contacts{display:flex;flex-direction:column;gap:0.6rem}
+.agent-modal-contact{font-size:0.85rem;display:flex;gap:0.6rem;align-items:center}
+.agent-modal-contact a{color:var(--gold);font-weight:500}
 
 /* LISTINGS */
 .listings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
@@ -160,7 +180,6 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
         <h1 class="profile-name" id="profileName"></h1>
         <div class="profile-location" id="profileLocation"></div>
         <div class="profile-tags" id="profileTags"></div>
-        <p class="profile-about" id="profileAbout"></p>
         <div class="profile-stats" id="profileStats"></div>
       </div>
     </div>
@@ -169,9 +188,24 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
       <div id="contactDetails"></div>
     </div>
   </div>
+  <div id="profileBody" style="display:none" class="profile-body">
+    <p id="profileAbout"></p>
+  </div>
   <div id="teamSection" style="display:none">
     <h2 class="section-title">Meet the Team</h2>
     <div class="team-grid" id="teamGrid"></div>
+  </div>
+  <!-- Agent modal -->
+  <div class="agent-modal-overlay" id="agentModal" onclick="closeAgentModal(event)">
+    <div class="agent-modal">
+      <button class="agent-modal-close" onclick="document.getElementById('agentModal').classList.remove('open')">&times;</button>
+      <div class="agent-modal-avatar" id="modalAvatar"></div>
+      <div class="agent-modal-name" id="modalName"></div>
+      <div class="agent-modal-speciality" id="modalSpeciality"></div>
+      <div class="agent-modal-years" id="modalYears"></div>
+      <div class="agent-modal-bio" id="modalBio"></div>
+      <div class="agent-modal-contacts" id="modalContacts"></div>
+    </div>
   </div>
   <div id="listingsSection" style="display:none">
     <h2 class="section-title" id="listingsTitle"></h2>
@@ -269,7 +303,10 @@ async function loadBrokerProfile() {
     });
 
     // About
-    if (f.Description) document.getElementById('profileAbout').textContent = f.Description;
+    if (f.Description) {
+      document.getElementById('profileAbout').textContent = f.Description;
+      document.getElementById('profileBody').style.display = 'block';
+    }
 
     // Stats
     var statsEl = document.getElementById('profileStats');
@@ -351,6 +388,7 @@ async function loadBrokerProfile() {
           var speciality = af.Speciality || '';
           var years = af['Years Experience'] ? af['Years Experience'] + ' yrs experience' : '';
           var bio = af.Bio || '';
+          var hasContact = af.Phone || af.Email;
           var card = document.createElement('div');
           card.className = 'team-card';
           card.innerHTML =
@@ -358,7 +396,18 @@ async function loadBrokerProfile() {
             '<div class="team-name">' + agentName + '</div>' +
             (speciality ? '<div class="team-speciality">' + speciality + '</div>' : '') +
             (years ? '<div class="team-title">' + years + '</div>' : '') +
-            (bio ? '<div class="team-bio">' + bio + '</div>' : '');
+            (hasContact ? '<div class="team-contact-btn">View Contact Details</div>' : '');
+          card.onclick = function() {
+            openAgentModal({
+              name: agentName,
+              avatarInner: avatarInner,
+              speciality: speciality,
+              years: years,
+              bio: bio,
+              phone: af.Phone || '',
+              email: af.Email || ''
+            });
+          };
           teamGrid.appendChild(card);
         });
       }
@@ -375,6 +424,36 @@ async function loadBrokerProfile() {
 }
 loadBrokerProfile();
 
+function openAgentModal(agent) {
+  document.getElementById('modalAvatar').innerHTML = agent.avatarInner;
+  document.getElementById('modalName').textContent = agent.name;
+  document.getElementById('modalSpeciality').textContent = agent.speciality || '';
+  document.getElementById('modalSpeciality').style.display = agent.speciality ? 'block' : 'none';
+  document.getElementById('modalYears').textContent = agent.years || '';
+  document.getElementById('modalYears').style.display = agent.years ? 'block' : 'none';
+  document.getElementById('modalBio').textContent = agent.bio || '';
+  document.getElementById('modalBio').style.display = agent.bio ? 'block' : 'none';
+  var contacts = document.getElementById('modalContacts');
+  contacts.innerHTML = '';
+  if (agent.phone) {
+    var d = document.createElement('div');
+    d.className = 'agent-modal-contact';
+    d.innerHTML = '<span>📞</span><span>' + agent.phone + '</span>';
+    contacts.appendChild(d);
+  }
+  if (agent.email) {
+    var d2 = document.createElement('div');
+    d2.className = 'agent-modal-contact';
+    d2.innerHTML = '<span>✉️</span><a href="mailto:' + agent.email + '">' + agent.email + '</a>';
+    contacts.appendChild(d2);
+  }
+  document.getElementById('agentModal').classList.add('open');
+}
+function closeAgentModal(e) {
+  if (e.target === document.getElementById('agentModal')) {
+    document.getElementById('agentModal').classList.remove('open');
+  }
+}
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
 function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
 document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
