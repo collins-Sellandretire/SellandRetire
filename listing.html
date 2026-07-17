@@ -122,8 +122,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .detail-tag{background:var(--cream);border:1px solid var(--cream-dark);border-radius:4px;padding:0.35rem 0.8rem;font-size:0.8rem;color:var(--text-mid)}
 
 .seller-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.8rem;font-weight:600;padding:0.35rem 0.9rem;border-radius:4px;border:1px solid;margin-bottom:0.75rem;font-family:"DM Sans",sans-serif}
-.seller-badge.private{background:rgba(28,56,41,0.08);border-color:rgba(28,56,41,0.2);color:var(--forest)}
-.seller-badge.broker{background:rgba(191,138,46,0.1);border-color:rgba(191,138,46,0.3);color:#8a6020}
+.seller-badge.private{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.5);color:var(--forest)}
+.seller-badge.broker{background:rgba(255,255,255,0.92);border-color:rgba(191,138,46,0.5);color:#7a5010}
 .confidentiality-note{background:rgba(191,138,46,0.06);border:1px solid rgba(191,138,46,0.18);border-radius:8px;padding:1rem 1.25rem;font-size:0.85rem;color:#6b4c10;line-height:1.6}
 
 /* ENQUIRY FORM */
@@ -335,7 +335,7 @@ function renderListing(record) {
           <span>›</span>
           <span>${f.Title || 'Listing'}</span>
         </div>
-        ${(f['Seller Type'] === 'Broker' && (Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name'])) ? `<div class="seller-badge broker">🏢 Listed via ${Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name']}</div>` : '<div class="seller-badge private">👤 Private Seller — Retiring Owner</div>'}
+        ${(f['Seller Type'] === 'Broker' && (Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name'])) ? `<div class="seller-badge broker">🏢 Listed via ${Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name']}</div>` : '<div class="seller-badge private">Private Seller — Retiring Owner</div>'}
       <div class="listing-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}${f.Location ? ' · ' + f.Location : ''}</div>
       <h1>${f.Title || 'Business Listing'}</h1>
       <div class="listing-price">${price}</div>
