@@ -22,6 +22,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif}.logo-retire{color:var(--gold)}
 .logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
 .nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none}
+.nav-trigger.broker-trigger{color:var(--gold);background:rgba(191,138,46,0.12);font-weight:500}
+.dropdown:hover .broker-trigger,.dropdown.open .broker-trigger{color:var(--gold);background:rgba(191,138,46,0.2)}
+.menu-item-label{font-weight:600;color:var(--forest);margin-bottom:2px}
+.menu-item-sub{font-size:0.75rem;color:var(--text-light)}
 .nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
 .dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
 .nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
@@ -105,6 +109,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .fc-details{display:flex;flex-direction:column;gap:0.35rem}
 .fc-detail{font-size:0.8rem;color:var(--text-mid)}
 .fc-footer{padding:0 1.25rem 1.25rem;display:flex;justify-content:space-between;align-items:center}
+.seller-badge-fc{display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;font-weight:600;padding:0.2rem 0.65rem;border-radius:3px;border:1px solid}
+.seller-badge-fc.private{background:rgba(28,56,41,0.06);border-color:rgba(28,56,41,0.2);color:var(--forest)}
+.seller-badge-fc.broker{background:rgba(191,138,46,0.08);border-color:rgba(191,138,46,0.3);color:#8a6020}
+.new-badge{position:absolute;top:0.6rem;left:0.6rem;background:#e03d2f;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px;z-index:2}
 .fc-badge{font-size:0.7rem;font-weight:700;background:rgba(191,138,46,0.12);color:#8a6020;padding:3px 9px;border-radius:3px;border:1px solid rgba(191,138,46,0.3)}
 .fc-view{font-size:0.82rem;color:var(--gold);font-weight:600}
 
@@ -155,6 +163,9 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
       </div>
       <div class="dropdown"><span class="nav-trigger">Selling</span>
         <div class="dropdown-menu"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger broker-trigger">Brokers</span>
+        <div class="dropdown-menu"><a href="find-brokers.html"><div class="menu-item-label">Find a Broker</div><div class="menu-item-sub">Browse our broker directory</div></a><a href="brokers.html"><div class="menu-item-label">Register as a Broker</div><div class="menu-item-sub">List your businesses with us</div></a></div>
       </div>
       <div class="dropdown"><span class="nav-trigger">Other</span>
         <div class="dropdown-menu"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
@@ -266,6 +277,9 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">Selling <span class="arrow">▾</span></div>
       <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
     </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
+    </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
       <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
     </div>
@@ -296,30 +310,33 @@ function buildCard(record) {
   const f = record.fields;
   const price = f.Price ? '$' + parseInt(f.Price).toLocaleString('en-AU') : 'Price on enquiry';
   const photo = f.Photo1 || 'https://picsum.photos/seed/' + record.id + '/400/260';
+  var isNew = false;
+  if (f['Date Listed']) {
+    var listed = new Date(f['Date Listed']);
+    var daysDiff = (new Date() - listed) / (1000 * 60 * 60 * 24);
+    isNew = daysDiff <= 14;
+  }
+  var newBadgeHtml = isNew ? '<span class="new-badge">New</span>' : '';
   const div = document.createElement('div');
   div.className = 'featured-card';
   div.dataset.state = f.State || '';
   div.dataset.industry = f.Category || '';
   div.dataset.price = f.Price || 0;
   div.dataset.text = ((f.Title||'') + ' ' + (f.Category||'') + ' ' + (f.State||'') + ' ' + (f.Location||'')).toLowerCase();
-  div.innerHTML = `
-    <div class="fc-thumb"><img src="${photo}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/260'"></div>
-    <div class="fc-header">
-      <div class="fc-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
-      <div class="fc-title">${f.Title || 'Business listing'}</div>
-    </div>
-    <div class="fc-body">
-      <div class="fc-price">${price}</div>
-      <div class="fc-details">
-        ${f.Location ? '<div class="fc-detail">📍 ' + f.Location + '</div>' : ''}
-        ${f['Years Trading'] ? '<div class="fc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : ''}
-        ${f['Annual Turnover'] ? '<div class="fc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : ''}
-      </div>
-    </div>
-    <div class="fc-footer">
-      <span class="fc-badge">★ Premium</span>
-      <span class="fc-view">View →</span>
-    </div>`;
+  var sellerType = f['Seller Type'] || 'Private Seller';
+  var brokerName = Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : (f['Broker Name'] || '');
+  var sellerBadgeHtml = sellerType === 'Broker' && brokerName
+    ? '<span class="seller-badge-fc broker">🏢 ' + brokerName + '</span>'
+    : '<span class="seller-badge-fc private">👤 Private Seller</span>';
+  div.innerHTML =
+    '<div class="fc-thumb" style="position:relative">' + newBadgeHtml + '<img src="' + photo + '" alt="' + (f.Title || '') + '" loading="lazy" onerror="this.src=\'https://picsum.photos/seed/default/400/260\'"></div>' +
+    '<div class="fc-header"><div class="fc-category">' + (f.Category || '') + (f.State ? ' · ' + f.State : '') + '</div>' +
+    '<div class="fc-title">' + (f.Title || 'Business listing') + '</div></div>' +
+    '<div class="fc-body"><div class="fc-price">' + price + '</div><div class="fc-details">' +
+    (f.Location ? '<div class="fc-detail">📍 ' + f.Location + '</div>' : '') +
+    (f['Years Trading'] ? '<div class="fc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : '') +
+    (f['Annual Turnover'] ? '<div class="fc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : '') +
+    '</div></div><div class="fc-footer">' + sellerBadgeHtml + '<span class="fc-view">View →</span></div>';
   div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
   return div;
 }
