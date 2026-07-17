@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bennett Business Sales | Sell & Retire</title>
+<meta name="description" content="Browse retirement business listings from Bennett Business Sales on Sell & Retire — Australia's marketplace for retiring business owners.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:clip}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(191,138,46,0.2)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;height:68px;gap:1rem}
+.logo{display:flex;align-items:flex-start;gap:10px;text-decoration:none;line-height:1}
+.logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
+.logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
+.logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif}.logo-retire{color:var(--gold)}
+.logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
+.nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;background:transparent;border:none;font-family:'DM Sans',sans-serif}
+.nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
+.nav-trigger.broker-trigger{color:var(--gold);background:rgba(191,138,46,0.12);font-weight:500}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:200px;overflow:hidden}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark);transition:background 0.15s}
+.dropdown-menu a:last-child{border-bottom:none}
+.dropdown-menu a:hover{background:var(--cream)}
+.menu-item-label{font-weight:600;color:var(--forest);margin-bottom:2px}
+.menu-item-sub{font-size:0.75rem;color:var(--text-light)}
+.dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
+.nav-actions{display:flex;align-items:center;gap:0.6rem;justify-content:flex-end}
+.nav-join{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:0.45rem 1rem!important;border-radius:var(--radius)!important;background:transparent!important;font-weight:500!important}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:0.5rem 1.25rem!important;font-weight:500!important;border-radius:var(--radius)!important}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:1050;background:var(--forest)}
+.mobile-menu.open{display:flex;flex-direction:column}
+.mobile-menu-inner{padding:5rem 2rem 2rem;overflow-y:auto;flex:1}
+.mobile-nav-item{border-bottom:1px solid rgba(255,255,255,0.08)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;color:#fff;font-size:1.1rem;font-weight:500;cursor:pointer}
+.mobile-nav-link .arrow{font-size:0.7rem;opacity:0.6}
+.mobile-submenu{display:none;padding:0 0 0.75rem 1rem;flex-direction:column}
+.mobile-submenu.open{display:flex}
+.mobile-submenu a{padding:0.6rem 0;color:rgba(255,255,255,0.72);font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05);display:block}
+.mobile-menu-footer{padding:1.5rem 2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.75rem}
+.mobile-btn-outline{display:block;text-align:center;padding:0.9rem;border:1px solid var(--gold);color:var(--gold);border-radius:var(--radius);font-size:0.95rem;font-weight:600}
+.mobile-btn-solid{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600}
+@media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
+
+/* PAGE */
+.page-wrap{max-width:1100px;margin:0 auto;padding:2rem 2rem 4rem;margin-top:68px}
+
+/* BREADCRUMB */
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-light);margin-bottom:2rem;padding-top:1.5rem}
+.breadcrumb a{color:var(--gold);transition:opacity 0.2s}
+.breadcrumb a:hover{opacity:0.8}
+.breadcrumb span{color:var(--text-light)}
+
+/* PROFILE HEADER */
+.profile-header{display:grid;grid-template-columns:1fr 300px;gap:2.5rem;align-items:start;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--cream-dark)}
+.profile-logo{width:80px;height:80px;border-radius:12px;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:1.25rem;flex-shrink:0}
+.profile-name{font-size:2rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;line-height:1.1}
+.profile-location{font-size:0.9rem;color:var(--text-light);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.profile-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem}
+.profile-tag{background:var(--cream);border:1px solid var(--cream-dark);border-radius:3px;padding:0.25rem 0.7rem;font-size:0.78rem;color:var(--text-mid);font-weight:500}
+.profile-about{font-size:0.925rem;color:var(--text-mid);line-height:1.75;margin-bottom:1.5rem}
+.profile-stats{display:flex;gap:2rem}
+.profile-stat{text-align:center}
+.profile-stat-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--forest);line-height:1}
+.profile-stat-label{font-size:0.75rem;color:var(--text-light);margin-top:3px}
+
+/* CONTACT CARD */
+.contact-card{background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.75rem;position:sticky;top:88px}
+.contact-card h3{font-size:1.25rem;color:var(--forest);margin-bottom:1.25rem}
+.contact-row{display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:0.9rem;font-size:0.875rem}
+.contact-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.contact-row a{color:var(--gold);font-weight:500}
+.contact-row span{color:var(--text-mid)}
+.enquire-btn{display:block;width:100%;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-weight:500;font-size:0.95rem;margin-top:1.25rem;transition:background 0.2s}
+.enquire-btn:hover{background:var(--gold-light)}
+
+/* BROKERS TEAM */
+.section-title{font-size:1.6rem;color:var(--forest);font-weight:600;margin-bottom:1.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem}
+.team-card{background:var(--cream);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem;text-align:center}
+.team-avatar{width:52px;height:52px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:600;margin:0 auto 0.75rem}
+.team-name{font-size:0.95rem;font-weight:600;color:var(--forest);margin-bottom:0.2rem;font-family:'Cormorant Garamond',serif}
+.team-title{font-size:0.78rem;color:var(--text-light)}
+
+/* LISTINGS */
+.listings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.lc{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow 0.2s,transform 0.2s}
+.lc:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.lc-thumb{height:150px;overflow:hidden;background:var(--cream)}
+.lc-thumb img{width:100%;height:100%;object-fit:cover}
+.lc-body{padding:1.1rem}
+.lc-cat{font-size:0.72rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem}
+.lc-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;line-height:1.3}
+.lc-price{font-size:1rem;color:var(--gold);font-weight:600;margin-bottom:0.5rem;font-family:'Cormorant Garamond',serif}
+.lc-meta{font-size:0.78rem;color:var(--text-light)}
+.lc-footer{padding:0.75rem 1.1rem;border-top:1px solid var(--cream-dark);display:flex;justify-content:space-between;align-items:center}
+.broker-badge-sm{font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:3px;background:rgba(191,138,46,0.1);border:1px solid rgba(191,138,46,0.3);color:#8a6020}
+.view-link{font-size:0.82rem;color:var(--gold);font-weight:600}
+
+footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-bottom a{color:rgba(255,255,255,0.5)}
+
+@media(max-width:900px){.profile-header{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.listings-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.team-grid{grid-template-columns:1fr}.profile-stats{gap:1rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
+    <div class="nav-links">
+      <div class="dropdown"><span class="nav-trigger">Browse Businesses</span>
+        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><div class="dropdown-divider"></div><a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">How It Works</span>
+        <div class="dropdown-menu"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Buying</span>
+        <div class="dropdown-menu"><a href="browse.html">Browse Listings</a><a href="buying.html">Buyer's Guide</a><a href="buying.html">Register as a Buyer</a><a href="join.html">Register for Alerts</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Selling</span>
+        <div class="dropdown-menu"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger broker-trigger">Brokers</span>
+        <div class="dropdown-menu">
+          <a href="find-brokers.html"><div class="menu-item-label">Find a Broker</div><div class="menu-item-sub">Browse our broker directory</div></a>
+          <a href="brokers.html"><div class="menu-item-label">Register as a Broker</div><div class="menu-item-sub">List your businesses with us</div></a>
+        </div>
+      </div>
+      <div class="dropdown"><span class="nav-trigger">Other</span>
+        <div class="dropdown-menu"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
+      </div>
+    </div>
+    <div class="nav-actions"><a href="join.html" class="nav-join">Join</a><a href="selling.html" class="nav-cta">List My Business</a></div>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-wrap" id="profileWrap" style="display:none">
+  <div class="breadcrumb">
+    <a href="find-brokers.html">Find a Broker</a>
+    <span>&rsaquo;</span>
+    <span id="breadcrumbName"></span>
+  </div>
+  <div class="profile-header">
+    <div>
+      <div class="profile-logo" id="profileLogo"></div>
+      <h1 class="profile-name" id="profileName"></h1>
+      <div class="profile-location" id="profileLocation"></div>
+      <div class="profile-tags" id="profileTags"></div>
+      <p class="profile-about" id="profileAbout"></p>
+      <div class="profile-stats" id="profileStats"></div>
+    </div>
+    <div class="contact-card">
+      <h3>Get in touch</h3>
+      <div id="contactDetails"></div>
+      <a href="contact.html" class="enquire-btn">Send an Enquiry</a>
+    </div>
+  </div>
+  <div id="listingsSection" style="display:none">
+    <h2 class="section-title" id="listingsTitle"></h2>
+    <div class="listings-grid" id="listingsGrid"></div>
+  </div>
+</div>
+
+<div id="profileLoading" class="page-wrap" style="text-align:center;padding:6rem 2rem">
+  <div style="display:inline-block;width:36px;height:36px;border:3px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite"></div>
+</div>
+
+<div id="profileError" class="page-wrap" style="display:none;text-align:center;padding:6rem 2rem">
+  <h2 style="font-family:'Cormorant Garamond',serif;color:var(--forest);margin-bottom:1rem">Broker not found</h2>
+  <p style="color:var(--text-light);margin-bottom:2rem">This broker profile could not be loaded.</p>
+  <a href="find-brokers.html" style="color:var(--gold);font-weight:500">Back to broker directory</a>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 SellandRetire.com.au — All rights reserved</span>
+    <div style="display:flex;gap:1.5rem"><a href="index.html">Home</a><a href="browse.html">Browse</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a></div>
+  </div>
+</footer>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-browse',this)">Browse Businesses <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-browse"><a href="browse.html">View All Listings</a><a href="featured.html" style="color:var(--gold)">★ Featured</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
+    </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
+    </div>
+  </div>
+  <div class="mobile-menu-footer">
+    <a href="join.html" class="mobile-btn-outline">Join</a>
+    <a href="selling.html" class="mobile-btn-solid">List My Business — Free</a>
+  </div>
+</div>
+
+<script>
+// Add spin animation
+var style = document.createElement('style');
+style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(style);
+
+async function loadBrokerProfile() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+
+  if (!id) {
+    document.getElementById('profileLoading').style.display = 'none';
+    document.getElementById('profileError').style.display = 'block';
+    return;
+  }
+
+  try {
+    var res = await fetch('/.netlify/functions/brokers-fn?id=' + id);
+    var record = await res.json();
+    var f = record.fields;
+
+    if (!f) throw new Error('No fields');
+
+    var name = f['Company Name'] || '';
+    var initials = name.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+
+    // Breadcrumb
+    document.getElementById('breadcrumbName').textContent = name;
+    document.title = name + ' | Sell & Retire';
+
+    // Logo
+    var logoEl = document.getElementById('profileLogo');
+    if (f.Logo) {
+      logoEl.innerHTML = '<img src="' + f.Logo + '" style="width:80px;height:80px;object-fit:contain;border-radius:12px" alt="' + name + '">';
+    } else {
+      logoEl.textContent = initials;
+    }
+
+    // Name and location
+    document.getElementById('profileName').textContent = name;
+    if (f.Location) document.getElementById('profileLocation').innerHTML = '&#128205; ' + f.Location;
+
+    // Tags
+    var tagsEl = document.getElementById('profileTags');
+    var allTags = [];
+    if (f.States) f.States.split(',').forEach(function(s){ allTags.push(s.trim()); });
+    if (f.Industries) f.Industries.split(',').forEach(function(s){ allTags.push(s.trim()); });
+    allTags.forEach(function(tag) {
+      var span = document.createElement('span');
+      span.className = 'profile-tag';
+      span.textContent = tag;
+      tagsEl.appendChild(span);
+    });
+
+    // About
+    if (f.Description) document.getElementById('profileAbout').textContent = f.Description;
+
+    // Stats
+    var statsEl = document.getElementById('profileStats');
+    var stats = [];
+    if (f['Listings Count']) stats.push([f['Listings Count'], 'Active listings']);
+    if (f.States) stats.push([f.States, 'States covered']);
+    stats.forEach(function(s) {
+      var div = document.createElement('div');
+      div.className = 'profile-stat';
+      div.innerHTML = '<div class="profile-stat-val">' + s[0] + '</div><div class="profile-stat-label">' + s[1] + '</div>';
+      statsEl.appendChild(div);
+    });
+
+    // Contact card
+    var contactEl = document.getElementById('contactDetails');
+    var contactRows = [];
+    if (f.Phone) contactRows.push(['&#128222;', f.Phone, null]);
+    if (f.Email) contactRows.push(['&#9993;', f.Email, 'mailto:' + f.Email]);
+    if (f.Website) contactRows.push(['&#127760;', f.Website, f.Website]);
+    if (f.Address) contactRows.push(['&#128205;', f.Address, null]);
+    contactRows.forEach(function(row) {
+      var div = document.createElement('div');
+      div.className = 'contact-row';
+      div.innerHTML = '<span class="contact-icon">' + row[0] + '</span>' +
+        (row[2] ? '<a href="' + row[2] + '" style="color:var(--gold)">' + row[1] + '</a>' : '<span>' + row[1] + '</span>');
+      contactEl.appendChild(div);
+    });
+
+    // Fetch listings for this broker from listings function
+    try {
+      var listRes = await fetch('/.netlify/functions/listings');
+      var listData = await listRes.json();
+      var brokerListings = (listData.records || []).filter(function(r) {
+        var bn = r.fields['Broker Name'];
+        var brokerName = Array.isArray(bn) ? bn[0] : bn;
+        return brokerName && brokerName.toLowerCase() === name.toLowerCase();
+      });
+
+      if (brokerListings.length) {
+        document.getElementById('listingsSection').style.display = 'block';
+        document.getElementById('listingsTitle').textContent = 'Active listings on Sell & Retire (' + brokerListings.length + ')';
+        var grid = document.getElementById('listingsGrid');
+        brokerListings.forEach(function(r) {
+          var lf = r.fields;
+          var price = lf.Price ? '$' + parseInt(lf.Price).toLocaleString('en-AU') : 'Price on enquiry';
+          var photo = lf.Photo1 || '';
+          var div = document.createElement('div');
+          div.className = 'lc';
+          div.onclick = function(){ window.location = 'listing.html?id=' + r.id; };
+          div.innerHTML =
+            '<div class="lc-thumb">' + (photo ? '<img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '') + '</div>' +
+            '<div class="lc-body">' +
+              '<div class="lc-cat">' + (lf.Category || '') + (lf.State ? ' &middot; ' + lf.State : '') + '</div>' +
+              '<div class="lc-title">' + (lf.Title || '') + '</div>' +
+              '<div class="lc-price">' + price + '</div>' +
+              '<div class="lc-meta">' + (lf.Location ? '&#128205; ' + lf.Location : '') + (lf['Years Trading'] ? ' &middot; ' + lf['Years Trading'] + ' years trading' : '') + '</div>' +
+            '</div>' +
+            '<div class="lc-footer"><span class="broker-badge-sm">&#127970; ' + name + '</span><span class="view-link">View &rarr;</span></div>';
+          grid.appendChild(div);
+        });
+      }
+    } catch(e) {}
+
+    // Show profile
+    document.getElementById('profileLoading').style.display = 'none';
+    document.getElementById('profileWrap').style.display = 'block';
+
+  } catch(err) {
+    document.getElementById('profileLoading').style.display = 'none';
+    document.getElementById('profileError').style.display = 'block';
+  }
+}
+loadBrokerProfile();
+
+function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
+function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
+document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
+</script>
+</body>
+</html>
