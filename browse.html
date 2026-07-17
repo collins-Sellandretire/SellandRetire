@@ -648,6 +648,11 @@ function handleFeaturedClick(e) {
   } else if (featured.length === 0) {
     track.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:0.875rem;padding:1rem">Featured listings coming soon.</p>';
   } else {
+    // Shuffle so visitors see different listings each visit
+    for (let i = featured.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [featured[i], featured[j]] = [featured[j], featured[i]];
+    }
     featured.forEach(r => track.appendChild(buildFeaturedCard(r)));
     initCarousel(featured.length);
   }
