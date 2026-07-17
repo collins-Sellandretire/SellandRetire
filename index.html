@@ -139,8 +139,8 @@ section{padding:5rem 2rem}
 .new-badge{position:absolute;top:0.6rem;left:0.6rem;background:#e03d2f;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px;z-index:2}
 .featured-ribbon{position:absolute;top:18px;right:-22px;background:#e03d2f;color:#fff;font-size:0.6rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 2.5rem;transform:rotate(45deg);z-index:3;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
 .seller-badge{display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;font-weight:600;padding:0.2rem 0.65rem;border-radius:3px;border:1px solid}
-.seller-badge.private{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.5);color:var(--forest)}
-.seller-badge.broker{background:rgba(255,255,255,0.92);border-color:rgba(191,138,46,0.5);color:#7a5010}
+.seller-badge.private{background:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.4);color:var(--forest)}
+.seller-badge.broker{background:rgba(255,255,255,0.65);border-color:rgba(191,138,46,0.45);color:#7a5010}
 .listing-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;transition:all 0.25s;cursor:pointer}
 .listing-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .lc-header{background:var(--forest);padding:1.5rem}
@@ -541,20 +541,54 @@ function doSearch() {
 let homeCarouselIndex = 0;
 let homeCarouselTotal = 0;
 const homeCarouselVisible = 3;
+let homeAutoTimer = null;
 
-function homeSlide(dir) {
+function homeGetCardWidth() {
+  const track = document.getElementById('homepageFeaturedGrid');
+  if (!track) return 0;
+  const card = track.querySelector('.listing-card');
+  return card ? card.offsetWidth + 24 : 0;
+}
+
+function homeUpdatePosition(animate) {
   const track = document.getElementById('homepageFeaturedGrid');
   if (!track) return;
-  const cards = track.querySelectorAll('.listing-card');
-  if (!cards.length) return;
-  const maxIndex = Math.max(0, homeCarouselTotal - homeCarouselVisible);
-  homeCarouselIndex = Math.max(0, Math.min(homeCarouselIndex + dir, maxIndex));
-  const cardWidth = cards[0].offsetWidth + 24;
-  track.style.transform = 'translateX(-' + (homeCarouselIndex * cardWidth) + 'px)';
-  const prevBtn = document.getElementById('homePrev');
-  const nextBtn = document.getElementById('homeNext');
-  if (prevBtn) prevBtn.style.display = homeCarouselIndex > 0 ? 'flex' : 'none';
-  if (nextBtn) nextBtn.style.display = homeCarouselIndex < maxIndex ? 'flex' : 'none';
+  if (!animate) track.style.transition = 'none';
+  else track.style.transition = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+  track.style.transform = 'translateX(-' + (homeCarouselIndex * homeGetCardWidth()) + 'px)';
+}
+
+function homeSlide(dir) {
+  homeCarouselIndex += dir;
+  homeUpdatePosition(true);
+  // After transition, check if we need to jump (infinite loop)
+  setTimeout(function() {
+    if (homeCarouselIndex >= homeCarouselTotal) {
+      homeCarouselIndex = 0;
+      homeUpdatePosition(false);
+      // Force reflow then re-enable transition
+      document.getElementById('homepageFeaturedGrid').offsetHeight;
+    } else if (homeCarouselIndex < 0) {
+      homeCarouselIndex = homeCarouselTotal - 1;
+      homeUpdatePosition(false);
+      document.getElementById('homepageFeaturedGrid').offsetHeight;
+    }
+  }, 750);
+  resetHomeAuto();
+}
+
+function resetHomeAuto() {
+  if (homeAutoTimer) clearInterval(homeAutoTimer);
+  if (homeCarouselTotal > homeCarouselVisible) {
+    homeAutoTimer = setInterval(function() { homeSlide(1); }, 4000);
+  }
+}
+
+function initHomeCarousel() {
+  if (homeCarouselTotal <= homeCarouselVisible) return;
+  document.getElementById('homePrev').style.display = 'flex';
+  document.getElementById('homeNext').style.display = 'flex';
+  resetHomeAuto();
 }
 
 (async function loadHomepageFeatured() {
@@ -600,10 +634,15 @@ function homeSlide(dir) {
       div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
       grid.appendChild(div);
     });
-    if (homeCarouselTotal > homeCarouselVisible) {
-      const nextBtn = document.getElementById('homeNext');
-      if (nextBtn) nextBtn.style.display = 'flex';
+    // Shuffle Premium listings so order varies each visit
+    const grid2 = document.getElementById('homepageFeaturedGrid');
+    const cards2 = Array.from(grid2.querySelectorAll('.listing-card'));
+    for (let i = cards2.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      grid2.appendChild(cards2[j]);
+      cards2.splice(j, 1);
     }
+    initHomeCarousel();
   } catch(e) {
     console.error('Homepage featured error:', e);
   }
