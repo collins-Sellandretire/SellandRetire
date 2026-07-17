@@ -143,7 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .seller-badge.private{background:rgba(28,56,41,0.06);border-color:rgba(28,56,41,0.2);color:var(--forest)}
 .seller-badge.broker{background:rgba(191,138,46,0.08);border-color:rgba(191,138,46,0.3);color:#8a6020}
 .view-link{font-size:0.82rem;color:var(--gold);font-weight:600}
-.new-badge{position:absolute;top:0.6rem;left:0.6rem;background:#e03d2f;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px;z-index:2}
+.new-badge{position:absolute;top:0.6rem;left:0.6rem;background:#e03d2f;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px;z-index:2}.featured-ribbon{position:absolute;top:10px;right:-28px;background:#e03d2f;color:#fff;font-size:0.6rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.28rem 2.2rem;transform:rotate(45deg);z-index:3;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
 
 /* LOADING & EMPTY STATES */
 .loading-state{text-align:center;padding:4rem 2rem;color:var(--text-light)}
@@ -366,13 +366,14 @@ function buildCard(record) {
     isNew = daysDiff <= 14;
   }
   var newBadge = isNew ? '<span class="new-badge">New</span>' : '';
+  var featuredRibbon = f.Plan === 'Premium' ? '<span class="featured-ribbon">Featured</span>' : '';
   var sellerType = f['Seller Type'] || 'Private Seller';
   var brokerName = Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : (f['Broker Name'] || '');
   var sellerBadge = sellerType === 'Broker' && brokerName
     ? '<span class="seller-badge broker">🏢 ' + brokerName + '</span>'
     : '<span class="seller-badge private">👤 Private Seller</span>';
   div.innerHTML = `
-    <div class="lc-thumb" style="position:relative">${newBadge}<img src="${photo}" alt="${f.Title || 'Business listing'}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/200'"></div>
+    <div class="lc-thumb" style="position:relative">${newBadge}${featuredRibbon}<img src="${photo}" alt="${f.Title || 'Business listing'}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/200'"></div>
     <div class="lc-header">
       <div class="lc-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
       <div class="lc-title">${f.Title || 'Business listing'}</div>
@@ -400,10 +401,18 @@ function buildFeaturedCard(record) {
   const f = record.fields;
   const price = f.Price ? '$' + parseInt(f.Price).toLocaleString('en-AU') : 'Price on enquiry';
   const photo = f.Photo1 || 'https://picsum.photos/seed/' + record.id + '/400/260';
+  var sellerType = f['Seller Type'] || 'Private Seller';
+  var brokerName = Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : (f['Broker Name'] || '');
+  var isNew = false;
+  if (f['Date Listed']) {
+    var daysDiff = (new Date() - new Date(f['Date Listed'])) / (1000 * 60 * 60 * 24);
+    isNew = daysDiff <= 14;
+  }
+  var newBadge = isNew ? '<span class="new-badge">New</span>' : '';
   const div = document.createElement('div');
   div.className = 'featured-card';
   div.innerHTML = `
-    <div class="fc-thumb"><img src="${photo}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/260'"></div>
+    <div class="fc-thumb" style="position:relative"><span class="featured-ribbon">Featured</span>${newBadge}<img src="${photo}" alt="${f.Title || ''}" loading="lazy" onerror="this.src='https://picsum.photos/seed/default/400/260'"></div>
     <div class="fc-body">
       <div class="fc-cat">${f.Category || ''}${f.State ? ' · ' + f.State : ''}</div>
       <div class="fc-title">${f.Title || ''}</div>
@@ -411,7 +420,7 @@ function buildFeaturedCard(record) {
       <div class="fc-meta">${f.Location ? '📍 ' + f.Location : ''}${f['Years Trading'] ? ' · ' + f['Years Trading'] + ' yrs' : ''}${f['Annual Turnover'] ? ' · ' + f['Annual Turnover'] : ''}</div>
     </div>
     <div class="fc-footer">
-      <span class="fc-feat-label">★ Premium</span>
+      ${sellerType === 'Broker' && brokerName ? '<span class="seller-badge broker">🏢 ' + brokerName + '</span>' : '<span class="seller-badge private">👤 Private Seller</span>'}
       <button class="fc-view-btn">View →</button>
     </div>`;
   div.addEventListener('click', function(e) {
@@ -466,8 +475,8 @@ function applyFilters() {
     const yA = parseInt(a.dataset.years) || 0, yB = parseInt(b.dataset.years) || 0;
     const dA = parseInt(a.dataset.date) || 0, dB = parseInt(b.dataset.date) || 0;
     if (sortVal.indexOf('Newest') > -1) return dB - dA;
-    if (sortVal.indexOf('Low') > -1) return pA - pB;
-    if (sortVal.indexOf('High') > -1) return pB - pA;
+    if (sortVal.indexOf('High–Low') > -1) return pB - pA;
+    if (sortVal.indexOf('Low–High') > -1) return pA - pB;
     if (sortVal.indexOf('Years') > -1) return yB - yA;
     return 0;
   });
