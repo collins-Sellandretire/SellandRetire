@@ -105,6 +105,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .broker-card-listings{font-size:0.78rem;color:var(--text-light)}
 .broker-read-more{font-size:0.85rem;color:var(--gold);font-weight:600}
 .broker-tag{background:var(--cream);border:1px solid var(--cream-dark);border-radius:3px;padding:0.2rem 0.6rem;font-size:0.72rem;color:var(--text-mid);font-weight:500}
+.directory-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.broker-search{flex:1;min-width:200px;padding:0.5rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.875rem;font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;outline:none}
+.broker-search:focus{border-color:var(--gold)}
+.btn-register-broker{background:var(--gold);color:#fff;border:none;padding:0.5rem 1.1rem;border-radius:var(--radius);font-size:0.85rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:background 0.2s}
+.btn-register-broker:hover{background:var(--gold-light)}
+.broker-states-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.4rem}
+.broker-state-tag{background:var(--cream);border:1px solid var(--cream-dark);border-radius:3px;padding:0.15rem 0.5rem;font-size:0.72rem;color:var(--text-mid);font-weight:500}
 
 .why-section{padding:4rem 2rem;background:#fff}
 .why-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
@@ -228,10 +235,14 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 
     <!-- Real broker list from Airtable -->
     <div id="brokerList" style="display:none">
-      <p id="brokerCount" style="font-size:0.82rem;color:var(--text-light);margin-bottom:1rem"></p>
-      <div class="state-filters" id="stateFilters" style="display:none"></div>
+      <div class="directory-toolbar">
+        <p id="brokerCount" style="font-size:0.82rem;color:var(--text-light);margin:0;white-space:nowrap"></p>
+        <input type="text" class="broker-search" id="brokerSearch" placeholder="Search by name, location or specialty…" oninput="applyBrokerFilters()">
+        <a href="brokers.html" class="btn-register-broker">Register as a Broker →</a>
+      </div>
+      <div class="state-filters" id="stateFilters"></div>
       <div class="broker-grid" id="brokerGrid"></div>
-      <p id="noResults" style="display:none;text-align:center;padding:2rem;font-size:0.9rem;color:var(--text-light)">No brokers found in this state.</p>
+      <p id="noResults" style="display:none;text-align:center;padding:2rem;font-size:0.9rem;color:var(--text-light)">No brokers match your search.</p>
     </div>
 
   </div>
@@ -293,66 +304,41 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 
 <script>
 var bgColors = ['#1c3829','#bf8a2e','#2d5a4a','#3a5a8a','#6b4a2a'];
+var allStates = ['All','ACT','NSW','NT','QLD','SA','TAS','VIC','WA'];
+var activeState = 'All';
+var allBrokerRecords = [];
 
 async function loadBrokers() {
   try {
     var res = await fetch('/.netlify/functions/brokers-fn');
     var data = await res.json();
-    var records = data.records || [];
+    allBrokerRecords = data.records || [];
     document.getElementById('brokerLoading').style.display = 'none';
-    if (!records.length) {
+    if (!allBrokerRecords.length) {
       document.getElementById('brokerEmpty').style.display = 'block';
       return;
     }
     document.getElementById('brokerList').style.display = 'block';
-    var count = records.length;
-    document.getElementById('brokerCount').textContent = count + ' brokerage' + (count !== 1 ? 's' : '') + ' listed — sorted A–Z';
 
-    // Build state filter tabs
-    var states = ['All'];
-    records.forEach(function(record) {
-      var s = record.fields['States'] || '';
-      s.split(',').forEach(function(st) {
-        var trimmed = st.trim();
-        if (trimmed && trimmed !== 'Australia Wide' && states.indexOf(trimmed) === -1) states.push(trimmed);
-      });
-    });
-    states.sort(function(a, b) { return a === 'All' ? -1 : b === 'All' ? 1 : a.localeCompare(b); });
-
+    // Build fixed state filter tabs (all Aus states always shown)
     var filtersEl = document.getElementById('stateFilters');
-    if (states.length > 2) {
-      filtersEl.style.display = 'flex';
-      states.forEach(function(state) {
-        var btn = document.createElement('button');
-        btn.className = 'state-btn' + (state === 'All' ? ' active' : '');
-        btn.textContent = state;
-        btn.onclick = function() {
-          document.querySelectorAll('.state-btn').forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          var cards = document.querySelectorAll('.broker-card[data-states]');
-          var visible = 0;
-          cards.forEach(function(card) {
-            var cardStates = card.getAttribute('data-states');
-            var show = state === 'All' || cardStates.indexOf(state) !== -1;
-            card.style.display = show ? 'flex' : 'none';
-            if (show) visible++;
-          });
-          document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
-          // Fix border radius for visible cards
-          var visibleCards = Array.from(cards).filter(function(c) { return c.style.display !== 'none'; });
-          visibleCards.forEach(function(c, i) {
-            c.style.borderRadius = '';
-            c.style.borderTop = '';
-            if (i === 0) c.style.borderRadius = '12px 12px 0 0';
-            if (i === visibleCards.length - 1) c.style.borderRadius = (visibleCards.length === 1 ? '12px' : '0 0 12px 12px');
-            if (i > 0) c.style.borderTop = 'none';
-          });
-        };
-        filtersEl.appendChild(btn);
-      });
-    }
+    filtersEl.style.display = 'flex';
+    allStates.forEach(function(state) {
+      var btn = document.createElement('button');
+      btn.className = 'state-btn' + (state === 'All' ? ' active' : '');
+      btn.textContent = state;
+      btn.onclick = function() {
+        document.querySelectorAll('.state-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeState = state;
+        applyBrokerFilters();
+      };
+      filtersEl.appendChild(btn);
+    });
+
+    // Build cards
     var grid = document.getElementById('brokerGrid');
-    records.forEach(function(record, idx) {
+    allBrokerRecords.forEach(function(record, idx) {
       var f = record.fields;
       var name = f['Company Name'] || '';
       var initials = name.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
@@ -361,24 +347,60 @@ async function loadBrokers() {
         ? '<div class="broker-logo-area" style="background:var(--cream)"><img src="' + f.Logo + '" style="width:100%;height:100%;object-fit:contain;padding:1rem" alt="' + name + '"></div>'
         : '<div class="broker-logo-area" style="background:' + bg + '"><span class="broker-logo-initials">' + initials + '</span></div>';
       var count2 = f['Listings Count'] ? f['Listings Count'] + ' active listing' + (f['Listings Count'] !== 1 ? 's' : '') : '';
+      // States as tags instead of single location
+      var statesStr = f.States || '';
+      var stateTags = statesStr ? statesStr.split(',').map(function(s){ return s.trim(); }).filter(Boolean).map(function(s){
+        return '<span class="broker-state-tag">' + s + '</span>';
+      }).join('') : '';
       var div = document.createElement('a');
       div.className = 'broker-card';
       div.href = 'broker-profile.html?id=' + record.id;
-      div.setAttribute('data-states', f.States || '');
+      div.setAttribute('data-states', statesStr);
+      div.setAttribute('data-search', (name + ' ' + (f.Description || '') + ' ' + statesStr).toLowerCase());
       div.innerHTML = logoArea +
         '<div class="broker-card-body">' +
           '<div class="broker-card-name">' + name + '</div>' +
-          (f.Location ? '<div class="broker-card-location">&#128205; ' + f.Location + '</div>' : '') +
+          (stateTags ? '<div class="broker-states-tags">' + stateTags + '</div>' : '') +
           (f.Description ? '<p class="broker-card-desc">' + f.Description + '</p>' : '') +
           '<div class="broker-card-footer"><span class="broker-card-listings">' + count2 + '</span><span class="broker-read-more">Read More &rsaquo;</span></div>' +
         '</div>';
       grid.appendChild(div);
     });
+
+    applyBrokerFilters();
   } catch(err) {
     document.getElementById('brokerLoading').style.display = 'none';
     document.getElementById('brokerEmpty').style.display = 'block';
   }
 }
+
+function applyBrokerFilters() {
+  var keyword = (document.getElementById('brokerSearch').value || '').toLowerCase().trim();
+  var cards = document.querySelectorAll('.broker-card[data-states]');
+  var visible = 0;
+  cards.forEach(function(card) {
+    var cardStates = card.getAttribute('data-states');
+    var searchText = card.getAttribute('data-search') || '';
+    var stateOk = activeState === 'All' || cardStates.indexOf(activeState) !== -1;
+    var keywordOk = !keyword || searchText.indexOf(keyword) !== -1;
+    var show = stateOk && keywordOk;
+    card.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+  var total = allBrokerRecords.length;
+  document.getElementById('brokerCount').textContent = visible + ' of ' + total + ' brokerage' + (total !== 1 ? 's' : '') + ' listed — sorted A–Z';
+  // Fix border radius on visible cards
+  var visibleCards = Array.from(cards).filter(function(c) { return c.style.display !== 'none'; });
+  visibleCards.forEach(function(c, i) {
+    c.style.borderRadius = '';
+    c.style.borderTop = '';
+    if (i === 0) c.style.borderRadius = '12px 12px 0 0';
+    if (i === visibleCards.length - 1) c.style.borderRadius = (visibleCards.length === 1 ? '12px' : '0 0 12px 12px');
+    if (i > 0) c.style.borderTop = 'none';
+  });
+}
+
 loadBrokers();
 
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
