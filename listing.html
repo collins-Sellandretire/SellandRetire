@@ -335,7 +335,7 @@ function renderListing(record) {
           <span>›</span>
           <span>${f.Title || 'Listing'}</span>
         </div>
-        ' + (f['Seller Type'] === 'Broker' && (Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name']) ? '<div class="seller-badge broker">🏢 Listed via ' + (Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name']) + '</div>' : '<div class="seller-badge private">👤 Private Seller — Retiring Owner</div>') + '
+        ${(f['Seller Type'] === 'Broker' && (Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name'])) ? `<div class="seller-badge broker">🏢 Listed via ${Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : f['Broker Name']}</div>` : '<div class="seller-badge private">👤 Private Seller — Retiring Owner</div>'}
       <div class="listing-category">${f.Category || ''}${f.State ? ' · ' + f.State : ''}${f.Location ? ' · ' + f.Location : ''}</div>
       <h1>${f.Title || 'Business Listing'}</h1>
       <div class="listing-price">${price}</div>
