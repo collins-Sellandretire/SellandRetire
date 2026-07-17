@@ -63,7 +63,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 
 /* PROFILE HEADER */
 .profile-header{display:grid;grid-template-columns:1fr 300px;gap:2.5rem;align-items:start;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--cream-dark)}
-.profile-logo{width:80px;height:80px;border-radius:12px;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:1.25rem;flex-shrink:0}
+.profile-left{display:flex;gap:2rem;align-items:flex-start}.profile-logo{width:160px;height:160px;border-radius:16px;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:#fff;font-weight:700;flex-shrink:0;overflow:hidden}.profile-logo img{width:100%;height:100%;object-fit:contain;padding:1rem}.profile-info{flex:1}
 .profile-name{font-size:2rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;line-height:1.1}
 .profile-location{font-size:0.9rem;color:var(--text-light);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
 .profile-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem}
@@ -81,14 +81,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .contact-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
 .contact-row a{color:var(--gold);font-weight:500}
 .contact-row span{color:var(--text-mid)}
-.enquire-btn{display:block;width:100%;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-weight:500;font-size:0.95rem;margin-top:1.25rem;transition:background 0.2s}
-.enquire-btn:hover{background:var(--gold-light)}
+
 
 /* BROKERS TEAM */
 .section-title{font-size:1.6rem;color:var(--forest);font-weight:600;margin-bottom:1.5rem}
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3rem}
 .team-card{background:var(--cream);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem;text-align:center}
-.team-avatar{width:52px;height:52px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:600;margin:0 auto 0.75rem}
+.team-avatar{width:64px;height:64px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:600;margin:0 auto 0.75rem;overflow:hidden;flex-shrink:0}.team-avatar img{width:100%;height:100%;object-fit:cover}.team-bio{font-size:0.78rem;color:var(--text-light);line-height:1.5;margin-top:0.4rem}.team-speciality{font-size:0.75rem;color:var(--gold);font-weight:500;margin-top:0.25rem}
 .team-name{font-size:0.95rem;font-weight:600;color:var(--forest);margin-bottom:0.2rem;font-family:'Cormorant Garamond',serif}
 .team-title{font-size:0.78rem;color:var(--text-light)}
 
@@ -111,7 +110,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35)}
 .footer-bottom a{color:rgba(255,255,255,0.5)}
 
-@media(max-width:900px){.profile-header{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.listings-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.profile-header{grid-template-columns:1fr}.profile-left{flex-direction:column}.profile-logo{width:120px;height:120px}.team-grid{grid-template-columns:1fr 1fr}.listings-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.team-grid{grid-template-columns:1fr}.profile-stats{gap:1rem}}
 </style>
 </head>
@@ -155,19 +154,24 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
     <span id="breadcrumbName"></span>
   </div>
   <div class="profile-header">
-    <div>
+    <div class="profile-left">
       <div class="profile-logo" id="profileLogo"></div>
-      <h1 class="profile-name" id="profileName"></h1>
-      <div class="profile-location" id="profileLocation"></div>
-      <div class="profile-tags" id="profileTags"></div>
-      <p class="profile-about" id="profileAbout"></p>
-      <div class="profile-stats" id="profileStats"></div>
+      <div class="profile-info">
+        <h1 class="profile-name" id="profileName"></h1>
+        <div class="profile-location" id="profileLocation"></div>
+        <div class="profile-tags" id="profileTags"></div>
+        <p class="profile-about" id="profileAbout"></p>
+        <div class="profile-stats" id="profileStats"></div>
+      </div>
     </div>
     <div class="contact-card">
       <h3>Get in touch</h3>
       <div id="contactDetails"></div>
-      <a href="contact.html" class="enquire-btn">Send an Enquiry</a>
     </div>
+  </div>
+  <div id="teamSection" style="display:none">
+    <h2 class="section-title">Meet the Team</h2>
+    <div class="team-grid" id="teamGrid"></div>
   </div>
   <div id="listingsSection" style="display:none">
     <h2 class="section-title" id="listingsTitle"></h2>
@@ -243,7 +247,7 @@ async function loadBrokerProfile() {
     // Logo
     var logoEl = document.getElementById('profileLogo');
     if (f.Logo) {
-      logoEl.innerHTML = '<img src="' + f.Logo + '" style="width:80px;height:80px;object-fit:contain;border-radius:12px" alt="' + name + '">';
+      logoEl.innerHTML = '<img src="' + f.Logo + '" alt="' + name + '">';
     } else {
       logoEl.textContent = initials;
     }
@@ -306,7 +310,7 @@ async function loadBrokerProfile() {
 
       if (brokerListings.length) {
         document.getElementById('listingsSection').style.display = 'block';
-        document.getElementById('listingsTitle').textContent = 'Active listings on Sell & Retire (' + brokerListings.length + ')';
+        document.getElementById('listingsTitle').textContent = 'Active Listings (' + brokerListings.length + ')';
         var grid = document.getElementById('listingsGrid');
         brokerListings.forEach(function(r) {
           var lf = r.fields;
@@ -325,6 +329,37 @@ async function loadBrokerProfile() {
             '</div>' +
             '<div class="lc-footer"><span class="broker-badge-sm">&#127970; ' + name + '</span><span class="view-link">View &rarr;</span></div>';
           grid.appendChild(div);
+        });
+      }
+    } catch(e) {}
+
+    // Fetch agents for this brokerage
+    try {
+      var agentRes = await fetch('/.netlify/functions/agents-fn?company=' + encodeURIComponent(name));
+      var agentData = await agentRes.json();
+      var agents = (agentData.records || []).filter(function(r) { return r.fields['Active']; });
+      if (agents.length) {
+        document.getElementById('teamSection').style.display = 'block';
+        var teamGrid = document.getElementById('teamGrid');
+        agents.forEach(function(r) {
+          var af = r.fields;
+          var agentName = af['Full Name'] || '';
+          var initials = agentName.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+          var avatarInner = af.Photo
+            ? '<img src="' + af.Photo + '" alt="' + agentName + '">'
+            : initials;
+          var speciality = af.Speciality || '';
+          var years = af['Years Experience'] ? af['Years Experience'] + ' yrs experience' : '';
+          var bio = af.Bio || '';
+          var card = document.createElement('div');
+          card.className = 'team-card';
+          card.innerHTML =
+            '<div class="team-avatar">' + avatarInner + '</div>' +
+            '<div class="team-name">' + agentName + '</div>' +
+            (speciality ? '<div class="team-speciality">' + speciality + '</div>' : '') +
+            (years ? '<div class="team-title">' + years + '</div>' : '') +
+            (bio ? '<div class="team-bio">' + bio + '</div>' : '');
+          teamGrid.appendChild(card);
         });
       }
     } catch(e) {}
