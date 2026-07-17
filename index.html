@@ -136,6 +136,11 @@ section{padding:5rem 2rem}
 .home-carousel-btn:hover svg{stroke:#fff}
 .home-carousel-btn.prev{left:0}
 .home-carousel-btn.next{right:0}
+.new-badge{position:absolute;top:0.6rem;left:0.6rem;background:#e03d2f;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px;z-index:2}
+.featured-ribbon{position:absolute;top:18px;right:-22px;background:#e03d2f;color:#fff;font-size:0.6rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 2.5rem;transform:rotate(45deg);z-index:3;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+.seller-badge{display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;font-weight:600;padding:0.2rem 0.65rem;border-radius:3px;border:1px solid}
+.seller-badge.private{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.5);color:var(--forest)}
+.seller-badge.broker{background:rgba(255,255,255,0.92);border-color:rgba(191,138,46,0.5);color:#7a5010}
 .listing-card{background:#fff;border:1px solid var(--cream-dark);border-radius:10px;overflow:hidden;transition:all 0.25s;cursor:pointer}
 .listing-card:hover{border-color:var(--gold);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .lc-header{background:var(--forest);padding:1.5rem}
@@ -557,7 +562,7 @@ function homeSlide(dir) {
     const res = await fetch('/.netlify/functions/listings');
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
-    const featured = (data.records || []).filter(r => r.fields.Featured);
+    const featured = (data.records || []).filter(r => r.fields.Plan === 'Premium');
     const grid = document.getElementById('homepageFeaturedGrid');
     if (!grid) return;
     grid.innerHTML = '';
@@ -570,19 +575,31 @@ function homeSlide(dir) {
       const f = record.fields;
       const price = f.Price ? '$' + parseInt(f.Price).toLocaleString('en-AU') : 'Price on enquiry';
       const photo = f.Photo1 || '';
+      // NEW badge
+      var isNew = false;
+      if (f['Date Listed']) {
+        var daysDiff = (new Date() - new Date(f['Date Listed'])) / (1000 * 60 * 60 * 24);
+        isNew = daysDiff <= 14;
+      }
+      var newBadge = isNew ? '<span class="new-badge">New</span>' : '';
+      // Seller badge
+      var sellerType = f['Seller Type'] || 'Private Seller';
+      var brokerName = Array.isArray(f['Broker Name']) ? f['Broker Name'][0] : (f['Broker Name'] || '');
+      var sellerBadge = sellerType === 'Broker' && brokerName
+        ? '<span class="seller-badge broker">🏢 ' + brokerName + '</span>'
+        : '<span class="seller-badge private">Private Seller</span>';
       const div = document.createElement('div');
       div.className = 'listing-card';
       div.style.cursor = 'pointer';
-      var photoHtml = photo ? '<div style="width:100%;height:160px;overflow:hidden;background:var(--cream)"><img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>' : '';
+      var thumbHtml = '<div style="width:100%;height:160px;overflow:hidden;background:var(--cream);position:relative"><span class="featured-ribbon">Featured</span>' + newBadge + (photo ? '<img src="' + photo + '" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '') + '</div>';
       var catStr = (f.Category || '') + (f.State ? ' · ' + f.State : '');
       var locHtml = f.Location ? '<div class="lc-detail">📍 ' + f.Location + '</div>' : '';
       var yrsHtml = f['Years Trading'] ? '<div class="lc-detail">📅 ' + f['Years Trading'] + ' years trading</div>' : '';
       var tovHtml = f['Annual Turnover'] ? '<div class="lc-detail">💰 ' + f['Annual Turnover'] + ' annual turnover</div>' : '';
-      div.innerHTML = photoHtml + '<div class="lc-header"><div class="lc-category">' + catStr + '</div><div class="lc-title">' + (f.Title || '') + '</div></div><div class="lc-body"><div class="lc-price">' + price + '</div><div class="lc-details">' + locHtml + yrsHtml + tovHtml + '</div></div><div class="lc-footer"><span class="lc-badge">Retiring Owner</span><span class="view-link">View →</span></div>';
+      div.innerHTML = thumbHtml + '<div class="lc-header"><div class="lc-category">' + catStr + '</div><div class="lc-title">' + (f.Title || '') + '</div></div><div class="lc-body"><div class="lc-price">' + price + '</div><div class="lc-details">' + locHtml + yrsHtml + tovHtml + '</div></div><div class="lc-footer">' + sellerBadge + '<span class="view-link">View →</span></div>';
       div.onclick = function() { window.location.href = 'listing.html?id=' + record.id; };
       grid.appendChild(div);
     });
-    // Show next arrow only if more than 3
     if (homeCarouselTotal > homeCarouselVisible) {
       const nextBtn = document.getElementById('homeNext');
       if (nextBtn) nextBtn.style.display = 'flex';
