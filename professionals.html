@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Partner with Sell & Retire as an accountant, broker or lawyer. Connect with retiring business owners who need specialist support.">
+<meta name="description" content="Partner with Sell & Retire as an accountant or lawyer. Connect with retiring business owners who need specialist support.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Partner With Us | Sell & Retire</title>
@@ -23,6 +23,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
 .dropdown.open .dropdown-menu{display:block}
 .nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
+.nav-trigger.broker-trigger{color:var(--gold);background:rgba(191,138,46,0.12);font-weight:500}
+.dropdown:hover .broker-trigger,.dropdown.open .broker-trigger{color:var(--gold);background:rgba(191,138,46,0.2)}
+.menu-item-label{font-weight:600;color:var(--forest);margin-bottom:2px}
+.menu-item-sub{font-size:0.75rem;color:var(--text-light)}
 .nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
 .dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
 .nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
@@ -145,11 +149,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sellandretire.com.au/professionals.html">
   <meta property="og:title" content="Partner With Us | Sell & Retire">
-  <meta property="og:description" content="Partner with Sell & Retire as an accountant, broker or lawyer working with retiring business owners.">
+  <meta property="og:description" content="Partner with Sell & Retire as an accountant or lawyer working with retiring business owners.">
   <meta property="og:image" content="https://sellandretire.com.au/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Partner With Us | Sell & Retire">
-  <meta name="twitter:description" content="Partner with Sell & Retire as an accountant, broker or lawyer working with retiring business owners.">
+  <meta name="twitter:description" content="Partner with Sell & Retire as an accountant or lawyer working with retiring business owners.">
 </head>
 <body>
 <nav>
@@ -188,10 +192,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
       <h1>Your next client is a<br><em>retiring business owner.</em><br>We'll introduce you.</h1>
       <p>We connect retiring business owners with the right professionals at exactly the right moment — brokers, lawyers, accountants and valuers who understand what's at stake.</p>
       <div class="hero-pills">
-        <span class="hero-pill">Business Brokers</span>
         <span class="hero-pill">Lawyers</span>
         <span class="hero-pill">Accountants</span>
+        <span class="hero-pill">Financial Planners</span>
         <span class="hero-pill">Valuers</span>
+        <span class="hero-pill">Other</span>
       </div>
       <div class="hero-points">
         <div class="hero-point">We personally review every application</div>
@@ -238,9 +243,9 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
           <div><label>Profession *</label>
             <select name="profession" required>
               <option value="">Select profession</option>
-              <option>Business Broker</option>
               <option>Business Lawyer</option>
               <option>Accountant</option>
+              <option>Financial Planner</option>
               <option>Business Valuer</option>
               <option>Other</option>
             </select>
@@ -284,17 +289,6 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     </div>
     <div class="prof-grid">
       <div class="prof-card reveal">
-        <h3>Business Brokers</h3>
-        <div class="prof-tagline">Help sellers find buyers and close the deal</div>
-        <p>Our sellers are motivated, often emotional, and dealing with complex transactions. They need brokers who genuinely understand the retirement sale context — not just someone who lists businesses on a database.</p>
-        <ul class="prof-benefits">
-          <li>Referred directly to sellers who are ready to engage a broker</li>
-          <li>Listed profile on our platform visible to all visitors</li>
-          <li>Featured in our seller onboarding resources</li>
-          <li>Monthly introductions to new seller enquiries in your state</li>
-        </ul>
-      </div>
-      <div class="prof-card reveal">
         <h3>Business Lawyers</h3>
         <div class="prof-tagline">Guide clients through contracts and due diligence</div>
         <p>Business sales involve complex legal documentation — heads of agreement, contracts of sale, restraint clauses, employee entitlements. Our sellers and buyers need specialists, not general practitioners.</p>
@@ -314,6 +308,17 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
           <li>Introduced to sellers needing valuation and tax advice</li>
           <li>Featured in our seller preparation resources</li>
           <li>Ongoing referral relationship as your reputation builds</li>
+        </ul>
+      </div>
+      <div class="prof-card reveal">
+        <h3>Financial Planners</h3>
+        <div class="prof-tagline">Help owners plan their retirement, not just their exit</div>
+        <p>Retiring business owners often have most of their wealth tied up in their business. They need financial planners who can help them understand what the sale proceeds mean for their retirement — tax implications, super, investment structures and long-term planning.</p>
+        <ul class="prof-benefits">
+          <li>Introduced to sellers who are actively planning their exit</li>
+          <li>Opportunity to provide retirement income planning from day one</li>
+          <li>Listed in our trusted professional directory</li>
+          <li>Featured in our seller resources and onboarding materials</li>
         </ul>
       </div>
       <div class="prof-card reveal">
@@ -352,8 +357,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">Selling <span class="arrow">▾</span></div>
       <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
     </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
+    </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
-      <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">For Professionals</a></div>
+      <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
     </div>
   </div>
   <div class="mobile-menu-footer">
