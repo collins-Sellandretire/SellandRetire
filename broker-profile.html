@@ -96,6 +96,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .profile-body{background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.75rem;margin-bottom:2.5rem}
 .profile-body p{font-size:0.925rem;color:var(--text-mid);line-height:1.75;margin-bottom:1rem}
 .profile-body p:last-child{margin-bottom:0}
+.profile-tagline{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--forest);margin-bottom:1.25rem;line-height:1.5}
+.profile-section{margin-top:1.75rem;padding-top:1.75rem;border-top:1px solid var(--cream-dark)}
+.profile-section h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--forest);margin-bottom:0.75rem}
 /* Agent modal */
 .agent-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:2000;align-items:center;justify-content:center}
 .agent-modal-overlay.open{display:flex}
@@ -302,11 +305,47 @@ async function loadBrokerProfile() {
       tagsEl.appendChild(span);
     });
 
-    // About
-    if (f.Description) {
-      document.getElementById('profileAbout').textContent = f.Description;
-      document.getElementById('profileBody').style.display = 'block';
+    // About + extra sections
+    var bodyEl = document.getElementById('profileBody');
+    var aboutEl = document.getElementById('profileAbout');
+    var hasContent = false;
+    if (f.Tagline) {
+      var tagline = document.createElement('p');
+      tagline.className = 'profile-tagline';
+      tagline.textContent = f.Tagline;
+      bodyEl.insertBefore(tagline, aboutEl);
+      hasContent = true;
     }
+    if (f.Description) {
+      aboutEl.textContent = f.Description;
+      hasContent = true;
+    } else {
+      aboutEl.style.display = 'none';
+    }
+    [1, 2, 3].forEach(function(n) {
+      var title = f['Section ' + n + ' Title'];
+      var body = f['Section ' + n + ' Body'];
+      if (title && body) {
+        var sec = document.createElement('div');
+        sec.className = 'profile-section';
+        var h3 = document.createElement('h3');
+        h3.textContent = title;
+        sec.appendChild(h3);
+        // Support multiple paragraphs separated by newlines
+        body.split(/
+
++/).forEach(function(para) {
+          para = para.trim();
+          if (!para) return;
+          var p = document.createElement('p');
+          p.textContent = para;
+          sec.appendChild(p);
+        });
+        bodyEl.appendChild(sec);
+        hasContent = true;
+      }
+    });
+    if (hasContent) bodyEl.style.display = 'block';
 
     // Stats
     var statsEl = document.getElementById('profileStats');
