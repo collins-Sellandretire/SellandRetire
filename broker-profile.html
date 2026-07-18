@@ -332,11 +332,7 @@ async function loadBrokerProfile() {
         h3.textContent = title;
         sec.appendChild(h3);
         // Support multiple paragraphs separated by newlines
-        body.split(/
-
-+/).forEach(function(para) {
-          para = para.trim();
-          if (!para) return;
+        body.split(/\n\n+/).forEach(function(para) {
           var p = document.createElement('p');
           p.textContent = para;
           sec.appendChild(p);
