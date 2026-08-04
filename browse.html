@@ -10,6 +10,7 @@
 <style>
 :root{--forest:#1c3829;--forest-dark:#122318;--gold:#bf8a2e;--gold-light:#d4a44e;--gold-pale:#f0d9a8;--cream:#f9f5ee;--cream-dark:#f0e8d5;--text:#1a1a1a;--text-mid:#444;--text-light:#777;--radius:4px;--shadow-lg:0 12px 48px rgba(28,56,41,0.16)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip}
 body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:clip}
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
 a{text-decoration:none;color:inherit}
@@ -156,7 +157,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
 .footer-bottom a{color:rgba(255,255,255,0.5);transition:color 0.2s}
 .footer-bottom a:hover{color:var(--gold)}
 @media(max-width:900px){.browse-body{grid-template-columns:1fr}.sidebar{position:static}.featured-grid{grid-template-columns:1fr 1fr}.featured-track .featured-card{flex:0 0 calc(50% - 0.5rem)}}
-@media(max-width:600px){.listings-grid{grid-template-columns:1fr}.featured-grid{grid-template-columns:1fr}.featured-section{padding:1.5rem 1rem}.featured-carousel{padding:0 26px}.featured-track .featured-card{flex:0 0 100%}.fc-thumb{height:170px}.carousel-btn{width:36px;height:36px}}
+@media(max-width:600px){.listings-grid{grid-template-columns:1fr}.featured-grid{grid-template-columns:1fr}.featured-section{padding:1.5rem 1rem}.featured-carousel{padding:0 26px}.featured-track .featured-card{flex:0 0 100%}.fc-thumb{height:170px}.carousel-btn{width:36px;height:36px}.search-bar{flex-wrap:wrap}.search-bar .search-input{flex:1 1 100%}.search-bar .search-btn{flex:1}.search-bar .sort-select{flex:1;min-width:0}}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sellandretire.com.au/browse.html">
