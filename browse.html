@@ -250,10 +250,15 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
 
     <div class="filter-card">
       <h3>Listing Type</h3>
-      <div class="filter-tab-group">
-        <button class="filter-tab active" id="typeTabAll" onclick="setTypeTab(this,'all')">All</button>
-        <button class="filter-tab" id="typeTabFranchise" onclick="setTypeTab(this,'franchise')">Franchise</button>
-      </div>
+      <label class="filter-option" onclick="setTypeTab('all')" id="typeTabAll" style="font-weight:600;color:var(--forest)">
+        <input type="radio" name="listingType" value="all" checked onchange="setTypeTab('all')"> All <span class="count" id="cnt-type-all">0</span>
+      </label>
+      <label class="filter-option" onclick="setTypeTab('independent')" id="typeTabIndependent">
+        <input type="radio" name="listingType" value="independent" onchange="setTypeTab('independent')"> Independent <span class="count" id="cnt-type-independent">0</span>
+      </label>
+      <label class="filter-option" onclick="setTypeTab('franchise')" id="typeTabFranchise">
+        <input type="radio" name="listingType" value="franchise" onchange="setTypeTab('franchise')"> Franchise <span class="count" id="cnt-type-franchise">0</span>
+      </label>
     </div>
 
     <div class="filter-card">
@@ -452,10 +457,16 @@ function buildFeaturedCard(record) {
 // ── FILTER & SORT ──
 let activeTab_state = 'all';
 let activeTypeTab = 'all';
-function setTypeTab(btn, val) {
-  document.querySelectorAll('#typeTabAll, #typeTabFranchise').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+function setTypeTab(val) {
   activeTypeTab = val;
+  // Bold the selected label
+  ['typeTabAll','typeTabFranchise','typeTabIndependent'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.fontWeight = '';
+    if (el) el.style.color = '';
+  });
+  var selected = document.getElementById(val === 'all' ? 'typeTabAll' : val === 'franchise' ? 'typeTabFranchise' : 'typeTabIndependent');
+  if (selected) { selected.style.fontWeight = '600'; selected.style.color = 'var(--forest)'; }
   applyFilters();
 }
 function setTab(el, val) {
@@ -482,7 +493,7 @@ function applyFilters() {
     const price = parseInt(card.dataset.price) || 0;
     const text = card.dataset.text || '';
     const tabOk = activeTab_state === 'all' || state === activeTab_state;
-    const franchiseOk = activeTypeTab === 'all' || card.dataset.franchise === '1';
+    const franchiseOk = activeTypeTab === 'all' || (activeTypeTab === 'franchise' ? card.dataset.franchise === '1' : activeTypeTab === 'independent' ? card.dataset.franchise === '0' : true);
     const industryOk = checkedIndustries.length === 0 || checkedIndustries.includes(industry);
     const priceOk = price >= minPrice && price <= maxPrice;
     const keywordOk = !keyword || text.includes(keyword);
@@ -511,6 +522,14 @@ function applyFilters() {
 
   document.getElementById('count').textContent = visibleCount;
   document.getElementById('noResults').style.display = visibleCount === 0 && cards.length > 0 ? 'block' : 'none';
+
+  // Update listing type counts
+  var allCount = cards.length;
+  var franchiseCount = cards.filter(function(c){ return c.dataset.franchise === '1'; }).length;
+  var independentCount = cards.filter(function(c){ return c.dataset.franchise === '0'; }).length;
+  if (document.getElementById('cnt-type-all')) document.getElementById('cnt-type-all').textContent = allCount;
+  if (document.getElementById('cnt-type-franchise')) document.getElementById('cnt-type-franchise').textContent = franchiseCount;
+  if (document.getElementById('cnt-type-independent')) document.getElementById('cnt-type-independent').textContent = independentCount;
 
   // Update industry counts
   ['Hospitality','Trade','Retail','Professional','Health','Manufacturing','Other'].forEach(function(ind) {
