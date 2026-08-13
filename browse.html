@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-848243138"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-848243138');
+</script>
 <meta charset="UTF-8">
 <meta name="description" content="Browse businesses for sale from retiring owners across Australia. Filter by state, industry and price to find the right opportunity.">
 
@@ -241,6 +249,14 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:4rem}
     </div>
 
     <div class="filter-card">
+      <h3>Listing Type</h3>
+      <div class="filter-tab-group">
+        <button class="filter-tab active" id="typeTabAll" onclick="setTypeTab(this,'all')">All</button>
+        <button class="filter-tab" id="typeTabFranchise" onclick="setTypeTab(this,'franchise')">Franchise</button>
+      </div>
+    </div>
+
+    <div class="filter-card">
       <h3>Industry</h3>
       <label class="filter-option"><input type="checkbox" data-filter="industry" value="Hospitality" onchange="applyFilters()"> Hospitality <span class="count" id="cnt-Hospitality">0</span></label>
       <label class="filter-option"><input type="checkbox" data-filter="industry" value="Trade" onchange="applyFilters()"> Trade Services <span class="count" id="cnt-Trade">0</span></label>
@@ -355,6 +371,8 @@ function buildCard(record) {
   div.className = 'listing-card';
   div.dataset.state = f.State || '';
   div.dataset.industry = f.Category || '';
+  div.dataset.franchise = f.Franchise ? '1' : '0';
+  div.dataset.franchise = f.Franchise ? '1' : '0';
   div.dataset.price = f.Price || 0;
   div.dataset.years = f['Years Trading'] || 0;
   div.dataset.date = f['Date Listed'] ? new Date(f['Date Listed']).getTime() : 0;
@@ -433,6 +451,13 @@ function buildFeaturedCard(record) {
 
 // ── FILTER & SORT ──
 let activeTab_state = 'all';
+let activeTypeTab = 'all';
+function setTypeTab(btn, val) {
+  document.querySelectorAll('#typeTabAll, #typeTabFranchise').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeTypeTab = val;
+  applyFilters();
+}
 function setTab(el, val) {
   document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
@@ -457,10 +482,11 @@ function applyFilters() {
     const price = parseInt(card.dataset.price) || 0;
     const text = card.dataset.text || '';
     const tabOk = activeTab_state === 'all' || state === activeTab_state;
+    const franchiseOk = activeTypeTab === 'all' || card.dataset.franchise === '1';
     const industryOk = checkedIndustries.length === 0 || checkedIndustries.includes(industry);
     const priceOk = price >= minPrice && price <= maxPrice;
     const keywordOk = !keyword || text.includes(keyword);
-    if (tabOk && industryOk && priceOk && keywordOk) {
+    if (tabOk && franchiseOk && industryOk && priceOk && keywordOk) {
       card.classList.remove('hidden');
       visibleCount++;
       industryCounts[industry] = (industryCounts[industry] || 0) + 1;
@@ -623,7 +649,7 @@ function handleFeaturedClick(e) {
   const state = params.get('state');
   if (state) {
     const tab = document.querySelector('.filter-tab[onclick*="\'' + state + '\'"]');
-    if (tab) { document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); activeTab_state = state; }
+    if (tab) { document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); activeTab_state = state; applyFilters(); }
   }
   const min = params.get('min'); const max = params.get('max');
   if (min) document.getElementById('minPrice').value = min;
