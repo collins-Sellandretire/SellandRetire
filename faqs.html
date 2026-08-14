@@ -48,11 +48,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
 .nav-trigger.active{color:#fff}
 .nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
-.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+
+
 .dropdown{position:relative}
 .dropdown>a::after{content:' ▾';font-size:0.7rem}
-.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:180px;overflow:hidden}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:200px;overflow:hidden}
 .dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
 .dropdown:hover .dropdown-menu{display:block}
 .dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark)}
@@ -113,7 +113,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 
 .dropdown-divider{height:1px;background:var(--cream-dark);margin:4px 0}
 
-.nav-links{display:none}.faq-tabs{gap:0.25rem}}
+.nav-links{display:none}.faq-tabs{gap:0.25rem}.page-header{padding:2.5rem 1rem 2rem}.faq-layout{padding:2rem 1rem 2.5rem}.faq-tabs{margin-bottom:1.75rem}.contact-banner{margin-top:1.75rem}}
 
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
 .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
@@ -158,7 +158,6 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
         <span class="nav-trigger">Browse Businesses</span>
         <div class="dropdown-menu">
           <a href="browse.html">View All Listings</a>
-          <div class="dropdown-divider"></div>
           <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
         </div>
       </div>
