@@ -37,10 +37,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .dropdown:hover .nav-trigger,.dropdown.open .nav-trigger{color:#fff;background:rgba(255,255,255,0.08)}
 .nav-trigger.active{color:#fff}
 .nav-links{display:flex;align-items:center;gap:0.2rem;justify-content:center}
-.nav-links a{color:rgba(255,255,255,0.82);font-size:0.875rem;padding:0.5rem 0.9rem;border-radius:var(--radius);transition:all 0.2s}
-.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+
+
 .dropdown{position:relative}
-.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:185px;overflow:hidden}
+.dropdown-menu{display:none;position:absolute;top:calc(100% + 2px);left:0;background:#fff;border:1px solid var(--cream-dark);border-radius:8px;box-shadow:var(--shadow-lg);min-width:200px;overflow:hidden}
 .dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
 .dropdown:hover .dropdown-menu{display:block}
 .dropdown-menu a{display:block;padding:0.75rem 1.25rem;color:var(--text);font-size:0.875rem;border-bottom:1px solid var(--cream-dark);transition:background 0.15s}
@@ -100,7 +100,7 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:2rem 2r
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:900px){.pricing-grid{grid-template-columns:1fr}.faq-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.nav-links{display:none}}
+@media(max-width:600px){.nav-links{display:none}.page-header{padding:2.5rem 1rem 2rem}.pricing-section{padding:2.5rem 1rem}.pricing-grid{margin-top:1.75rem}.faq-section{padding:2rem 1rem}.cta-section{padding:2rem 1rem}}
 
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;z-index:1100}
 .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
@@ -148,7 +148,6 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:2rem 2r
         <span class="nav-trigger">Browse Businesses</span>
         <div class="dropdown-menu">
           <a href="browse.html">View All Listings</a>
-          <div class="dropdown-divider"></div>
           <a href="featured.html" style="color:var(--gold);font-weight:600">★ Featured Businesses</a>
         </div>
       </div>
