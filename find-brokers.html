@@ -21,9 +21,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .logo-icon{flex-shrink:0;display:flex;align-items:center;padding-top:2px}
 .logo-wordmark{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
 .logo-main{display:flex;align-items:center;gap:5px;font-family:'Cormorant Garamond',serif;font-size:1.60rem;font-weight:800;letter-spacing:0.02em;line-height:1}
-.logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif}.logo-retire{color:var(--gold)}
+.logo-sell{color:#fff}.logo-and{color:#fff;font-weight:400;font-style:normal;font-size:0.75em;font-family:'DM Sans',sans-serif;letter-spacing:0.01em}.logo-retire{color:var(--gold)}
 .logo-domain{font-family:'DM Sans',sans-serif;font-size:0.80rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;margin-top:3px;font-weight:400;align-self:flex-end}
-.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none}
+.nav-trigger{color:rgba(255,255,255,0.82);font-size:0.875rem;font-weight:400;padding:0.5rem 0.9rem;border-radius:var(--radius);cursor:pointer;display:inline-flex;align-items:center;gap:3px;transition:color 0.2s,background 0.2s;user-select:none;background:transparent;border:none;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;appearance:none}
 .nav-trigger::after{content:'▾';font-size:0.7rem;opacity:0.7;margin-left:2px}
 .nav-trigger.broker-trigger{color:var(--gold);background:rgba(191,138,46,0.12);font-weight:500}
 .nav-trigger.broker-trigger::after{opacity:0.9}
@@ -138,7 +138,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 .footer-bottom a:hover{color:var(--gold)}
 @media(max-width:900px){.why-inner{grid-template-columns:1fr;gap:2rem}}
 @keyframes spin{to{transform:rotate(360deg)}}
-</style>
+@media(max-width:600px){.hero{padding:2.25rem 1rem 2rem}.directory-section{padding:2rem 1rem}.early-state{padding:2rem 1rem}.why-section{padding:2rem 1rem}.cta-section{padding:2rem 1rem}}</style>
 </head>
 <body>
 
@@ -147,7 +147,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     <a href="index.html" class="logo"><div class="logo-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#bf8a2e" stroke-width="1.8" fill="none"/><path d="M11 10l6 4-6 4" stroke="#bf8a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-wordmark"><div class="logo-main"><span class="logo-sell">Sell</span><span class="logo-and">and</span><span class="logo-retire">Retire</span></div><div class="logo-domain">.com.au</div></div></a>
     <div class="nav-links">
       <div class="dropdown"><span class="nav-trigger">Browse Businesses</span>
-        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><div class="dropdown-divider"></div><a href="featured.html" style="color:var(--gold);font-weight:600">&#9733; Featured Businesses</a></div>
+        <div class="dropdown-menu"><a href="browse.html">View All Listings</a><a href="featured.html" style="color:var(--gold);font-weight:600">&#9733; Featured Businesses</a></div>
       </div>
       <div class="dropdown"><span class="nav-trigger">How It Works</span>
         <div class="dropdown-menu"><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
