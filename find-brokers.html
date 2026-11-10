@@ -138,7 +138,25 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 .footer-bottom a:hover{color:var(--gold)}
 @media(max-width:900px){.why-inner{grid-template-columns:1fr;gap:2rem}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:600px){.hero{padding:2.25rem 1rem 2rem}.directory-section{padding:2rem 1rem}.early-state{padding:2rem 1rem}.why-section{padding:2rem 1rem}.cta-section{padding:2rem 1rem}}</style>
+@media(max-width:600px){.hero{padding:2.25rem 1rem 2rem}.directory-section{padding:2rem 1rem}.early-state{padding:2rem 1rem}.why-section{padding:2rem 1rem}.cta-section{padding:2rem 1rem}}.broker-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,35,24,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+.broker-modal-overlay.open{display:flex}
+.broker-modal-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-light);line-height:1}
+.broker-modal{background:#fff;border-radius:16px;padding:2.5rem;max-width:680px;width:100%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto}
+.broker-modal h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--forest);font-weight:600;text-align:center;margin-bottom:0.5rem}
+.broker-modal>p{font-size:0.88rem;color:var(--text-light);text-align:center;margin-bottom:1.75rem;line-height:1.6}
+.broker-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.broker-modal-card{display:block;background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.5rem 1.25rem;text-align:center;transition:all 0.2s}
+.broker-modal-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(191,138,46,0.15);transform:translateY(-2px)}
+.broker-modal-icon{font-size:2rem;margin-bottom:0.75rem}
+.broker-modal-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem}
+.broker-modal-card p{font-size:0.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.9rem}
+.broker-copy{text-align:left;font-size:0.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.75rem;align-self:stretch;width:100%}
+.broker-check-list{list-style:none;text-align:left;margin:0 0 0.9rem;padding:0;align-self:stretch;width:100%}
+.broker-check-list li{font-size:0.82rem;color:var(--text-mid);padding:0.22rem 0;display:flex;gap:0.5rem;align-items:flex-start;line-height:1.5}
+.broker-check-list li::before{content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0}
+.broker-modal-link{font-size:0.85rem;color:var(--gold);font-weight:600}
+@media(max-width:600px){.broker-modal-grid{grid-template-columns:1fr}.broker-modal{padding:1.75rem 1.25rem}}
+</style>
 </head>
 <body>
 
@@ -160,7 +178,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
       </div>
       <div class="dropdown"><span class="nav-trigger">Brokers</span>
         <div class="dropdown-menu">
-          <a href="find-brokers.html">Find a Broker</a>
+          <a href="find-a-broker.html" onclick="openBrokerChooser(event)">Find a Broker</a>
           <a href="brokers.html">Register as a Broker</a>
         </div>
       </div>
@@ -176,8 +194,8 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-badge">Broker Directory</div>
-    <h1>Find a broker who specialises in <em>retirement sales.</em></h1>
-    <p class="hero-sub">Every broker listed here works with retiring business owners. They understand what's involved, what's at stake and how to find the right buyer.</p>
+    <h1>Find a business broker who specialises in <em>retirement sales.</em></h1>
+    <p class="hero-sub">Every business broker listed here works with retiring business owners. They understand what's involved, what's at stake and how to find the right buyer.</p>
   </div>
 </div>
 
@@ -193,9 +211,9 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     <div id="brokerEmpty" style="display:none">
       <div class="early-state">
         <div class="early-icon">&#129309;</div>
-        <h2>Be one of the first brokers listed</h2>
+        <h2>Be one of the first business brokers listed</h2>
         <p>We're building Australia's first broker directory dedicated exclusively to retirement business sales. If you're a business broker who works with retiring owners, we'd love to have you listed here — free to start.</p>
-        <a href="brokers.html" class="early-cta">Register as a Broker</a>
+        <a href="brokers.html?type=business" class="early-cta">Register as a Broker</a>
         <a href="contact.html" class="early-cta-outline">Get in Touch</a>
       </div>
       <div style="margin-top:3rem">
@@ -229,7 +247,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
             </div>
           </div>
         </div>
-        <p style="text-align:center;font-size:0.82rem;color:var(--text-light);margin-top:1.5rem">These are example profiles only. <a href="brokers.html" style="color:var(--gold);font-weight:500">Register as a Broker</a> to create your real listing.</p>
+        <p style="text-align:center;font-size:0.82rem;color:var(--text-light);margin-top:1.5rem">These are example profiles only. <a href="brokers.html?type=business" style="color:var(--gold);font-weight:500">Register as a Broker</a> to create your real listing.</p>
       </div>
     </div>
 
@@ -238,7 +256,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
       <div class="directory-toolbar">
         <p id="brokerCount" style="font-size:0.82rem;color:var(--text-light);margin:0;white-space:nowrap"></p>
         <input type="text" class="broker-search" id="brokerSearch" placeholder="Search by name, location or specialty…" oninput="applyBrokerFilters()">
-        <a href="brokers.html" class="btn-register-broker">Register as a Broker →</a>
+        <a href="brokers.html?type=business" class="btn-register-broker">Register as a Broker →</a>
       </div>
       <div class="state-filters" id="stateFilters"></div>
       <div class="broker-grid" id="brokerGrid"></div>
@@ -251,11 +269,11 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
 <section class="why-section">
   <div class="why-inner">
     <div class="why-text">
-      <div class="section-label">Why Use a Broker</div>
+      <div class="section-label">Why Use a Business Broker</div>
       <h2>Sometimes you need someone in your corner</h2>
       <p>Selling a business you've spent years building is one of the most significant financial decisions of your life. A good broker brings experience, buyer networks, negotiation skills and a process that protects your interests from start to finish.</p>
-      <p>The brokers listed here specialise in retirement sales &#8212; they understand the emotional weight of the decision, not just the financial mechanics.</p>
-      <a href="selling.html">Or list your business directly &#8212; it's free to start &#8594;</a>
+      <p>The business brokers listed here specialise in retirement sales &#8212; they understand the emotional weight of the decision, not just the financial mechanics.</p>
+      <a href="selling.html">Or list your business directly &#8212; it's free to start &#8594;</a><br><a href="find-a-broker.html" style="margin-top:0.5rem;display:inline-block">Looking for finance instead? See the difference &#8594;</a>
     </div>
     <div class="why-points">
       <div class="why-point"><div class="why-point-icon">&#127919;</div><div class="why-point-text"><h4>Access to qualified buyers</h4><p>Brokers maintain active buyer networks and can match your business to the right person faster than a public listing alone.</p></div></div>
@@ -289,8 +307,8 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem}
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-selling',this)">Selling <span class="arrow">&#9660;</span></div>
       <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
     </div>
-    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">&#9660;</span></div>
-      <div class="mobile-submenu" id="sub-brokers"><a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-a-broker.html" style="color:var(--gold)" onclick="openBrokerChooser(event)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
     </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">&#9660;</span></div>
       <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
@@ -406,6 +424,48 @@ loadBrokers();
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
 function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
 document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
+</script>
+
+<div class="broker-modal-overlay" id="brokerChooserModal" onclick="closeBrokerChooser(event)">
+  <div class="broker-modal">
+    <button class="broker-modal-close" onclick="document.getElementById('brokerChooserModal').classList.remove('open')">&times;</button>
+    <h2>What kind of broker do you need?</h2>
+    <p>Business sales and business finance are two different things.</p>
+    <div class="broker-modal-grid">
+      <a href="find-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#127970;</div>
+        <h3>Business Broker</h3>
+        <p class="broker-copy">Helps you buy or sell a business, guiding you through:</p>
+        <ul class="broker-check-list">
+          <li>Business valuations</li>
+          <li>Finding buyers or businesses for sale</li>
+          <li>Negotiating the deal</li>
+          <li>Managing the sale process</li>
+        </ul>
+        <p class="broker-copy">From the first conversation through to settlement.</p>
+        <span class="broker-modal-link">Find a Business Broker &rarr;</span>
+      </a>
+      <a href="find-finance-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#128176;</div>
+        <h3>Finance Broker</h3>
+        <p class="broker-copy">Helps you find and arrange the right finance for:</p>
+        <ul class="broker-check-list">
+          <li>Buying a business</li>
+          <li>Business loans and funding</li>
+          <li>Equipment and asset finance</li>
+          <li>Business growth and cash flow</li>
+        </ul>
+        <p class="broker-copy">Helping you fund your next move and make it possible.</p>
+        <span class="broker-modal-link">Find a Finance Broker &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBrokerChooser(e){e.preventDefault();var mm=document.getElementById('mobileMenu'),hb=document.getElementById('hamburgerBtn');if(mm&&mm.classList.contains('open')){mm.classList.remove('open');if(hb)hb.classList.remove('open');}document.getElementById('brokerChooserModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeBrokerChooser(e){if(e.target===document.getElementById('brokerChooserModal')){e.target.classList.remove('open');document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('brokerChooserModal');if(m)m.classList.remove('open');document.body.style.overflow='';}});
 </script>
 </body>
 </html>
