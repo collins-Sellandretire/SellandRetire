@@ -184,6 +184,24 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:2rem 2r
 .mobile-btn-list{display:block;text-align:center;padding:0.9rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none}
 @media(max-width:900px){.hamburger{display:flex}.nav-links{display:none!important}.nav-actions{display:none!important}}
 
+.broker-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,35,24,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+.broker-modal-overlay.open{display:flex}
+.broker-modal-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-light);line-height:1}
+.broker-modal{background:#fff;border-radius:16px;padding:2.5rem;max-width:680px;width:100%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto}
+.broker-modal h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--forest);font-weight:600;text-align:center;margin-bottom:0.5rem}
+.broker-modal>p{font-size:0.88rem;color:var(--text-light);text-align:center;margin-bottom:1.75rem;line-height:1.6}
+.broker-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.broker-modal-card{display:block;background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.5rem 1.25rem;text-align:center;transition:all 0.2s}
+.broker-modal-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(191,138,46,0.15);transform:translateY(-2px)}
+.broker-modal-icon{font-size:2rem;margin-bottom:0.75rem}
+.broker-modal-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem}
+.broker-modal-card p{font-size:0.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.9rem}
+.broker-copy{text-align:left;font-size:0.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.75rem;align-self:stretch;width:100%}
+.broker-check-list{list-style:none;text-align:left;margin:0 0 0.9rem;padding:0;align-self:stretch;width:100%}
+.broker-check-list li{font-size:0.82rem;color:var(--text-mid);padding:0.22rem 0;display:flex;gap:0.5rem;align-items:flex-start;line-height:1.5}
+.broker-check-list li::before{content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0}
+.broker-modal-link{font-size:0.85rem;color:var(--gold);font-weight:600}
+@media(max-width:600px){.broker-modal-grid{grid-template-columns:1fr}.broker-modal{padding:1.75rem 1.25rem}}
 </style>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sellandretire.com.au/how-it-works.html">
@@ -230,10 +248,9 @@ footer{background:var(--forest-dark);color:rgba(255,255,255,0.7);padding:2rem 2r
           <a href="pricing.html">Pricing</a>
         </div>
       </div>
-      <div class="dropdown">
-        <span class="nav-trigger">Brokers</span>
+      <div class="dropdown"><span class="nav-trigger">Brokers</span>
         <div class="dropdown-menu">
-          <a href="find-brokers.html">Find a Broker</a>
+          <a href="find-a-broker.html" onclick="openBrokerChooser(event)">Find a Broker</a>
           <a href="brokers.html">Register as a Broker</a>
         </div>
       </div>
@@ -530,14 +547,8 @@ function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.class
       </div>
     </div>
 
-    <div class="mobile-nav-item">
-      <div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">
-        Brokers <span class="arrow">▾</span>
-      </div>
-      <div class="mobile-submenu" id="sub-brokers">
-        <a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a>
-        <a href="brokers.html">Register as a Broker</a>
-      </div>
+    <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-a-broker.html" style="color:var(--gold)" onclick="openBrokerChooser(event)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
     </div>
     <div class="mobile-nav-item">
       <div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">
@@ -557,5 +568,47 @@ function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.class
   </div>
 </div>
 
+
+<div class="broker-modal-overlay" id="brokerChooserModal" onclick="closeBrokerChooser(event)">
+  <div class="broker-modal">
+    <button class="broker-modal-close" onclick="document.getElementById('brokerChooserModal').classList.remove('open')">&times;</button>
+    <h2>What kind of broker do you need?</h2>
+    <p>Business sales and business finance are two different things.</p>
+    <div class="broker-modal-grid">
+      <a href="find-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#127970;</div>
+        <h3>Business Broker</h3>
+        <p class="broker-copy">Helps you buy or sell a business, guiding you through:</p>
+        <ul class="broker-check-list">
+          <li>Business valuations</li>
+          <li>Finding buyers or businesses for sale</li>
+          <li>Negotiating the deal</li>
+          <li>Managing the sale process</li>
+        </ul>
+        <p class="broker-copy">From the first conversation through to settlement.</p>
+        <span class="broker-modal-link">Find a Business Broker &rarr;</span>
+      </a>
+      <a href="find-finance-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#128176;</div>
+        <h3>Finance Broker</h3>
+        <p class="broker-copy">Helps you find and arrange the right finance for:</p>
+        <ul class="broker-check-list">
+          <li>Buying a business</li>
+          <li>Business loans and funding</li>
+          <li>Equipment and asset finance</li>
+          <li>Business growth and cash flow</li>
+        </ul>
+        <p class="broker-copy">Helping you fund your next move and make it possible.</p>
+        <span class="broker-modal-link">Find a Finance Broker &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBrokerChooser(e){e.preventDefault();var mm=document.getElementById('mobileMenu'),hb=document.getElementById('hamburgerBtn');if(mm&&mm.classList.contains('open')){mm.classList.remove('open');if(hb)hb.classList.remove('open');}document.getElementById('brokerChooserModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeBrokerChooser(e){if(e.target===document.getElementById('brokerChooserModal')){e.target.classList.remove('open');document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('brokerChooserModal');if(m)m.classList.remove('open');document.body.style.overflow='';}});
+</script>
 </body>
 </html>
