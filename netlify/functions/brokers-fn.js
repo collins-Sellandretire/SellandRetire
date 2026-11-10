@@ -1,7 +1,7 @@
 exports.handler = async function(event) {
   const token = process.env.AIRTABLE_TOKEN;
   const baseId = process.env.AIRTABLE_BASE_ID;
-  const table = 'Brokers';
+  const table = 'Business Brokers';
   const id = event.queryStringParameters && event.queryStringParameters.id;
 
   const headers = {
