@@ -12,10 +12,10 @@
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="3U6TdrEwgbDN2H1PLI98J3roaURSiEMiJMDJJl2inNA">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Business Brokers | Sell & Retire</title>
-<meta name="description" content="List your retirement business sale listings on Sell & Retire — Australia's dedicated marketplace for retiring business owners. Reach serious buyers faster.">
-<meta property="og:title" content="For Business Brokers | Sell & Retire">
-<meta property="og:description" content="List your retirement business sale listings on Sell & Retire and reach buyers specifically looking for businesses from retiring owners.">
+<title>Become a Broker | Sell & Retire</title>
+<meta name="description" content="Register as a business or finance broker on Sell & Retire — Australia's dedicated marketplace for retiring business owners. Reach serious buyers and sellers faster.">
+<meta property="og:title" content="Become a Broker | Sell & Retire">
+<meta property="og:description" content="Register as a business or finance broker on Sell & Retire and reach buyers and sellers specifically looking for what you offer.">
 <meta property="og:url" content="https://sellandretire.com.au/brokers.html">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -84,11 +84,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(28,56,41,0.
 .btn-outline:hover{background:rgba(255,255,255,0.08)}
 
 /* STATS BAR */
-.stats-bar{background:var(--forest-dark);padding:1.5rem 2rem;border-top:1px solid rgba(191,138,46,0.15)}
-.stats-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:4rem}
-.stat{text-align:center}
-.stat-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1}
-.stat-label{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:4px}
 
 /* WHY LIST */
 .why-section{padding:5rem 2rem;background:#fff}
@@ -163,6 +158,24 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 .footer-bottom a:hover{color:var(--gold)}
 @media(max-width:900px){.benefits-grid{grid-template-columns:1fr 1fr}.steps-grid{grid-template-columns:1fr 1fr}.pricing-grid{grid-template-columns:1fr}.stats-inner{gap:2rem;flex-wrap:wrap}.form-row{grid-template-columns:1fr}}
 @media(max-width:600px){.benefits-grid{grid-template-columns:1fr}.steps-grid{grid-template-columns:1fr}.stats-inner{gap:1.5rem}.hero{padding:2.5rem 1rem 2rem}.why-section{padding:2.5rem 1rem}.section-sub{margin-bottom:1.75rem}.how-section{padding:2.5rem 1rem}.steps-grid{margin-top:1.75rem}.pricing-section{padding:2.5rem 1rem}.pricing-grid{margin-top:1.75rem}.test-section{padding:2.5rem 1rem}.form-section{padding:2.5rem 1rem}.form-card{padding:1.75rem}}
+.broker-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,35,24,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+.broker-modal-overlay.open{display:flex}
+.broker-modal-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text-light);line-height:1}
+.broker-modal{background:#fff;border-radius:16px;padding:2.5rem;max-width:680px;width:100%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto}
+.broker-modal h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--forest);font-weight:600;text-align:center;margin-bottom:0.5rem}
+.broker-modal>p{font-size:0.88rem;color:var(--text-light);text-align:center;margin-bottom:1.75rem;line-height:1.6}
+.broker-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.broker-modal-card{display:block;background:var(--cream);border:1px solid var(--cream-dark);border-radius:12px;padding:1.5rem 1.25rem;text-align:center;transition:all 0.2s}
+.broker-modal-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(191,138,46,0.15);transform:translateY(-2px)}
+.broker-modal-icon{font-size:2rem;margin-bottom:0.75rem}
+.broker-modal-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem}
+.broker-modal-card p{font-size:0.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.9rem}
+.broker-copy{text-align:left;font-size:0.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.75rem;align-self:stretch;width:100%}
+.broker-check-list{list-style:none;text-align:left;margin:0 0 0.9rem;padding:0;align-self:stretch;width:100%}
+.broker-check-list li{font-size:0.82rem;color:var(--text-mid);padding:0.22rem 0;display:flex;gap:0.5rem;align-items:flex-start;line-height:1.5}
+.broker-check-list li::before{content:'\2713';color:var(--gold);font-weight:700;flex-shrink:0}
+.broker-modal-link{font-size:0.85rem;color:var(--gold);font-weight:600}
+@media(max-width:600px){.broker-modal-grid{grid-template-columns:1fr}.broker-modal{padding:1.75rem 1.25rem}}
 </style>
 </head>
 <body>
@@ -185,7 +198,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
       </div>
       <div class="dropdown"><span class="nav-trigger">Brokers</span>
         <div class="dropdown-menu">
-          <a href="find-brokers.html">Find a Broker</a>
+          <a href="find-a-broker.html" onclick="openBrokerChooser(event)">Find a Broker</a>
           <a href="brokers.html">Register as a Broker</a>
         </div>
       </div>
@@ -202,37 +215,43 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 <div class="hero" style="text-align:left;padding:3.5rem 2rem 3rem">
   <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
     <div>
-      <div class="hero-badge" style="margin-bottom:1.25rem">For Business Brokers</div>
-      <h1 style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:600;line-height:1.1;margin-bottom:1rem">Your retirement listings deserve a <em>dedicated audience.</em></h1>
-      <p class="hero-sub" style="margin-bottom:2rem">Every buyer on Sell & Retire is specifically looking for a business from a retiring owner — not a bargain, not a franchise. A targeted audience that understands what retirement sales involve.</p>
+      <div class="hero-badge" style="margin-bottom:1.25rem">For Brokers</div>
+      <h1 style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:600;line-height:1.1;margin-bottom:1rem">Your expertise deserves a <em>dedicated audience.</em></h1>
+      <p class="hero-sub" style="margin-bottom:2rem">Every buyer and seller on Sell & Retire is navigating a real business transition — not a bargain hunt, not a casual browse. Whether you broker business sales or the finance behind them, this is a targeted audience that understands what's at stake.</p>
       <a href="#how-it-works" class="btn-outline">See How It Works</a>
     </div>
     <div style="background:#fff;border-radius:12px;padding:2rem;box-shadow:0 12px 40px rgba(0,0,0,0.2)">
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--forest);font-weight:600;margin-bottom:0.35rem">Register as a Broker</p>
-      <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.25rem;line-height:1.5">We'll be in touch  to discuss your listings and get you set up.</p>
+      <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.25rem;line-height:1.5">We'll be in touch to discuss your services and get you set up.</p>
       <form name="broker-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="brokerFormHero">
         <input type="hidden" name="form-name" value="broker-enquiry">
         <p style="display:none"><input name="bot-field"></p>
+        <div style="margin-bottom:0.85rem">
+          <label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.4rem">I am a... *</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+            <label style="display:flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.7rem;border:1px solid var(--cream-dark);border-radius:var(--radius);cursor:pointer;font-size:0.85rem;font-weight:500;color:var(--text-mid)" id="toggleBizLabel">
+              <input type="radio" name="broker_type" value="Business Broker" required onchange="updateBrokerTypeUI()" style="accent-color:var(--gold)"> Business Broker
+            </label>
+            <label style="display:flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.7rem;border:1px solid var(--cream-dark);border-radius:var(--radius);cursor:pointer;font-size:0.85rem;font-weight:500;color:var(--text-mid)" id="toggleFinLabel">
+              <input type="radio" name="broker_type" value="Finance Broker" required onchange="updateBrokerTypeUI()" style="accent-color:var(--gold)"> Finance Broker
+            </label>
+          </div>
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
           <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">First Name *</label><input type="text" name="first_name" required placeholder="First name" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
           <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Last Name *</label><input type="text" name="last_name" required placeholder="Last name" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
         </div>
-        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Brokerage Name *</label><input type="text" name="brokerage" required placeholder="Your brokerage or company name" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Brokerage Name *</label><input type="text" name="brokerage" required placeholder="Company Name or are you a Sole Trader?" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
           <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Email *</label><input type="email" name="email" required placeholder="your@email.com" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
           <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Phone *</label><input type="tel" name="phone" required placeholder="04xx xxx xxx" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
         </div>
-        <div style="margin-bottom:1rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">How many retirement listings do you have?</label>
-          <select name="listings_count" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;background:#fff">
-            <option value="">Select...</option>
-            <option>1–5 listings</option>
-            <option>5–10 listings</option>
-            <option>10–25 listings</option>
-            <option>25+ listings</option>
-          </select>
+        <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+          <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Company Website</label><input type="url" name="website" placeholder="e.g. www.yourbrokerage.com.au" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
+          <div><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">ABN</label><input type="text" name="abn" placeholder="e.g. 12 345 678 901" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box"></div>
         </div>
-        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">States / Territories you operate in</label><select name="states" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;background:#fff"><option value="">Select...</option><option>Australia Wide</option><option>New South Wales (NSW)</option><option>Victoria (VIC)</option><option>Queensland (QLD)</option><option>Western Australia (WA)</option><option>South Australia (SA)</option><option>Tasmania (TAS)</option><option>Australian Capital Territory (ACT)</option><option>Northern Territory (NT)</option><option>Multiple states — details in message below</option></select></div>
-        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Tell us about your brokerage</label><textarea name="message" placeholder="Types of businesses you specialise in, states you operate in, anything else you'd like us to know..." style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;min-height:90px;resize:vertical"></textarea></div>
+        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">States / Territories you operate in *</label><select name="states" required style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;background:#fff"><option value="">Select...</option><option>Australia Wide</option><option>New South Wales (NSW)</option><option>Victoria (VIC)</option><option>Queensland (QLD)</option><option>Western Australia (WA)</option><option>South Australia (SA)</option><option>Tasmania (TAS)</option><option>Australian Capital Territory (ACT)</option><option>Northern Territory (NT)</option><option>Multiple states — details in message below</option></select></div>
+        <div style="margin-bottom:0.75rem"><label style="display:block;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-mid);margin-bottom:0.3rem">Tell us about you and/or your Brokerage</label><textarea name="message" placeholder="Types of businesses or finance you specialise in, states you operate in, anything else you'd like us to know..." style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--cream-dark);border-radius:var(--radius);font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;min-height:90px;resize:vertical"></textarea></div>
         <button type="submit" style="width:100%;padding:0.85rem;background:var(--gold);color:#fff;border:none;border-radius:var(--radius);font-size:0.95rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s">Register as a Broker</button>
         <p style="font-size:0.75rem;color:var(--text-light);text-align:center;margin-top:0.6rem">We'll be in touch shortly.</p>
       </form>
@@ -245,21 +264,12 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 </div>
 <style>@media(max-width:900px){.hero>div{grid-template-columns:1fr!important}}</style>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat"><div class="stat-val">420K+</div><div class="stat-label">Boomer-owned businesses in Australia</div></div>
-    <div class="stat"><div class="stat-val">800+</div><div class="stat-label">Australians retire daily</div></div>
-    <div class="stat"><div class="stat-val">$500B</div><div class="stat-label">Annual revenue at stake</div></div>
-  </div>
-</div>
-
 <!-- HOW IT WORKS + PRICING -->
 <section class="how-section" id="how-it-works">
   <div class="how-inner">
-    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start">
+    <div style="display:grid;grid-template-columns:1fr;gap:3rem;align-items:start">
 
-      <div style="display:flex;flex-direction:column;gap:0">
+      <div style="display:flex;flex-direction:column;gap:0;max-width:700px;margin:0 auto">
 
         <div style="margin-bottom:2rem">
           <div class="section-label">The Process</div>
@@ -273,7 +283,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
           </div>
           <div style="padding-top:8px">
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">Register as a Broker</h3>
-            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Fill in the form above. We'll be in touch to discuss your listings and get you set up.</p>
+            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Fill in the form above and tell us whether you're a business or finance broker. We'll be in touch to get you set up.</p>
           </div>
         </div>
 
@@ -283,8 +293,8 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
             <div style="width:1px;background:var(--cream-dark);flex:1;margin-top:8px"></div>
           </div>
           <div style="padding-top:8px">
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">Send us your listings</h3>
-            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Share your listing details and photos. We handle the formatting and get each listing live the same day.</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">Your profile goes live</h3>
+            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">We add you to the right directory — business or finance broker — so buyers and sellers can find you.</p>
           </div>
         </div>
 
@@ -294,8 +304,8 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
             <div style="width:1px;background:var(--cream-dark);flex:1;margin-top:8px"></div>
           </div>
           <div style="padding-top:8px">
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">Buyers enquire</h3>
-            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Interested buyers submit an enquiry. You receive their details directly — name, contact and what they're looking for.</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">Buyers and sellers enquire</h3>
+            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Interested buyers and sellers submit an enquiry. You receive their details directly — name, contact and what they need.</p>
           </div>
         </div>
 
@@ -305,31 +315,14 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
           </div>
           <div style="padding-top:8px">
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--forest);font-weight:600;margin-bottom:0.4rem">You take it from there</h3>
-            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Follow up with qualified buyers and manage the sale through your existing process. We stay out of the way — the relationship is yours.</p>
+            <p style="font-size:0.875rem;color:var(--text-light);line-height:1.65">Follow up with qualified enquiries and manage the process through your existing workflow. We stay out of the way — the relationship is yours.</p>
           </div>
         </div>
 
       </div>
 
-      <div style="background:#fff;border:1px solid var(--cream-dark);border-radius:12px;padding:1.75rem;position:sticky;top:88px">
-        <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem">Pricing</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem">Simple, fair pricing</h3>
-        <p style="font-size:0.85rem;color:var(--text-light);line-height:1.65;margin-bottom:1.25rem">We work with brokers individually depending on volume and listing type. No lock-in, no success fees.</p>
-        <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem">
-          <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-mid)"><span style="color:var(--gold);font-weight:700">&#10003;</span> No success fees — ever</div>
-          <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-mid)"><span style="color:var(--gold);font-weight:700">&#10003;</span> Your brokerage name on every listing</div>
-          <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-mid)"><span style="color:var(--gold);font-weight:700">&#10003;</span> Buyer enquiries go directly to you</div>
-          <div style="display:flex;gap:8px;font-size:0.85rem;color:var(--text-mid)"><span style="color:var(--gold);font-weight:700">&#10003;</span> No lock-in — cancel any time</div>
-        </div>
-        <div style="background:var(--cream);border-radius:8px;padding:1rem;margin-bottom:1.25rem">
-          <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.65">Register above and we'll have a quick conversation about what makes sense for your brokerage.</p>
-        </div>
-        <a href="#brokerFormHero" style="display:block;text-align:center;padding:0.8rem;background:var(--gold);color:#fff;border-radius:var(--radius);font-size:0.9rem;font-weight:500;text-decoration:none;transition:background 0.2s">Register as a Broker</a>
-      </div>
-
     </div>
   </div>
-  <style>@media(max-width:900px){#how-it-works .how-inner>div[style]{grid-template-columns:1fr!important}}</style>
 </section>
 
 
@@ -338,38 +331,38 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
 <section class="why-section">
   <div class="why-inner">
     <div class="section-label">Why Sell & Retire</div>
-    <h2 class="section-title">A platform built for the listings you specialise in</h2>
-    <p class="section-sub">General business-for-sale platforms mix retirement sales with distressed sales, franchises and startups. Your listings get lost. Here, every buyer came specifically looking for what you're selling.</p>
+    <h2 class="section-title">A platform built for the expertise you specialise in</h2>
+    <p class="section-sub">Generic platforms mix retirement business sales and their finance with distressed sales, franchises and personal lending. Your expertise gets lost. Here, every buyer and seller came specifically looking for what you offer.</p>
     <div class="benefits-grid">
       <div class="benefit-card">
         <div class="benefit-icon">🎯</div>
-        <h3>Targeted buyer audience</h3>
-        <p>Every buyer on Sell & Retire registered specifically to find a business from a retiring owner. No tyre-kickers, no bargain hunters — buyers who understand and respect what retirement sales involve.</p>
+        <h3>Targeted audience</h3>
+        <p>Every buyer and seller on Sell & Retire is navigating a real business transition — not a casual browser. No tyre-kickers, no bargain hunters — people who understand and respect what's involved.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">⚡</div>
-        <h3>List in minutes</h3>
-        <p>No lengthy onboarding. Send us your listing details and we'll have it live the same day. Photos, financials, key features — we format it professionally and get it in front of buyers fast.</p>
+        <h3>Fast, simple onboarding</h3>
+        <p>No lengthy sign-up process. Register today and we'll have your profile live in the right directory, ready for buyers and sellers to find you.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">📣</div>
-        <h3>Your brand on every listing</h3>
-        <p>Every listing you place clearly shows your brokerage name. Buyers who enquire know who you are. It's additional brand exposure with every listing and every enquiry.</p>
+        <h3>Your brand front and centre</h3>
+        <p>Your profile clearly shows your brokerage name and specialities. Buyers and sellers who enquire know exactly who you are before they reach out.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">📊</div>
-        <h3>Complement your existing platforms</h3>
-        <p>We're not asking you to move away from Seek Business or Bsale. Add Sell & Retire as another channel and increase your listing's reach to a highly targeted retirement-focused audience.</p>
+        <h3>Complement your existing channels</h3>
+        <p>We're not asking you to move away from your existing platforms or referral sources. Add Sell & Retire as another channel and reach a highly targeted, retirement-focused audience.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">🔒</div>
         <h3>Confidentiality protected</h3>
-        <p>Buyer details are collected before sharing with you. NDA templates available. Your vendor's identity and financials stay private until you decide to share them with serious enquirers.</p>
+        <p>Enquirer details are reviewed before being shared with you. NDA templates available for business sales. Identities and financials stay private until you decide to share them with serious enquirers.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">💰</div>
         <h3>Simple, honest pricing</h3>
-        <p>No success fees. No lock-in contracts. Pay per listing or choose a monthly plan if you have multiple listings. You keep 100% of your commission — we just help you find the buyer faster.</p>
+        <p>No success fees. No lock-in contracts. Pay per listing or choose a monthly plan. You keep 100% of your commission or fees — we just help you find the right buyer or introduction faster.</p>
       </div>
     </div>
   </div>
@@ -399,7 +392,7 @@ footer{background:var(--forest-dark);padding:2rem 2rem 1.5rem;margin-top:0}
       <div class="mobile-submenu" id="sub-selling"><a href="selling.html">List My Business</a><a href="how-it-works.html">How It Works</a><a href="pricing.html">Pricing</a></div>
     </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-brokers',this)" style="color:var(--gold)">Brokers <span class="arrow">▾</span></div>
-      <div class="mobile-submenu" id="sub-brokers"><a href="find-brokers.html" style="color:var(--gold)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
+      <div class="mobile-submenu" id="sub-brokers"><a href="find-a-broker.html" style="color:var(--gold)" onclick="openBrokerChooser(event)">Find a Broker</a><a href="brokers.html">Register as a Broker</a></div>
     </div>
     <div class="mobile-nav-item"><div class="mobile-nav-link" onclick="toggleMobileSub('sub-other',this)">Other <span class="arrow">▾</span></div>
       <div class="mobile-submenu" id="sub-other"><a href="faqs.html">FAQs</a><a href="contact.html">Contact Us</a><a href="professionals.html">Partner With Us</a></div>
@@ -422,6 +415,31 @@ document.getElementById('brokerFormHero').addEventListener('submit', function(e)
     });
 });
 
+function updateBrokerTypeUI(){
+  var biz = document.querySelector('input[name="broker_type"][value="Business Broker"]');
+  var fin = document.querySelector('input[name="broker_type"][value="Finance Broker"]');
+  var bizLabel = document.getElementById('toggleBizLabel');
+  var finLabel = document.getElementById('toggleFinLabel');
+  if (biz.checked) {
+    bizLabel.style.borderColor = 'var(--gold)'; bizLabel.style.background = 'var(--cream)'; bizLabel.style.color = 'var(--forest)';
+    finLabel.style.borderColor = 'var(--cream-dark)'; finLabel.style.background = '#fff'; finLabel.style.color = 'var(--text-mid)';
+  } else if (fin.checked) {
+    finLabel.style.borderColor = 'var(--gold)'; finLabel.style.background = 'var(--cream)'; finLabel.style.color = 'var(--forest)';
+    bizLabel.style.borderColor = 'var(--cream-dark)'; bizLabel.style.background = '#fff'; bizLabel.style.color = 'var(--text-mid)';
+  }
+}
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var t = params.get('type');
+  if (t === 'finance') {
+    var fin = document.querySelector('input[name="broker_type"][value="Finance Broker"]');
+    if (fin) { fin.checked = true; updateBrokerTypeUI(); }
+  } else if (t === 'business') {
+    var biz = document.querySelector('input[name="broker_type"][value="Business Broker"]');
+    if (biz) { biz.checked = true; updateBrokerTypeUI(); }
+  }
+})();
+
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),b=document.getElementById('hamburgerBtn'),o=m.classList.contains('open');if(o){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}else{m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}}
 function toggleMobileSub(id,trigger){var s=document.getElementById(id),o=s.classList.contains('open');document.querySelectorAll('.mobile-submenu').forEach(function(x){x.classList.remove('open');});document.querySelectorAll('.mobile-nav-link').forEach(function(x){x.classList.remove('expanded');});if(!o){s.classList.add('open');trigger.classList.add('expanded');}}
 document.querySelectorAll('.dropdown').forEach(function(dd){var menu=dd.querySelector('.dropdown-menu'),trigger=dd.querySelector('.nav-trigger');if(!menu||!trigger)return;trigger.addEventListener('click',function(){var o=dd.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});if(!o)dd.classList.add('open');});document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open');});});
@@ -434,6 +452,48 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     if (target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
   });
 });
+</script>
+
+<div class="broker-modal-overlay" id="brokerChooserModal" onclick="closeBrokerChooser(event)">
+  <div class="broker-modal">
+    <button class="broker-modal-close" onclick="document.getElementById('brokerChooserModal').classList.remove('open')">&times;</button>
+    <h2>What kind of broker do you need?</h2>
+    <p>Business sales and business finance are two different things.</p>
+    <div class="broker-modal-grid">
+      <a href="find-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#127970;</div>
+        <h3>Business Broker</h3>
+        <p class="broker-copy">Helps you buy or sell a business, guiding you through:</p>
+        <ul class="broker-check-list">
+          <li>Business valuations</li>
+          <li>Finding buyers or businesses for sale</li>
+          <li>Negotiating the deal</li>
+          <li>Managing the sale process</li>
+        </ul>
+        <p class="broker-copy">From the first conversation through to settlement.</p>
+        <span class="broker-modal-link">Find a Business Broker &rarr;</span>
+      </a>
+      <a href="find-finance-brokers.html" class="broker-modal-card">
+        <div class="broker-modal-icon">&#128176;</div>
+        <h3>Finance Broker</h3>
+        <p class="broker-copy">Helps you find and arrange the right finance for:</p>
+        <ul class="broker-check-list">
+          <li>Buying a business</li>
+          <li>Business loans and funding</li>
+          <li>Equipment and asset finance</li>
+          <li>Business growth and cash flow</li>
+        </ul>
+        <p class="broker-copy">Helping you fund your next move and make it possible.</p>
+        <span class="broker-modal-link">Find a Finance Broker &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBrokerChooser(e){e.preventDefault();var mm=document.getElementById('mobileMenu'),hb=document.getElementById('hamburgerBtn');if(mm&&mm.classList.contains('open')){mm.classList.remove('open');if(hb)hb.classList.remove('open');}document.getElementById('brokerChooserModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeBrokerChooser(e){if(e.target===document.getElementById('brokerChooserModal')){e.target.classList.remove('open');document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('brokerChooserModal');if(m)m.classList.remove('open');document.body.style.overflow='';}});
 </script>
 </body>
 </html>
